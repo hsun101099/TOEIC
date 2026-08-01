@@ -4,116 +4,79 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light only">
-<title>Day 01 · 情境單字 — 一紙合約的誕生</title>
+<title>多益情境單字 · 每日自動更新</title>
 <style>
 :root{
   color-scheme:light only;
-  --canvas:#FAF6F0;
-  --card:#FFFCF8;
-  --ink:#332E28;
-  --muted:#7C7168;
-  --faint:#A79C90;
-  --line:#EDE4D8;
-  --accent:#3F6B55;
-  --accent-soft:#E7F0EA;
-  --good:#4A7A5F;
-  --good-soft:#E6F1E9;
-  --warn:#9A6318;
-  --warn-soft:#F9EFDF;
-  --r:16px;
+  --canvas:#FAF6F0; --card:#FFFCF8; --ink:#332E28; --muted:#7C7168; --faint:#A79C90;
+  --line:#EDE4D8; --accent:#3F6B55; --accent-soft:#E7F0EA; --good:#4A7A5F; --good-soft:#E6F1E9;
+  --warn:#9A6318; --warn-soft:#F9EFDF; --r:16px;
   --shadow:0 1px 2px rgba(94,74,52,.05), 0 8px 24px rgba(94,74,52,.07);
   --shadow-lift:0 2px 4px rgba(94,74,52,.06), 0 16px 40px rgba(94,74,52,.13);
   --ease:cubic-bezier(.22,.61,.36,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%}
-body{
-  background:var(--canvas);color:var(--ink);
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter","Segoe UI","PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
-  font-size:16.5px;line-height:1.7;letter-spacing:-.003em;
-  -webkit-font-smoothing:antialiased;
-}
-.wrap{max-width:1080px;margin:0 auto;padding:48px 24px 140px}
-
-/* ---------- header ---------- */
-.eyebrow{
-  display:inline-flex;align-items:center;gap:8px;
-  font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--accent);background:var(--accent-soft);
-  padding:6px 12px;border-radius:999px;
-}
-h1{
-  font-size:clamp(30px,5.2vw,44px);line-height:1.15;letter-spacing:-.03em;
-  font-weight:700;margin:18px 0 10px;
-}
-.sub{color:var(--muted);font-size:16px;max-width:60ch}
-.metrics{display:flex;gap:28px;margin-top:26px;flex-wrap:wrap;align-items:center}
-.metric b{display:block;font-size:22px;font-weight:650;letter-spacing:-.02em}
+body{background:var(--canvas);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter","Segoe UI","PingFang TC","Noto Sans TC",sans-serif;
+  font-size:16.5px;line-height:1.7;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:44px 24px 140px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:6px 12px;border-radius:999px}
+h1{font-size:clamp(29px,5vw,42px);line-height:1.18;letter-spacing:-.03em;font-weight:700;margin:16px 0 8px}
+.sub{color:var(--muted);font-size:16px;max-width:62ch}
+.nav{display:flex;align-items:center;gap:8px;margin-top:22px;flex-wrap:wrap}
+.nav button{border:1px solid var(--line);background:var(--card);border-radius:11px;font:inherit;font-size:13.5px;
+  font-weight:550;padding:8px 14px;cursor:pointer;color:var(--ink);transition:all .22s var(--ease)}
+.nav button:hover:not(:disabled){border-color:#DFD2C0;box-shadow:var(--shadow);transform:translateY(-1px)}
+.nav button:disabled{opacity:.4;cursor:default}
+.nav select{border:1px solid var(--line);background:var(--card);border-radius:11px;font:inherit;font-size:13.5px;
+  font-weight:550;padding:8px 12px;color:var(--ink);cursor:pointer}
+.today{font-size:12.5px;color:var(--faint);margin-left:4px}
+.metrics{display:flex;gap:26px;margin-top:24px;flex-wrap:wrap;align-items:center}
+.metric b{display:block;font-size:21px;font-weight:650;letter-spacing:-.02em}
 .metric span{font-size:12.5px;color:var(--faint)}
 .ring{width:54px;height:54px;transform:rotate(-90deg)}
 .ring circle{fill:none;stroke-width:6;stroke-linecap:round}
-.ring .bg{stroke:var(--line)}
-.ring .fg{stroke:var(--accent);transition:stroke-dasharray .5s var(--ease)}
+.ring .bg{stroke:var(--line)} .ring .fg{stroke:var(--accent);transition:stroke-dasharray .5s var(--ease)}
 .ringwrap{position:relative;display:grid;place-items:center}
 .ringwrap span{position:absolute;font-size:12px;font-weight:650}
-
-/* ---------- signature: the deal spine ---------- */
-.spine{
-  margin:40px 0 8px;background:var(--card);border:1px solid var(--line);
-  border-radius:var(--r);padding:22px 24px;box-shadow:var(--shadow);
-}
+.spine{margin:34px 0 8px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:22px 24px;box-shadow:var(--shadow)}
 .spine-title{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);font-weight:600}
-.stages{display:flex;align-items:flex-start;margin-top:18px}
+.stages{display:flex;align-items:flex-start;margin-top:16px}
 .stage{flex:1;position:relative;padding-right:12px}
-.stage::before{
-  content:"";position:absolute;top:7px;left:0;right:0;height:2px;background:var(--line);
-}
+.stage::before{content:"";position:absolute;top:7px;left:0;right:0;height:2px;background:var(--line)}
 .stage:last-child::before{right:calc(100% - 14px)}
-.dot{
-  position:relative;width:14px;height:14px;border-radius:50%;
-  background:var(--card);border:2px solid var(--faint);z-index:1;
-  transition:all .35s var(--ease);
-}
+.dot{position:relative;width:14px;height:14px;border-radius:50%;background:var(--card);
+  border:2px solid var(--faint);z-index:1;transition:all .35s var(--ease)}
 .stage.on .dot{border-color:var(--accent);background:var(--accent);box-shadow:0 0 0 5px var(--accent-soft)}
 .stage h3{font-size:14.5px;font-weight:650;margin:12px 0 2px;letter-spacing:-.01em}
 .stage p{font-size:12.5px;color:var(--muted);line-height:1.45}
-
-/* ---------- controls ---------- */
-.bar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:34px 0 20px;position:sticky;top:0;z-index:20;
-  padding:14px 0;background:linear-gradient(var(--canvas) 72%,rgba(250,246,240,0));}
+.bar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:30px 0 18px;position:sticky;top:0;z-index:20;
+  padding:14px 0;background:linear-gradient(var(--canvas) 72%,rgba(250,246,240,0))}
 .seg{display:flex;background:#F1E8DB;border-radius:12px;padding:4px;gap:2px;overflow-x:auto;max-width:100%}
-.seg button{
-  border:0;background:transparent;color:var(--muted);cursor:pointer;white-space:nowrap;
-  font:inherit;font-size:13.5px;font-weight:550;padding:7px 14px;border-radius:9px;
-  transition:all .22s var(--ease);
-}
+.seg button{border:0;background:transparent;color:var(--muted);cursor:pointer;white-space:nowrap;font:inherit;
+  font-size:13.5px;font-weight:550;padding:7px 14px;border-radius:9px;transition:all .22s var(--ease)}
 .seg button:hover{color:var(--ink)}
 .seg button[aria-pressed="true"]{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(94,74,52,.12)}
-.ghost{
-  margin-left:auto;border:1px solid var(--line);background:var(--card);border-radius:11px;
-  font:inherit;font-size:13.5px;font-weight:550;padding:8px 15px;cursor:pointer;color:var(--ink);
-  transition:all .22s var(--ease);
-}
+.ghost{margin-left:auto;border:1px solid var(--line);background:var(--card);border-radius:11px;font:inherit;
+  font-size:13.5px;font-weight:550;padding:8px 15px;cursor:pointer;color:var(--ink);transition:all .22s var(--ease)}
 .ghost:hover{border-color:#DFD2C0;box-shadow:var(--shadow);transform:translateY(-1px)}
-
-/* ---------- cards ---------- */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
-.card{
-  background:var(--card);border:1px solid var(--line);border-radius:var(--r);
-  box-shadow:var(--shadow);overflow:hidden;transition:box-shadow .3s var(--ease),transform .3s var(--ease),border-color .3s var(--ease);
-  animation:rise .45s var(--ease) both;
-}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);
+  overflow:hidden;transition:box-shadow .3s var(--ease),transform .3s var(--ease),border-color .3s var(--ease);
+  animation:rise .45s var(--ease) both}
 @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .card:hover{box-shadow:var(--shadow-lift);transform:translateY(-2px)}
-.card.known{border-color:#C6D9CB}
-.card.known .head b{color:var(--good)}
-.head{width:100%;text-align:left;border:0;background:transparent;font:inherit;cursor:pointer;padding:20px 22px;display:flex;gap:14px;align-items:flex-start}
+.card.known{border-color:#C6D9CB} .card.known .head b{color:var(--good)}
+.head{width:100%;text-align:left;border:0;background:transparent;font:inherit;cursor:pointer;padding:20px 22px;
+  display:flex;gap:12px;align-items:flex-start}
 .head b{font-size:20px;font-weight:650;letter-spacing:-.02em;line-height:1.25}
 .head .zh{font-size:13.5px;color:var(--muted);margin-top:3px}
-.pos{
-  font-size:11px;font-weight:650;letter-spacing:.04em;color:var(--accent);
-  background:var(--accent-soft);padding:3px 8px;border-radius:6px;flex:none;margin-top:4px;
-}
+.pos{font-size:11px;font-weight:650;color:var(--accent);background:var(--accent-soft);padding:3px 8px;
+  border-radius:6px;flex:none;margin-top:4px}
+.rev{font-size:10.5px;font-weight:650;color:var(--warn);background:var(--warn-soft);padding:3px 7px;
+  border-radius:6px;flex:none;margin-top:4px}
 .chev{margin-left:auto;flex:none;color:var(--faint);transition:transform .3s var(--ease)}
 .card.open .chev{transform:rotate(180deg)}
 .body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .38s var(--ease)}
@@ -125,300 +88,576 @@ mark{background:linear-gradient(transparent 56%, #F6E1B8 56%);color:inherit;padd
 .sent-zh{font-size:14px;color:var(--muted);margin-top:7px}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
 .chip{font-size:12.5px;color:#5E5349;background:#F4ECE1;border-radius:7px;padding:4px 9px}
-.tip{margin-top:14px;background:var(--warn-soft);border-radius:11px;padding:11px 13px;font-size:13px;color:#6E4A16;line-height:1.55}
-.tip b{font-weight:650}
+.tip{margin-top:14px;background:var(--warn-soft);border-radius:11px;padding:11px 13px;font-size:13px;
+  color:#6E4A16;line-height:1.55}
 .acts{display:flex;gap:8px;margin-top:16px}
-.acts button{
-  border:1px solid var(--line);background:var(--card);border-radius:10px;font:inherit;font-size:12.5px;
-  font-weight:550;padding:7px 12px;cursor:pointer;color:var(--muted);transition:all .2s var(--ease);
-}
+.acts button{border:1px solid var(--line);background:var(--card);border-radius:10px;font:inherit;font-size:12.5px;
+  font-weight:550;padding:7px 12px;cursor:pointer;color:var(--muted);transition:all .2s var(--ease)}
 .acts button:hover{color:var(--ink);border-color:#DFD2C0}
 .acts button.mark[data-on="1"]{background:var(--good-soft);border-color:#BCD6C4;color:var(--good)}
-
-/* ---------- quiz ---------- */
-.launch{
-  position:fixed;left:50%;transform:translateX(-50%);bottom:26px;z-index:40;
-  background:var(--accent);color:#FFFCF8;border:0;border-radius:14px;font:inherit;font-size:14.5px;font-weight:600;
-  padding:14px 26px;cursor:pointer;box-shadow:0 8px 26px rgba(63,107,85,.30);
-  transition:transform .25s var(--ease),box-shadow .25s var(--ease);
-}
+.launch{position:fixed;left:50%;transform:translateX(-50%);bottom:26px;z-index:40;background:var(--accent);
+  color:#FFFCF8;border:0;border-radius:14px;font:inherit;font-size:14.5px;font-weight:600;padding:14px 26px;
+  cursor:pointer;box-shadow:0 8px 26px rgba(63,107,85,.30);transition:all .25s var(--ease)}
 .launch:hover{transform:translateX(-50%) translateY(-2px);box-shadow:0 12px 34px rgba(63,107,85,.36)}
-.overlay{
-  position:fixed;inset:0;background:rgba(250,246,240,.88);backdrop-filter:blur(14px);
-  z-index:50;display:none;place-items:center;padding:20px;animation:fade .3s var(--ease)
-}
+.overlay{position:fixed;inset:0;background:rgba(250,246,240,.88);backdrop-filter:blur(14px);z-index:50;
+  display:none;place-items:center;padding:20px;animation:fade .3s var(--ease)}
 @keyframes fade{from{opacity:0}to{opacity:1}}
 .overlay.on{display:grid}
-.quiz{
-  width:100%;max-width:620px;background:var(--card);border:1px solid var(--line);
-  border-radius:22px;box-shadow:var(--shadow-lift);padding:30px;
-}
+.quiz{width:100%;max-width:620px;background:var(--card);border:1px solid var(--line);border-radius:22px;
+  box-shadow:var(--shadow-lift);padding:30px}
 .qtop{display:flex;align-items:center;gap:14px;font-size:12.5px;color:var(--faint);font-weight:550}
 .track{flex:1;height:4px;background:var(--line);border-radius:99px;overflow:hidden}
 .track i{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .4s var(--ease)}
-.qsent{font-size:19px;line-height:1.7;margin:26px 0 6px;letter-spacing:-.01em}
-.blank{display:inline-block;min-width:110px;border-bottom:2px solid var(--accent);vertical-align:baseline}
+.qsent{font-size:19px;line-height:1.7;margin:24px 0 6px}
+.blank{display:inline-block;min-width:110px;border-bottom:2px solid var(--accent)}
 .qhint{font-size:13px;color:var(--muted)}
-.opts{display:grid;gap:9px;margin-top:22px}
-.opt{
-  display:flex;align-items:center;gap:12px;text-align:left;width:100%;
-  border:1px solid var(--line);background:var(--card);border-radius:13px;font:inherit;font-size:15px;
-  padding:14px 16px;cursor:pointer;transition:all .2s var(--ease);
-}
+.opts{display:grid;gap:9px;margin-top:20px}
+.opt{display:flex;align-items:center;gap:12px;text-align:left;width:100%;border:1px solid var(--line);
+  background:var(--card);border-radius:13px;font:inherit;font-size:15px;padding:14px 16px;cursor:pointer;
+  transition:all .2s var(--ease)}
 .opt:hover:not(:disabled){border-color:#BFD4C6;background:#FDFAF5;transform:translateX(2px)}
-.opt kbd{
-  font:inherit;font-size:11.5px;font-weight:650;color:var(--faint);background:#F2E9DD;
-  border-radius:6px;padding:2px 7px;flex:none
-}
+.opt kbd{font:inherit;font-size:11.5px;font-weight:650;color:var(--faint);background:#F2E9DD;border-radius:6px;
+  padding:2px 7px;flex:none}
 .opt.right{border-color:#A6C9B2;background:var(--good-soft)}
 .opt.wrong{border-color:#E0BCA6;background:#FAEDE2}
 .opt:disabled{cursor:default}
-.feedback{margin-top:18px;border-radius:13px;padding:15px 16px;background:#F7F0E6;font-size:13.5px;line-height:1.6;display:none}
+.feedback{margin-top:18px;border-radius:13px;padding:15px 16px;background:#F7F0E6;font-size:13.5px;
+  line-height:1.6;display:none}
 .feedback.on{display:block;animation:rise .3s var(--ease)}
 .feedback .zh{color:var(--muted);margin-top:5px}
 .qfoot{display:flex;gap:10px;margin-top:20px;align-items:center}
-.primary{
-  border:0;background:var(--accent);color:#fff;border-radius:12px;font:inherit;font-size:14px;font-weight:600;
-  padding:12px 22px;cursor:pointer;transition:all .22s var(--ease);
-}
-.primary:hover{filter:brightness(1.07);transform:translateY(-1px)}
+.primary{border:0;background:var(--accent);color:#FFFCF8;border-radius:12px;font:inherit;font-size:14px;
+  font-weight:600;padding:12px 22px;cursor:pointer;transition:all .22s var(--ease)}
+.primary:hover{filter:brightness(1.08);transform:translateY(-1px)}
 .link{border:0;background:none;font:inherit;font-size:13px;color:var(--muted);cursor:pointer;padding:8px}
 .link:hover{color:var(--ink)}
 .score{font-size:52px;font-weight:700;letter-spacing:-.03em}
 .wronglist{margin-top:18px;display:grid;gap:8px;max-height:38vh;overflow:auto}
 .wrongitem{border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px}
 .wrongitem span{color:var(--muted);font-size:12.5px;display:block;margin-top:3px}
+.notice{background:var(--warn-soft);border:1px solid #EBD9BC;border-radius:var(--r);padding:16px 18px;
+  font-size:14px;color:#6E4A16;margin-top:20px}
+/* ---- Part 6 ---- */
+.launchbar{position:fixed;left:50%;transform:translateX(-50%);bottom:24px;z-index:40;display:flex;gap:10px}
+.launchbar button{border:0;border-radius:14px;font:inherit;font-size:14px;font-weight:600;padding:13px 20px;
+  cursor:pointer;transition:all .25s var(--ease)}
+.launchbar .p5{background:var(--accent);color:#FFFCF8;box-shadow:0 8px 26px rgba(63,107,85,.30)}
+.launchbar .p6{background:var(--card);color:var(--ink);border:1px solid var(--line);
+  box-shadow:0 8px 26px rgba(94,74,52,.16)}
+.launchbar button:hover{transform:translateY(-2px)}
+.quiz.wide{max-width:760px}
+.passage{background:#FDF9F3;border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:18px 0 4px;
+  max-height:34vh;overflow:auto}
+.pmeta{font-size:12px;color:var(--faint);line-height:1.7;padding-bottom:10px;margin-bottom:12px;
+  border-bottom:1px dashed var(--line)}
+.ptext{font-size:15.5px;line-height:1.95}
+.bl{display:inline-block;min-width:74px;text-align:center;border-bottom:2px solid var(--faint);
+  color:var(--faint);font-size:13px;font-weight:650;transition:all .25s var(--ease)}
+.bl.cur{border-color:var(--accent);color:var(--accent);background:var(--accent-soft);border-radius:5px 5px 0 0}
+.bl.done{border-color:var(--good);color:var(--good);font-weight:550}
+.bl.done.miss{border-color:#C97B4E;color:#B0693F}
+.optlong{font-size:14.5px;line-height:1.5;align-items:flex-start}
+.optlong kbd{margin-top:2px}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
 @media (max-width:600px){
-  .wrap{padding:32px 18px 130px}
+  .wrap{padding:30px 18px 130px}
   .stages{flex-direction:column;gap:16px}
-  .stage::before{display:none}
-  .stage{padding-right:0}
-  .quiz{padding:22px 20px;border-radius:18px}
-  .qsent{font-size:17px}
+  .stage::before{display:none} .stage{padding-right:0}
+  .quiz{padding:22px 20px;border-radius:18px} .qsent{font-size:17px}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <span class="eyebrow">Day 01 · 情境成組記憶法</span>
-  <h1>一紙合約的誕生</h1>
-  <p class="sub">今天的 30 個字不是隨機清單，而是一筆生意從報價到履約的完整流程。照順序讀完，你記住的是<strong>劇情</strong>，不是單字表。</p>
+  <span class="eyebrow" id="eyebrow">Day 01</span>
+  <h1 id="theme">—</h1>
+  <p class="sub" id="story">—</p>
+
+  <div class="nav">
+    <button id="prev">‹ 前一天</button>
+    <select id="jump"></select>
+    <button id="next">後一天 ›</button>
+    <button id="backToday" style="display:none">回到今天</button>
+    <span class="today" id="dateLabel"></span>
+  </div>
 
   <div class="metrics">
     <div class="ringwrap">
-      <svg class="ring" viewBox="0 0 54 54"><circle class="bg" cx="27" cy="27" r="22"/><circle class="fg" id="ring" cx="27" cy="27" r="22" stroke-dasharray="0 138"/></svg>
+      <svg class="ring" viewBox="0 0 54 54"><circle class="bg" cx="27" cy="27" r="22"/>
+      <circle class="fg" id="ring" cx="27" cy="27" r="22" stroke-dasharray="0 138"/></svg>
       <span id="ringtxt">0%</span>
     </div>
     <div class="metric"><b id="mKnown">0 / 30</b><span>已標記記住</span></div>
-    <div class="metric"><b>3</b><span>情境段落</span></div>
+    <div class="metric"><b id="mNew">—</b><span>新字 / 複習</span></div>
     <div class="metric"><b>15–20 分</b><span>建議時間</span></div>
   </div>
 
   <section class="spine">
     <div class="spine-title">今日情境軸線</div>
-    <div class="stages" id="stages">
-      <div class="stage on" data-s="1"><div class="dot"></div><h3>提案與報價</h3><p>買方詢價、賣方投標，數字還沒定案。</p></div>
-      <div class="stage" data-s="2"><div class="dot"></div><h3>條款協商</h3><p>雙方對責任與例外來回拉鋸。</p></div>
-      <div class="stage" data-s="3"><div class="dot"></div><h3>簽約與履約</h3><p>白紙黑字生效，違約就要付代價。</p></div>
-    </div>
+    <div class="stages" id="stages"></div>
   </section>
 
   <div class="bar">
-    <div class="seg" id="seg">
-      <button aria-pressed="true" data-f="all">全部 30</button>
-      <button aria-pressed="false" data-f="1">提案與報價</button>
-      <button aria-pressed="false" data-f="2">條款協商</button>
-      <button aria-pressed="false" data-f="3">簽約與履約</button>
-    </div>
+    <div class="seg" id="seg"></div>
     <button class="ghost" id="expandAll">全部展開</button>
   </div>
 
   <div class="grid" id="grid"></div>
+  <div id="endNotice"></div>
 </div>
 
-<button class="launch" id="launch">開始測驗 · 30 題克漏字</button>
-
+<div class="launchbar">
+  <button class="p5" id="launch">Part 5 · 30 題</button>
+  <button class="p6" id="launch6">Part 6 · 短文填空</button>
+</div>
 <div class="overlay" id="overlay"><div class="quiz" id="quiz"></div></div>
 
 <script>
-const DATA=[
-{s:1,w:"proposal",pos:"n.",zh:"提案；企劃書",form:"proposal",
- sent:"The marketing team will submit its proposal to the board by Friday.",
- zhs:"行銷團隊將在週五前把提案送交董事會。",
- coll:["submit a proposal","review / accept a proposal","a proposal for the project"],
- tip:"動詞 propose → 名詞 proposal，Part 5 最愛考詞性轉換。別和 purpose（目的）看混。"},
-{s:1,w:"quotation",pos:"n.",zh:"報價（單）",form:"quotation",
- sent:"Please send us a written quotation for the office furniture.",
- zhs:"請將辦公家具的書面報價單寄給我們。",
- coll:["request / provide a quotation","a quotation for + 物品"],
- tip:"口語與 email 常縮成 quote。quotation 另一個意思是「引文」，看情境判斷。"},
-{s:1,w:"estimate",pos:"n./v.",zh:"估價；估計",form:"estimate",
- sent:"The contractor's estimate exceeded our budget by 15 percent.",
- zhs:"承包商的估價超出我們預算 15%。",
- coll:["a rough / preliminary estimate","estimate that ...","cost estimate"],
- tip:"名詞唸 /ˈestɪmət/、動詞唸 /ˈestɪmeɪt/，聽力 Part 3 靠重音分辨。"},
-{s:1,w:"bid",pos:"n./v.",zh:"投標；出價",form:"bids",
- sent:"Three firms placed bids on the construction project.",
- zhs:"三家公司對這項工程投標。",
- coll:["submit / place a bid","the winning bid","bid for a contract"],
- tip:"三態同形 bid–bid–bid，看到 bidded 就是錯的選項。"},
-{s:1,w:"vendor",pos:"n.",zh:"供應商；賣方",form:"vendors",
- sent:"We have shortlisted two vendors for the software upgrade.",
- zhs:"我們已為軟體升級篩選出兩家供應商。",
- coll:["approved / preferred vendor","vendor selection"],
- tip:"＝ supplier。另有「街頭攤販」之意，多益圖片題出現過 street vendor。"},
-{s:1,w:"specification",pos:"n.",zh:"規格；明細",form:"specifications",
- sent:"All materials must meet the specifications listed in Appendix B.",
- zhs:"所有材料都必須符合附錄 B 所列規格。",
- coll:["meet / comply with the specifications","technical specs"],
- tip:"常縮寫成 spec；動詞是 specify。合約與產品說明題型高頻。"},
-{s:1,w:"competitive",pos:"adj.",zh:"有競爭力的；價格優惠的",form:"competitive",
- sent:"Their pricing is highly competitive compared with other suppliers.",
- zhs:"與其他供應商相比，他們的定價非常有競爭力。",
- coll:["competitive pricing / rate","a competitive salary"],
- tip:"三兄弟必分清：competitive（有競爭力）／competent（能勝任）／competitor（競爭者）。"},
-{s:1,w:"submit",pos:"v.",zh:"提交；呈交",form:"submit",
- sent:"Applicants must submit all required documents before the deadline.",
- zhs:"申請人必須在截止日前提交所有必要文件。",
- coll:["submit a report / an application","submit A to B"],
- tip:"重音在後，變化要雙寫：submitted、submitting。名詞 submission。"},
-{s:1,w:"inquiry",pos:"n.",zh:"詢問；詢價",form:"inquiry",
- sent:"We received an inquiry about bulk discounts from a new client.",
- zhs:"我們收到一位新客戶關於大量採購折扣的詢問。",
- coll:["make / handle an inquiry","an inquiry about + 事"],
- tip:"英式拼法 enquiry。動詞 inquire about（詢問）／inquire into（調查）。"},
-{s:1,w:"tentative",pos:"adj.",zh:"暫定的；初步的",form:"tentative",
- sent:"The tentative delivery date is set for March 10.",
- zhs:"暫定的交貨日期訂在 3 月 10 日。",
- coll:["a tentative agreement / schedule","tentatively scheduled"],
- tip:"和 confirmed（已確認）相對，聽力改期題常靠這個字判斷答案。"},
+/* ============ 起始日：頁面自此日起每天自動換一天 ============ */
+const START = "2026-08-01";
 
-{s:2,w:"negotiate",pos:"v.",zh:"談判；協商",form:"negotiated",
- sent:"Both parties negotiated the terms for nearly three hours.",
- zhs:"雙方就條款協商了將近三小時。",
- coll:["negotiate a contract / the terms","negotiate with sb over sth"],
- tip:"名詞 negotiation。徵才廣告的 salary negotiable ＝ 薪資面議。"},
-{s:2,w:"clause",pos:"n.",zh:"條款",form:"clause",
- sent:"The confidentiality clause prohibits sharing client data.",
- zhs:"保密條款禁止分享客戶資料。",
- coll:["confidentiality / termination / penalty clause"],
- tip:"別和 cause（原因）看混。一份 contract 由許多 clauses 組成。"},
-{s:2,w:"provision",pos:"n.",zh:"條款；規定；供應",form:"provision",
- sent:"Under this provision, either party may cancel with 30 days' notice.",
- zhs:"依據本條規定，任一方均可提前 30 天通知取消。",
- coll:["under the provisions of","make provision for"],
- tip:"一字兩義：法律「規定」＋「提供」。衍生 provided that ＝ 假如。"},
-{s:2,w:"amend",pos:"v.",zh:"修訂；修正",form:"amended",
- sent:"The agreement was amended to include an extended warranty.",
- zhs:"該協議經修訂，納入了延長保固。",
- coll:["amend a contract / policy","an amendment to the agreement"],
- tip:"比 change 正式，合約題必考。名詞 amendment。"},
-{s:2,w:"waive",pos:"v.",zh:"放棄（權利）；免除",form:"waive",
- sent:"The bank agreed to waive the transfer fee for premium members.",
- zhs:"銀行同意免除高級會員的轉帳手續費。",
- coll:["waive a fee / requirement / right"],
- tip:"發音同 wave 但意思無關。名詞 waiver ＝ 免責同意書。"},
-{s:2,w:"liability",pos:"n.",zh:"責任；債務",form:"liability",
- sent:"The clause limits the supplier's liability to the value of the order.",
- zhs:"該條款將供應商的責任限制在訂單金額之內。",
- coll:["limit / assume liability","liability for damages"],
- tip:"形容詞 liable：be liable for。財報中 liabilities（負債）與 assets（資產）相對。"},
-{s:2,w:"binding",pos:"adj.",zh:"具約束力的",form:"binding",
- sent:"Once signed, the document becomes legally binding on both parties.",
- zhs:"一經簽署，該文件即對雙方具有法律約束力。",
- coll:["legally binding","a binding agreement","non-binding"],
- tip:"來自 bind–bound–bound。看到 non-binding 就是「無約束力」。"},
-{s:2,w:"concession",pos:"n.",zh:"讓步；特許經營",form:"concessions",
- sent:"Neither side was willing to make further concessions.",
- zhs:"雙方都不願再做出進一步讓步。",
- coll:["make / offer a concession"],
- tip:"動詞 concede。機場的 concession stand 指特許商店，聽力出現過。"},
-{s:2,w:"mutually",pos:"adv.",zh:"互相地；雙方地",form:"mutually",
- sent:"The two companies reached a mutually beneficial arrangement.",
- zhs:"兩家公司達成了互惠的安排。",
- coll:["mutually beneficial / agreeable","a mutually agreed date"],
- tip:"形容詞 mutual。mutually beneficial 幾乎是合約新聞稿的固定搭配。"},
-{s:2,w:"stipulate",pos:"v.",zh:"明訂；規定",form:"stipulates",
- sent:"The contract stipulates that payment be made within 30 days.",
- zhs:"合約明訂款項須於 30 天內支付。",
- coll:["stipulate that ...","as stipulated in the agreement"],
- tip:"陷阱：stipulate/require/recommend 後的 that 子句用<b>原形動詞</b>（be made，不是 is made）。"},
+const DAYS = [
+{n:1,theme:"一紙合約的誕生",story:"一筆生意從報價到履約的完整流程。照順序讀，你記住的是劇情，不是單字表。",
+ arc:[["提案與報價","買方詢價、賣方投標，數字還沒定案。"],["條款協商","雙方對責任與例外來回拉鋸。"],["簽約與履約","白紙黑字生效，違約就要付代價。"]],
+ words:[
+{s:1,w:"proposal",p:"n.",z:"提案；企劃書",f:"proposal",e:"The marketing team will submit its proposal to the board by Friday.",t:"行銷團隊將在週五前把提案送交董事會。",c:["submit a proposal","a proposal for the project"],k:"動詞 propose → 名詞 proposal，Part 5 最愛考詞性轉換。別和 purpose 看混。"},
+{s:1,w:"quotation",p:"n.",z:"報價（單）",f:"quotation",e:"Please send us a written quotation for the office furniture.",t:"請將辦公家具的書面報價單寄給我們。",c:["request a quotation","a quotation for + 物品"],k:"口語常縮成 quote。另一個意思是「引文」，看情境判斷。"},
+{s:1,w:"estimate",p:"n./v.",z:"估價；估計",f:"estimate",e:"The contractor's estimate exceeded our budget by 15 percent.",t:"承包商的估價超出我們預算 15%。",c:["a rough estimate","cost estimate"],k:"名詞唸 /ˈestɪmət/、動詞唸 /ˈestɪmeɪt/，聽力靠重音分辨。"},
+{s:1,w:"bid",p:"n./v.",z:"投標；出價",f:"bids",e:"Three firms placed bids on the construction project.",t:"三家公司對這項工程投標。",c:["submit a bid","the winning bid"],k:"三態同形 bid–bid–bid，看到 bidded 就是錯選項。"},
+{s:1,w:"vendor",p:"n.",z:"供應商；賣方",f:"vendors",e:"We have shortlisted two vendors for the software upgrade.",t:"我們已為軟體升級篩選出兩家供應商。",c:["approved vendor","vendor selection"],k:"＝ supplier。另有「街頭攤販」之意，圖片題出現過。"},
+{s:1,w:"specification",p:"n.",z:"規格；明細",f:"specifications",e:"All materials must meet the specifications listed in Appendix B.",t:"所有材料都必須符合附錄 B 所列規格。",c:["meet the specifications","technical specs"],k:"常縮寫成 spec；動詞是 specify。"},
+{s:1,w:"competitive",p:"adj.",z:"有競爭力的",f:"competitive",e:"Their pricing is highly competitive compared with other suppliers.",t:"與其他供應商相比，他們的定價非常有競爭力。",c:["competitive pricing","a competitive salary"],k:"三兄弟必分清：competitive／competent（能勝任）／competitor（競爭者）。"},
+{s:1,w:"submit",p:"v.",z:"提交；呈交",f:"submit",e:"Applicants must submit all required documents before the deadline.",t:"申請人必須在截止日前提交所有必要文件。",c:["submit a report","submit A to B"],k:"重音在後，變化雙寫：submitted、submitting。名詞 submission。"},
+{s:1,w:"inquiry",p:"n.",z:"詢問；詢價",f:"inquiry",e:"We received an inquiry about bulk discounts from a new client.",t:"我們收到新客戶關於大量採購折扣的詢問。",c:["make an inquiry","an inquiry about + 事"],k:"英式拼法 enquiry。inquire about（詢問）／inquire into（調查）。"},
+{s:1,w:"tentative",p:"adj.",z:"暫定的；初步的",f:"tentative",e:"The tentative delivery date is set for March 10.",t:"暫定的交貨日期訂在 3 月 10 日。",c:["a tentative schedule","tentatively scheduled"],k:"和 confirmed 相對，聽力改期題常靠這字判斷答案。"},
+{s:2,w:"negotiate",p:"v.",z:"談判；協商",f:"negotiated",e:"Both parties negotiated the terms for nearly three hours.",t:"雙方就條款協商了將近三小時。",c:["negotiate a contract","negotiate with sb"],k:"名詞 negotiation。徵才廣告 salary negotiable ＝ 薪資面議。"},
+{s:2,w:"clause",p:"n.",z:"條款",f:"clause",e:"The confidentiality clause prohibits sharing client data.",t:"保密條款禁止分享客戶資料。",c:["confidentiality clause","termination clause"],k:"別和 cause 看混。一份 contract 由許多 clauses 組成。"},
+{s:2,w:"provision",p:"n.",z:"條款；規定",f:"provision",e:"Under this provision, either party may cancel with 30 days' notice.",t:"依據本條規定，任一方均可提前 30 天通知取消。",c:["under the provisions of","make provision for"],k:"一字兩義：法律「規定」＋「提供」。衍生 provided that ＝ 假如。"},
+{s:2,w:"amend",p:"v.",z:"修訂；修正",f:"amended",e:"The agreement was amended to include an extended warranty.",t:"該協議經修訂，納入了延長保固。",c:["amend a contract","an amendment to"],k:"比 change 正式，合約題必考。名詞 amendment。"},
+{s:2,w:"waive",p:"v.",z:"放棄（權利）；免除",f:"waive",e:"The bank agreed to waive the transfer fee for premium members.",t:"銀行同意免除高級會員的轉帳手續費。",c:["waive a fee","waive a requirement"],k:"發音同 wave 但意思無關。名詞 waiver ＝ 免責同意書。"},
+{s:2,w:"liability",p:"n.",z:"責任；債務",f:"liability",e:"The clause limits the supplier's liability to the value of the order.",t:"該條款將供應商的責任限制在訂單金額之內。",c:["limit liability","liability for damages"],k:"形容詞 liable：be liable for。財報中與 assets 相對。"},
+{s:2,w:"binding",p:"adj.",z:"具約束力的",f:"binding",e:"Once signed, the document becomes legally binding on both parties.",t:"一經簽署，該文件即對雙方具法律約束力。",c:["legally binding","a binding agreement"],k:"來自 bind–bound–bound。non-binding ＝ 無約束力。"},
+{s:2,w:"concession",p:"n.",z:"讓步；特許經營",f:"concessions",e:"Neither side was willing to make further concessions.",t:"雙方都不願再做出進一步讓步。",c:["make a concession","offer a concession"],k:"動詞 concede。機場 concession stand 指特許商店。"},
+{s:2,w:"mutually",p:"adv.",z:"互相地；雙方地",f:"mutually",e:"The two companies reached a mutually beneficial arrangement.",t:"兩家公司達成了互惠的安排。",c:["mutually beneficial","a mutually agreed date"],k:"形容詞 mutual。mutually beneficial 幾乎是合約新聞稿的固定搭配。"},
+{s:2,w:"stipulate",p:"v.",z:"明訂；規定",f:"stipulates",e:"The contract stipulates that payment be made within 30 days.",t:"合約明訂款項須於 30 天內支付。",c:["stipulate that ...","as stipulated in"],k:"陷阱：後接 that 子句用原形動詞（be made，不是 is made）。"},
+{s:3,w:"execute",p:"v.",z:"簽署使生效；執行",f:"executed",e:"The agreement was executed by both parties on May 1.",t:"該協議由雙方於 5 月 1 日簽署生效。",c:["execute a contract","execute a plan"],k:"多益考的多半是「簽署生效」而非「執行」。名詞 execution。"},
+{s:3,w:"comply",p:"v.",z:"遵守",f:"comply",e:"All employees must comply with the updated safety regulations.",t:"全體員工都必須遵守更新後的安全規範。",c:["comply with（不可省 with）","in compliance with"],k:"名詞 compliance、形容詞 compliant。少了 with 就是錯選項。"},
+{s:3,w:"obligation",p:"n.",z:"義務；責任",f:"obligations",e:"The vendor failed to fulfill its contractual obligations.",t:"該供應商未能履行合約義務。",c:["fulfill an obligation","under no obligation to"],k:"動詞 oblige、形容詞 obligatory。廣告常見 with no obligation。"},
+{s:3,w:"terminate",p:"v.",z:"終止",f:"terminate",e:"Either party may terminate the agreement with written notice.",t:"任一方均可以書面通知終止本協議。",c:["terminate a contract","termination clause"],k:"名詞 termination，比 end 正式。"},
+{s:3,w:"renewal",p:"n.",z:"續約；更新",f:"renewal",e:"Your subscription is up for renewal at the end of the month.",t:"您的訂閱將於月底到期續約。",c:["automatic renewal","be up for renewal"],k:"動詞 renew。renewable 另指「可再生的」。"},
+{s:3,w:"breach",p:"n./v.",z:"違約；違反",f:"breach",e:"Late delivery constitutes a breach of contract.",t:"延遲交貨構成違約。",c:["a breach of contract","be in breach of"],k:"＝ violation。別把 break 的名詞誤放在這個位置。"},
+{s:3,w:"penalty",p:"n.",z:"罰款；違約金",f:"penalty",e:"A penalty will be imposed for any delay in shipment.",t:"任何出貨延遲都將被處以罰款。",c:["impose a penalty","penalty clause"],k:"動詞 penalize。帳單通知類文章常見 late payment penalty。"},
+{s:3,w:"effective",p:"adj.",z:"生效的；有效的",f:"effective",e:"The new pricing policy is effective as of June 1.",t:"新的定價政策自 6 月 1 日起生效。",c:["effective immediately","effective as of + 日期"],k:"多益考「生效」遠多於「有效果」。effective ≠ efficient（有效率）。"},
+{s:3,w:"subject to",p:"phr.",z:"須經…核准；受制於",f:"subject to",e:"All contracts are subject to approval by the legal department.",t:"所有合約均須經法務部門核准。",c:["subject to change","subject to availability"],k:"後接名詞或 V-ing，不接原形動詞。"},
+{s:3,w:"in accordance with",p:"phr.",z:"依照；根據",f:"in accordance with",e:"Refunds will be processed in accordance with company policy.",t:"退款將依照公司政策處理。",c:["in accordance with the terms"],k:"不能寫成 in accordance to。較口語的同義說法是 according to。"}
+]},
 
-{s:3,w:"execute",pos:"v.",zh:"簽署使生效；執行",form:"executed",
- sent:"The agreement was executed by both parties on May 1.",
- zhs:"該協議由雙方於 5 月 1 日簽署生效。",
- coll:["execute a contract","execute a plan"],
- tip:"多益考的多半是「簽署生效」而非「執行」。名詞 execution。"},
-{s:3,w:"comply",pos:"v.",zh:"遵守",form:"comply",
- sent:"All employees must comply with the updated safety regulations.",
- zhs:"全體員工都必須遵守更新後的安全規範。",
- coll:["comply with（with 不可省）"],
- tip:"名詞 compliance（in compliance with）、形容詞 compliant。少了 with 就是錯選項。"},
-{s:3,w:"obligation",pos:"n.",zh:"義務；責任",form:"obligations",
- sent:"The vendor failed to fulfill its contractual obligations.",
- zhs:"該供應商未能履行合約義務。",
- coll:["fulfill / meet an obligation","under no obligation to"],
- tip:"動詞 oblige、形容詞 obligatory。廣告常見 with no obligation ＝ 無需承諾。"},
-{s:3,w:"terminate",pos:"v.",zh:"終止",form:"terminate",
- sent:"Either party may terminate the agreement with written notice.",
- zhs:"任一方均可以書面通知終止本協議。",
- coll:["terminate a contract / employment"],
- tip:"名詞 termination，比 end 正式。termination clause 就是解約條款。"},
-{s:3,w:"renewal",pos:"n.",zh:"續約；更新",form:"renewal",
- sent:"Your subscription is up for renewal at the end of the month.",
- zhs:"您的訂閱將於月底到期續約。",
- coll:["automatic renewal","renewal notice","be up for renewal"],
- tip:"動詞 renew。renewable 另指「可再生的」（renewable energy）。"},
-{s:3,w:"breach",pos:"n./v.",zh:"違約；違反",form:"breach",
- sent:"Late delivery constitutes a breach of contract.",
- zhs:"延遲交貨構成違約。",
- coll:["a breach of contract / security","be in breach of"],
- tip:"＝ violation。別把 break 的名詞誤用成 breach 的位置。"},
-{s:3,w:"penalty",pos:"n.",zh:"罰款；違約金",form:"penalty",
- sent:"A penalty will be imposed for any delay in shipment.",
- zhs:"任何出貨延遲都將被處以罰款。",
- coll:["impose / incur a penalty","penalty clause","late penalty"],
- tip:"動詞 penalize。帳單與通知類文章常見 late payment penalty。"},
-{s:3,w:"effective",pos:"adj.",zh:"生效的；有效的",form:"effective",
- sent:"The new pricing policy is effective as of June 1.",
- zhs:"新的定價政策自 6 月 1 日起生效。",
- coll:["effective immediately","effective from / as of + 日期"],
- tip:"多益考「生效」的次數遠多於「有效果」。effective ≠ efficient（有效率的）。"},
-{s:3,w:"subject to",pos:"phr.",zh:"須經…核准；受制於",form:"subject to",
- sent:"All contracts are subject to approval by the legal department.",
- zhs:"所有合約均須經法務部門核准。",
- coll:["subject to change / approval / availability"],
- tip:"後面接名詞或 V-ing，<b>不接原形動詞</b>。廣告常見 Prices are subject to change。"},
-{s:3,w:"in accordance with",pos:"phr.",zh:"依照；根據",form:"in accordance with",
- sent:"Refunds will be processed in accordance with company policy.",
- zhs:"退款將依照公司政策處理。",
- coll:["in accordance with the terms / regulations"],
- tip:"不能寫成 in accordance to。較口語的同義說法是 according to。"}
+{n:2,theme:"一個職缺的旅程",story:"從貼出徵才啟事到新人報到，這是多益 Part 4、Part 7 出現頻率最高的場景之一。",
+ arc:[["徵才與面試","履歷、資格、關卡。"],["任用與福利","談薪、試用、留人。"]],
+ words:[
+{s:1,w:"applicant",p:"n.",z:"應徵者；申請人",f:"applicants",e:"All applicants must complete the online form before Monday.",t:"所有應徵者都須在週一前填妥線上表格。",c:["qualified applicants","applicants for the position"],k:"apply → applicant（人）／application（申請）／appliance（家電），四字常互相干擾。"},
+{s:1,w:"candidate",p:"n.",z:"候選人；人選",f:"candidates",e:"Only three candidates were invited for a second interview.",t:"只有三位人選獲邀參加第二次面試。",c:["a strong candidate","shortlisted candidates"],k:"applicant 是「投履歷的人」，candidate 是「進入評選的人」，順序不同。"},
+{s:1,w:"credentials",p:"n.",z:"資歷；證明文件",f:"credentials",e:"Please bring your credentials to the interview on Thursday.",t:"請於週四面試時攜帶你的資歷證明。",c:["impressive credentials","verify credentials"],k:"通常用複數。指學歷、證照、推薦信這一整包。"},
+{s:1,w:"qualification",p:"n.",z:"資格；條件",f:"qualifications",e:"The job posting lists three required qualifications.",t:"這則職缺公告列出三項必要資格。",c:["meet the qualifications","required qualifications"],k:"形容詞 qualified（合格的）。be qualified for + 職位。"},
+{s:1,w:"recruit",p:"v./n.",z:"招募；新進人員",f:"recruit",e:"The firm plans to recruit twenty engineers this quarter.",t:"該公司計畫本季招募二十名工程師。",c:["recruit staff","a new recruit"],k:"名詞 recruitment（招募活動）、recruiter（招募人員）。"},
+{s:1,w:"vacancy",p:"n.",z:"職缺；空房",f:"vacancy",e:"There is currently one vacancy in the accounting department.",t:"會計部門目前有一個職缺。",c:["fill a vacancy","No Vacancy（客滿）"],k:"一字兩用：職缺＋旅館空房。形容詞 vacant（空的）。"},
+{s:1,w:"eligible",p:"adj.",z:"有資格的",f:"eligible",e:"Employees become eligible for the bonus after one year.",t:"員工任職滿一年後才有資格領取獎金。",c:["eligible for + 名詞","eligible to + 原形"],k:"高頻陷阱：eligible for（後接名詞）vs eligible to（後接原形動詞）。"},
+{s:1,w:"mandatory",p:"adj.",z:"強制的；必須的",f:"mandatory",e:"Attendance at the safety training is mandatory for all staff.",t:"全體員工都必須出席安全訓練。",c:["mandatory training","mandatory retirement"],k:"＝ required、compulsory；反義 optional、voluntary。"},
+{s:1,w:"supervisor",p:"n.",z:"主管；督導",f:"supervisor",e:"Submit your leave request to your immediate supervisor.",t:"請將請假申請交給你的直屬主管。",c:["immediate supervisor","under the supervision of"],k:"動詞 supervise、名詞 supervision。聽力常出現 report to your supervisor。"},
+{s:1,w:"personnel",p:"n.",z:"人事（部門）；全體人員",f:"personnel",e:"Contact the personnel office for questions about your contract.",t:"合約相關問題請洽人事室。",c:["personnel department","authorized personnel only"],k:"重音在最後 /ˌpɜːrsəˈnel/，別跟 personal（個人的）搞混，這組是聽力經典陷阱。"},
+{s:2,w:"compensation",p:"n.",z:"薪酬；補償",f:"compensation",e:"The package includes a competitive compensation plan.",t:"這份方案包含具競爭力的薪酬計畫。",c:["compensation package","compensate for"],k:"動詞 compensate sb for sth。徵才文中指「整體薪酬」，不只月薪。"},
+{s:2,w:"probation",p:"n.",z:"試用期",f:"probation",e:"New hires are evaluated at the end of their probation period.",t:"新進人員會在試用期結束時接受評估。",c:["probation period","on probation"],k:"形容詞 probationary。三個月試用期是多益公告題的常見設定。"},
+{s:2,w:"orientation",p:"n.",z:"新人訓練；職前說明",f:"orientation",e:"The orientation session for new employees begins at nine.",t:"新進員工的職前說明會九點開始。",c:["orientation session","attend an orientation"],k:"別譯成「方向」。行事曆與公告題高頻。"},
+{s:2,w:"promote",p:"v.",z:"升職；推廣",f:"promoted",e:"She was promoted to regional manager after two years.",t:"她兩年後被升任為區域經理。",c:["be promoted to + 職位","promote a product"],k:"一字兩義：升職＋促銷。名詞 promotion 同樣兩義，看上下文。"},
+{s:2,w:"resign",p:"v.",z:"辭職",f:"resigned",e:"The chief financial officer resigned for personal reasons.",t:"財務長因個人因素辭職。",c:["resign from a position","submit a resignation"],k:"名詞 resignation。resign 是自己走，be laid off 是被裁。"},
+{s:2,w:"retirement",p:"n.",z:"退休",f:"retirement",e:"A reception will be held to celebrate his retirement.",t:"公司將舉辦餐會慶祝他退休。",c:["retirement party","early retirement"],k:"動詞 retire。retirement party 是聽力最愛的辦公室場景。"},
+{s:2,w:"workforce",p:"n.",z:"勞動力；全體員工",f:"workforce",e:"Nearly half of the workforce works remotely.",t:"將近半數員工採遠距工作。",c:["expand the workforce","a skilled workforce"],k:"集合名詞，動詞多用單數。與 staff、personnel 同類。"},
+{s:2,w:"incentive",p:"n.",z:"獎勵；誘因",f:"incentive",e:"The company offers a cash incentive for meeting sales targets.",t:"公司為達成銷售目標提供現金獎勵。",c:["offer an incentive","incentive program"],k:"an incentive to + 原形動詞。人資與行銷兩個場景都會出現。"},
+{s:2,w:"turnover",p:"n.",z:"員工流動率；營業額",f:"turnover",e:"High employee turnover has become a serious concern.",t:"高員工流動率已成為嚴重問題。",c:["employee turnover","annual turnover"],k:"一字兩義：人事流動率＋營業額。看前面搭配什麼字判斷。"},
+{s:2,w:"reference",p:"n.",z:"推薦人；推薦信",f:"references",e:"Applicants should provide two professional references.",t:"應徵者應提供兩位專業推薦人。",c:["provide references","a letter of reference"],k:"求職語境指「推薦人」，不是「參考」。動詞 refer to。"}
+]},
+
+{n:3,theme:"一場會議的前後",story:"從發出議程到會後追蹤——Part 3 對話與 Part 4 通知幾乎有三分之一落在這個場景。",
+ arc:[["會前準備","議程、場地、出席確認。"],["會議進行與追蹤","討論、決議、後續。"]],
+ words:[
+{s:1,w:"agenda",p:"n.",z:"議程",f:"agenda",e:"The agenda for tomorrow's meeting has been emailed to everyone.",t:"明天會議的議程已用電子郵件寄給大家。",c:["on the agenda","set the agenda"],k:"item on the agenda ＝ 議程項目。別跟 calendar（行事曆）混用。"},
+{s:1,w:"attendee",p:"n.",z:"出席者",f:"attendees",e:"All attendees will receive a copy of the handouts.",t:"所有出席者都會拿到一份講義。",c:["conference attendees","registered attendees"],k:"attend（v.）→ attendee（出席的人）／attendance（出席率）／attendant（服務員），四字常混考。"},
+{s:1,w:"venue",p:"n.",z:"場地；地點",f:"venue",e:"The venue was changed to the third-floor conference room.",t:"場地改到三樓會議室。",c:["change the venue","an ideal venue"],k:"專指活動舉辦地點，比 place 精確。改場地是聽力經典轉折。"},
+{s:1,w:"convene",p:"v.",z:"召開；集合",f:"convene",e:"The committee will convene at nine sharp on Monday.",t:"委員會將於週一九點整召開。",c:["convene a meeting","the meeting convenes"],k:"可及物可不及物。相對詞 adjourn（休會）。"},
+{s:1,w:"postpone",p:"v.",z:"延期",f:"postponed",e:"The quarterly review has been postponed until next week.",t:"季度檢討會已延期至下週。",c:["postpone a meeting","postpone V-ing"],k:"後接 V-ing 不接 to V。同義 put off、delay。"},
+{s:1,w:"reschedule",p:"v.",z:"改期；重新安排",f:"reschedule",e:"Could we reschedule the call for Thursday afternoon?",t:"我們能把電話會議改到週四下午嗎？",c:["reschedule for + 時間","reschedule an appointment"],k:"reschedule for（改到某時）。聽力改期題答案句常用這個字。"},
+{s:1,w:"handout",p:"n.",z:"講義；資料",f:"handouts",e:"Extra handouts are available at the registration desk.",t:"報到處備有多餘的講義。",c:["distribute handouts","pick up a handout"],k:"由 hand out（分發）名詞化。多益簡報場景固定班底。"},
+{s:1,w:"preliminary",p:"adj.",z:"初步的；預備的",f:"preliminary",e:"The preliminary results will be released on Friday.",t:"初步結果將於週五公布。",c:["preliminary results","a preliminary report"],k:"與 final 相對。常與 tentative 一起考「尚未定案」的語意。"},
+{s:1,w:"confirm",p:"v.",z:"確認",f:"confirm",e:"Please confirm your attendance by replying to this email.",t:"請回覆此信以確認你的出席。",c:["confirm attendance","confirmation number"],k:"名詞 confirmation。訂位、報名、出席三大場景都用它。"},
+{s:1,w:"quarterly",p:"adj./adv.",z:"季度的；每季",f:"quarterly",e:"The board holds a quarterly meeting to review performance.",t:"董事會每季召開會議檢討績效。",c:["quarterly report","quarterly earnings"],k:"同一家族：weekly／monthly／quarterly／biannual／annual，時間題常考。"},
+{s:2,w:"facilitate",p:"v.",z:"促進；主持（會議）",f:"facilitate",e:"A consultant was hired to facilitate the workshop.",t:"公司聘請一位顧問來主持這場工作坊。",c:["facilitate discussion","facilitate the process"],k:"字面「使容易」。名詞 facilitator（主持人）、facility（設施）不同義。"},
+{s:2,w:"consensus",p:"n.",z:"共識",f:"consensus",e:"The team finally reached a consensus on the new logo.",t:"團隊終於就新標誌達成共識。",c:["reach a consensus","a general consensus"],k:"不可數，前面不加 a…s。固定搭配 reach／come to a consensus。"},
+{s:2,w:"address",p:"v.",z:"處理；針對…發言",f:"address",e:"The manager will address the concerns raised by staff.",t:"經理將處理員工提出的疑慮。",c:["address an issue","address the audience"],k:"多益考「處理、談及」遠多於「地址」。address ＋ 問題，不加 to。"},
+{s:2,w:"outline",p:"v./n.",z:"概述；大綱",f:"outlined",e:"She outlined the three phases of the project.",t:"她概述了專案的三個階段。",c:["outline a plan","a brief outline"],k:"＝ summarize、sketch out。簡報動詞群的常見選項。"},
+{s:2,w:"adjourn",p:"v.",z:"休會；散會",f:"adjourned",e:"The meeting was adjourned until two o'clock.",t:"會議休會至兩點。",c:["adjourn a meeting","stand adjourned"],k:"與 convene 成對。be adjourned until + 時間。"},
+{s:2,w:"minutes",p:"n.",z:"會議紀錄",f:"minutes",e:"Please circulate the minutes to everyone who attended.",t:"請將會議紀錄分送給所有出席者。",c:["take the minutes","circulate the minutes"],k:"複數形才是「會議紀錄」，和「分鐘」同形不同義。take minutes ＝ 做紀錄。"},
+{s:2,w:"participant",p:"n.",z:"參與者",f:"participants",e:"All participants are asked to complete a short survey.",t:"參與者被要求填寫一份簡短問卷。",c:["participants in the study","active participation"],k:"動詞 participate in（不可省 in）。attendee 偏「出席」，participant 偏「投入」。"},
+{s:2,w:"deliberate",p:"v./adj.",z:"審議；蓄意的",f:"deliberate",e:"The committee will deliberate before announcing a decision.",t:"委員會將先行審議再宣布決定。",c:["deliberate on an issue","a deliberate choice"],k:"動詞唸 /-eɪt/、形容詞唸 /-ət/。副詞 deliberately ＝ 故意地。"},
+{s:2,w:"follow-up",p:"n./adj.",z:"後續追蹤",f:"follow-up",e:"A follow-up email will be sent after the workshop.",t:"工作坊結束後會寄出一封後續追蹤信。",c:["a follow-up meeting","follow up on"],k:"名詞有連字號 follow-up，動詞片語沒有 follow up on。"},
+{s:2,w:"unanimous",p:"adj.",z:"一致同意的",f:"unanimous",e:"The proposal received unanimous approval from the board.",t:"該提案獲得董事會一致通過。",c:["unanimous decision","vote unanimously"],k:"uni-（一）＋ anim（心）＝ 同一條心。副詞 unanimously。"}
+]},
+
+{n:4,theme:"一趟出差的全程",story:"訂票、登機、住宿、報帳——多益最愛的旅行場景，Part 2 到 Part 7 通吃。",
+ arc:[["出發前","訂位、行程、確認。"],["抵達後","住宿、設施、報帳。"]],
+ words:[
+{s:1,w:"itinerary",p:"n.",z:"行程表",f:"itinerary",e:"Your updated itinerary is attached to this message.",t:"你的更新行程表已附在這封訊息中。",c:["a detailed itinerary","travel itinerary"],k:"發音 /aɪˈtɪnəreri/，四音節，聽力容易漏聽。指整份行程安排，不只班機。"},
+{s:1,w:"reservation",p:"n.",z:"預訂；訂位",f:"reservation",e:"I'd like to make a reservation for four at seven o'clock.",t:"我想訂七點四位的位子。",c:["make a reservation","confirm a reservation"],k:"動詞 reserve。另一義「保留意見」（have reservations about）。"},
+{s:1,w:"departure",p:"n.",z:"出發；離站",f:"departure",e:"The departure has been delayed by about forty minutes.",t:"出發時間已延誤約四十分鐘。",c:["departure gate","departure time"],k:"動詞 depart from。與 arrival 成對，機場廣播必考。"},
+{s:1,w:"layover",p:"n.",z:"轉機停留",f:"layover",e:"We have a three-hour layover in Singapore.",t:"我們在新加坡有三小時的轉機停留。",c:["a short layover","a layover in + 地點"],k:"英式常說 stopover。行程題會拿轉機時間長短出題。"},
+{s:1,w:"boarding",p:"n.",z:"登機",f:"boarding",e:"General boarding will begin thirty minutes before takeoff.",t:"登機將於起飛前三十分鐘開始。",c:["boarding pass","boarding gate"],k:"動詞 board（登上，及物，不加 on）：board the plane。"},
+{s:1,w:"confirmation",p:"n.",z:"確認（函／編號）",f:"confirmation",e:"Please keep your confirmation number for check-in.",t:"請保留你的確認編號以便報到。",c:["confirmation number","confirmation email"],k:"訂房訂票題最愛考「請提供確認編號」這一句。"},
+{s:1,w:"accommodation",p:"n.",z:"住宿",f:"accommodation",e:"The company covers accommodation for business trips.",t:"公司負擔出差的住宿費用。",c:["arrange accommodation","overnight accommodation"],k:"美式常用複數 accommodations。動詞 accommodate（容納、提供住宿）。"},
+{s:1,w:"shuttle",p:"n.",z:"接駁車",f:"shuttle",e:"A free shuttle runs between the hotel and the airport.",t:"飯店與機場之間有免費接駁車。",c:["airport shuttle","shuttle service"],k:"聽力常出現 The shuttle departs every 20 minutes。"},
+{s:1,w:"delay",p:"n./v.",z:"延誤",f:"delay",e:"Passengers were notified of the delay by text message.",t:"旅客透過簡訊獲知延誤消息。",c:["a two-hour delay","without delay"],k:"without delay ＝ 立即。be delayed by（因…而延誤）。"},
+{s:1,w:"detour",p:"n.",z:"繞道；改道",f:"detour",e:"Drivers should take a detour due to road construction.",t:"因道路施工，駕駛應改道行駛。",c:["take a detour","a temporary detour"],k:"交通公告題高頻，通常搭配 construction、closure 一起出現。"},
+{s:2,w:"complimentary",p:"adj.",z:"免費招待的",f:"complimentary",e:"Guests receive a complimentary breakfast each morning.",t:"住客每天早上享有免費早餐。",c:["complimentary breakfast","complimentary upgrade"],k:"陷阱：complimentary（免費的）vs complementary（互補的），拼字只差一個字母。"},
+{s:2,w:"amenity",p:"n.",z:"（旅館）設施",f:"amenities",e:"The hotel's amenities include a gym and a rooftop pool.",t:"這間飯店的設施包含健身房與頂樓泳池。",c:["hotel amenities","on-site amenities"],k:"通常用複數。飯店廣告與評論題的固定字。"},
+{s:2,w:"occupancy",p:"n.",z:"入住率；使用率",f:"occupancy",e:"Hotel occupancy rates rose sharply during the festival.",t:"節慶期間入住率大幅上升。",c:["occupancy rate","maximum occupancy"],k:"動詞 occupy、形容詞 occupied（已佔用）。圖表題常見。"},
+{s:2,w:"voucher",p:"n.",z:"抵用券；憑證",f:"voucher",e:"Each guest received a voucher for a free meal.",t:"每位住客都獲得一張免費餐點抵用券。",c:["a meal voucher","redeem a voucher"],k:"搭配動詞 redeem（兌換）。與 coupon 近義。"},
+{s:2,w:"reimburse",p:"v.",z:"報銷；償還",f:"reimbursed",e:"Employees will be reimbursed for travel expenses within two weeks.",t:"員工的差旅費用將於兩週內報銷。",c:["reimburse sb for sth","reimbursement form"],k:"be reimbursed for + 費用。名詞 reimbursement，出差場景必考。"},
+{s:2,w:"receipt",p:"n.",z:"收據",f:"receipts",e:"Attach all original receipts to the expense report.",t:"請將所有原始收據附在費用報告後。",c:["original receipt","upon receipt of"],k:"p 不發音 /rɪˈsiːt/。upon receipt of ＝ 一收到…就。"},
+{s:2,w:"expense",p:"n.",z:"開銷；費用",f:"expenses",e:"All expenses must be approved by your supervisor.",t:"所有費用都須經你的主管核准。",c:["travel expenses","at the expense of"],k:"形容詞 expensive。expense report（費用報告）出差題必出。"},
+{s:2,w:"vicinity",p:"n.",z:"附近一帶",f:"vicinity",e:"Several restaurants are located in the vicinity of the hotel.",t:"飯店附近一帶有好幾家餐廳。",c:["in the vicinity of","the immediate vicinity"],k:"固定用 in the vicinity of。比 near 正式，Part 7 地點題常見。"},
+{s:2,w:"depart",p:"v.",z:"出發；離開",f:"departs",e:"The last train departs from platform three at midnight.",t:"末班車午夜自第三月台發車。",c:["depart from","depart for + 目的地"],k:"depart from（從某地出發）vs depart for（前往某地），介系詞決定方向。"},
+{s:2,w:"en route",p:"phr.",z:"在途中",f:"en route",e:"The package is currently en route to the branch office.",t:"包裹目前正在寄往分公司的途中。",c:["en route to","be en route"],k:"法文來源，唸 /ɑːn ˈruːt/。物流與交通題的高階用字。"}
+]},
+
+{n:5,theme:"一箱貨的旅程",story:"下單、出貨、缺件、退換——Part 7 的採購信與物流通知，幾乎全在這批字裡。",
+ arc:[["下單與出貨","訂單、倉儲、運送。"],["庫存與異常","缺貨、瑕疵、補救。"]],
+ words:[
+{s:1,w:"inventory",p:"n.",z:"庫存；存貨清單",f:"inventory",e:"The store closes early once a month to take inventory.",t:"這家店每月提早打烊一次以清點庫存。",c:["take inventory","inventory levels"],k:"take inventory ＝ 盤點。美式用 inventory，英式用 stock。"},
+{s:1,w:"shipment",p:"n.",z:"貨運；出貨批次",f:"shipment",e:"The latest shipment arrived two days ahead of schedule.",t:"最新一批貨提前兩天送達。",c:["a delayed shipment","track a shipment"],k:"shipment 是「一批貨」，shipping 是「運送這件事」，兩者常互相干擾。"},
+{s:1,w:"warehouse",p:"n.",z:"倉庫",f:"warehouse",e:"Excess stock is stored in the warehouse on Baker Street.",t:"多餘的存貨存放在貝克街的倉庫。",c:["a distribution warehouse","warehouse staff"],k:"複合字 ware（貨物）＋ house。動詞用法指「入庫存放」。"},
+{s:1,w:"dispatch",p:"v./n.",z:"發送；派遣",f:"dispatched",e:"Your order was dispatched from our facility this morning.",t:"您的訂單今早已自本廠發出。",c:["dispatch an order","dispatch a technician"],k:"貨可以 dispatch，人也可以。物流通知信的固定動詞。"},
+{s:1,w:"freight",p:"n.",z:"貨運；運費",f:"freight",e:"Air freight costs considerably more than sea freight.",t:"空運費用比海運貴得多。",c:["air freight","freight charges"],k:"唸 /freɪt/，ei 發長音 A。與 cargo 近義，但 freight 更常指運送服務與費用。"},
+{s:1,w:"courier",p:"n.",z:"快遞（公司／人員）",f:"courier",e:"A courier will collect the documents at four o'clock.",t:"快遞人員將於四點來收取文件。",c:["a courier service","send by courier"],k:"唸 /ˈkʊriər/。指急件專送，比一般 mail 快。"},
+{s:1,w:"carrier",p:"n.",z:"貨運業者；承運人",f:"carrier",e:"Damage claims must be filed directly with the carrier.",t:"損毀索賠須直接向承運業者提出。",c:["a shipping carrier","the carrier's liability"],k:"航空公司也叫 carrier。與 vendor（賣方）分工不同，別混。"},
+{s:1,w:"invoice",p:"n./v.",z:"發票；請款單",f:"invoice",e:"Payment is due within 30 days of the invoice date.",t:"款項須於請款單日期後三十天內支付。",c:["issue an invoice","the invoice date"],k:"是「請款單」不是收據（receipt）。動詞：invoice sb for sth。"},
+{s:1,w:"wholesale",p:"n./adj.",z:"批發",f:"wholesale",e:"They offer wholesale prices to registered retailers.",t:"他們對已登記的零售商提供批發價。",c:["wholesale price","a wholesale distributor"],k:"與 retail 成對出現。wholesaler ＝ 批發商。"},
+{s:1,w:"retail",p:"n./adj.",z:"零售",f:"retail",e:"The retail price is nearly double the wholesale cost.",t:"零售價幾乎是批發成本的兩倍。",c:["retail price","a retail outlet"],k:"retailer ＝ 零售商。圖表題常拿 retail vs wholesale 做對比。"},
+{s:2,w:"expedite",p:"v.",z:"加快；加速處理",f:"expedite",e:"We can expedite delivery for an additional fee.",t:"加收額外費用即可為您加快送達。",c:["expedite shipping","expedite the process"],k:"＝ speed up，正式用語。客服信中常見 expedite your order。"},
+{s:2,w:"backorder",p:"n.",z:"缺貨待補的訂單",f:"backorder",e:"The item is on backorder until early next month.",t:"該商品缺貨待補，要到下月初才有。",c:["on backorder","clear a backorder"],k:"意思是「已下單但還沒貨」。與 out of stock（單純沒貨）不同。"},
+{s:2,w:"defective",p:"adj.",z:"有瑕疵的；故障的",f:"defective",e:"Customers may return any defective merchandise for a full refund.",t:"顧客可將任何瑕疵商品退回並獲全額退款。",c:["defective merchandise","a defective part"],k:"名詞 defect（瑕疵）。退換貨題的關鍵字。"},
+{s:2,w:"shortage",p:"n.",z:"短缺；不足",f:"shortage",e:"A shortage of raw materials delayed the entire production line.",t:"原料短缺使整條生產線延誤。",c:["a labor shortage","a shortage of + 名詞"],k:"a shortage of。相對詞 surplus（過剩）。"},
+{s:2,w:"surplus",p:"n./adj.",z:"過剩；剩餘",f:"surplus",e:"The surplus inventory will be sold at a discount.",t:"過剩的庫存將以折扣價出售。",c:["surplus stock","a trade surplus"],k:"財經語境指「順差、盈餘」，與 deficit（赤字）相對。"},
+{s:2,w:"restock",p:"v.",z:"補貨",f:"restocked",e:"The shelves are restocked every Tuesday morning.",t:"貨架每週二早上補貨。",c:["restock the shelves","restocking fee"],k:"re-（再）＋ stock（進貨）。restocking fee ＝ 退貨手續費。"},
+{s:2,w:"replacement",p:"n.",z:"替換品；接替者",f:"replacement",e:"A free replacement will be sent within five business days.",t:"免費替換品將於五個工作天內寄出。",c:["a replacement part","send a replacement"],k:"一字兩義：替換零件＋接替人選。動詞 replace A with B。"},
+{s:2,w:"durable",p:"adj.",z:"耐用的",f:"durable",e:"These containers are durable enough for repeated use.",t:"這些容器耐用到足以重複使用。",c:["durable goods","a durable material"],k:"名詞 durability。dur- 字根表「持續」，同族 during、duration。"},
+{s:2,w:"discrepancy",p:"n.",z:"差異；不符",f:"discrepancy",e:"Please report any discrepancy between the invoice and the delivery.",t:"請回報請款單與交貨之間的任何不符之處。",c:["a discrepancy between A and B","resolve a discrepancy"],k:"固定搭配 between。帳務與收貨核對題的高階字。"},
+{s:2,w:"promptly",p:"adv.",z:"迅速地；準時地",f:"promptly",e:"Please respond promptly so we can process your claim.",t:"請儘速回覆，以便我們處理您的索賠。",c:["respond promptly","begin promptly at + 時間"],k:"兩義：迅速地＋準時地（promptly at 9 ＝ 九點整）。形容詞 prompt。"}
+]},
+
+{n:6,theme:"一份財報背後",story:"營收、成本、稽核、擴張——圖表題與商業新聞最常出現的一批字。",
+ arc:[["收支與報表","進來多少、花掉多少。"],["決策與擴張","預測、削減、併購。"]],
+ words:[
+{s:1,w:"revenue",p:"n.",z:"營收；收益",f:"revenue",e:"Annual revenue increased by twelve percent last year.",t:"去年年度營收成長了 12%。",c:["annual revenue","generate revenue"],k:"營收是「進帳總額」，profit 是扣掉成本後的獲利，圖表題常設陷阱。"},
+{s:1,w:"expenditure",p:"n.",z:"支出；開銷",f:"expenditure",e:"The department reduced its expenditure on office supplies.",t:"該部門減少了辦公用品的支出。",c:["capital expenditure","reduce expenditure"],k:"比 expense 更正式、更整體。動詞 expend。"},
+{s:1,w:"allocate",p:"v.",z:"分配；撥給",f:"allocated",e:"Half of the budget was allocated to product development.",t:"半數預算被分配給產品開發。",c:["allocate funds to","budget allocation"],k:"allocate A to B。名詞 allocation，預算會議題必考。"},
+{s:1,w:"audit",p:"n./v.",z:"稽核；查帳",f:"audit",e:"An external audit is scheduled for the end of the quarter.",t:"外部稽核安排在本季末進行。",c:["an internal audit","conduct an audit"],k:"名詞 auditor（稽核人員）。唸 /ˈɔːdɪt/。"},
+{s:1,w:"fiscal",p:"adj.",z:"財政的；會計年度的",f:"fiscal",e:"Results for the fiscal year will be announced in April.",t:"該會計年度的業績將於四月公布。",c:["fiscal year","fiscal policy"],k:"fiscal year 常不等於曆年，日期題會拿這點出題。"},
+{s:1,w:"overhead",p:"n.",z:"經常性支出；營運成本",f:"overhead",e:"Moving to a smaller office significantly reduced overhead.",t:"搬到較小的辦公室大幅降低了營運成本。",c:["reduce overhead","overhead costs"],k:"指房租、水電這類固定開銷，通常不可數。"},
+{s:1,w:"margin",p:"n.",z:"利潤率；差額",f:"margin",e:"The company operates on a very thin profit margin.",t:"該公司的利潤空間非常薄。",c:["profit margin","a narrow margin"],k:"by a narrow margin ＝ 以些微差距。財經與選舉語境都會用。"},
+{s:1,w:"asset",p:"n.",z:"資產；有價值的人事物",f:"assets",e:"The firm sold several assets to raise capital.",t:"該公司出售了數項資產以籌措資金。",c:["fixed assets","a valuable asset to the team"],k:"與 liability（負債）相對。也可形容人：她是團隊的資產。"},
+{s:1,w:"deficit",p:"n.",z:"赤字；不足額",f:"deficit",e:"The budget deficit widened for a third consecutive year.",t:"預算赤字連續第三年擴大。",c:["a budget deficit","run a deficit"],k:"與 surplus（盈餘）相對。唸 /ˈdefɪsɪt/，重音在第一音節。"},
+{s:1,w:"outstanding",p:"adj.",z:"未付的；傑出的",f:"outstanding",e:"Please settle the outstanding balance by the end of the month.",t:"請於月底前結清未付餘額。",c:["an outstanding balance","an outstanding performance"],k:"高頻雙義字：帳單語境是「未付」，人事語境是「傑出」。"},
+{s:2,w:"projection",p:"n.",z:"預測；推估",f:"projections",e:"Sales projections for next quarter appear overly optimistic.",t:"下一季的銷售預測看來過於樂觀。",c:["sales projections","revised projections"],k:"動詞 project（推估）。另一義是「投影」，簡報場景也用。"},
+{s:2,w:"curtail",p:"v.",z:"削減；縮減",f:"curtail",e:"Management decided to curtail spending on travel.",t:"管理層決定削減差旅支出。",c:["curtail spending","curtail operations"],k:"＝ cut back on、reduce，但更正式。多益偏好正式選項。"},
+{s:2,w:"streamline",p:"v.",z:"精簡；使有效率",f:"streamline",e:"New software was introduced to streamline the approval process.",t:"公司導入新軟體以精簡核准流程。",c:["streamline a process","streamline operations"],k:"字面「使成流線型」。流程改善題的標準動詞。"},
+{s:2,w:"subsidiary",p:"n.",z:"子公司",f:"subsidiaries",e:"The group operates twelve subsidiaries across Asia.",t:"該集團在亞洲經營十二家子公司。",c:["a wholly owned subsidiary","an overseas subsidiary"],k:"別跟 subsidy（補助金）混。形容詞義是「次要的」。"},
+{s:2,w:"merger",p:"n.",z:"合併",f:"merger",e:"The merger is expected to close by the end of June.",t:"這樁合併案預計於六月底完成。",c:["a merger with","merger and acquisition"],k:"動詞 merge with。商業新聞題固定出現的字。"},
+{s:2,w:"dividend",p:"n.",z:"股利；紅利",f:"dividend",e:"Shareholders will receive a dividend of two dollars per share.",t:"股東每股將獲得兩美元的股利。",c:["pay a dividend","dividend yield"],k:"來自 divide（分配）。股東會通知題常見。"},
+{s:2,w:"lucrative",p:"adj.",z:"獲利豐厚的",f:"lucrative",e:"The partnership proved highly lucrative for both firms.",t:"這項合作對雙方公司都極為有利可圖。",c:["a lucrative contract","a lucrative market"],k:"＝ profitable，但語氣更強。高階形容詞，Part 5 常當正解。"},
+{s:2,w:"installment",p:"n.",z:"分期付款；（連載）一期",f:"installments",e:"Customers may pay in twelve monthly installments.",t:"顧客可分十二期月付。",c:["pay in installments","the first installment"],k:"固定用 in installments。英式拼作 instalment。"},
+{s:2,w:"surge",p:"v./n.",z:"激增；急升",f:"surged",e:"Online orders surged after the holiday campaign launched.",t:"假期活動開跑後線上訂單激增。",c:["a surge in demand","prices surged"],k:"a surge in + 名詞。圖表描述題的高頻動詞，同族 soar、spike。"},
+{s:2,w:"depreciation",p:"n.",z:"折舊；貶值",f:"depreciation",e:"Equipment depreciation is recorded at the end of each year.",t:"設備折舊於每年年底入帳。",c:["asset depreciation","currency depreciation"],k:"動詞 depreciate，反義 appreciate（增值）——這個對比 Part 5 很愛考。"}
+]},
+
+{n:7,theme:"一個顧客的來去",story:"從被廣告吸引到申訴退款，這條線把行銷與客服兩個高頻場景串在一起。",
+ arc:[["把東西賣出去","活動、通路、客群。"],["把客人留下來","客訴、退款、保固。"]],
+ words:[
+{s:1,w:"campaign",p:"n.",z:"（行銷）活動；戰役",f:"campaign",e:"The advertising campaign will run through the summer.",t:"這波廣告活動將持續整個夏天。",c:["launch a campaign","an advertising campaign"],k:"搭配動詞 launch／run。與 promotion（促銷）常一起出現。"},
+{s:1,w:"merchandise",p:"n.",z:"商品",f:"merchandise",e:"All seasonal merchandise is now thirty percent off.",t:"所有季節性商品現正七折。",c:["seasonal merchandise","return merchandise"],k:"不可數，不加 s。動詞義是「推銷」，重音位置不同。"},
+{s:1,w:"demographic",p:"n./adj.",z:"客群；人口統計的",f:"demographic",e:"The product targets a younger demographic than before.",t:"這項產品鎖定比以往更年輕的客群。",c:["target demographic","demographic data"],k:"名詞用單數指「某一族群」。市場分析題高頻。"},
+{s:1,w:"endorsement",p:"n.",z:"代言；背書支持",f:"endorsement",e:"A celebrity endorsement boosted sales almost overnight.",t:"名人代言幾乎在一夜之間拉抬了銷量。",c:["a celebrity endorsement","endorse a product"],k:"動詞 endorse。也可指支票背書、政治表態。"},
+{s:1,w:"outlet",p:"n.",z:"門市；通路；插座",f:"outlets",e:"The brand operates forty retail outlets nationwide.",t:"該品牌在全國經營四十家門市。",c:["a retail outlet","a power outlet"],k:"三義字：門市／銷售通路／電源插座，聽力靠上下文判斷。"},
+{s:1,w:"subscription",p:"n.",z:"訂閱",f:"subscription",e:"Your subscription includes unlimited access to the archive.",t:"您的訂閱包含無限次存取檔案庫。",c:["renew a subscription","a monthly subscription"],k:"動詞 subscribe to（不可省 to）。與 renewal 常同時出現。"},
+{s:1,w:"testimonial",p:"n.",z:"顧客推薦；見證",f:"testimonials",e:"The website features testimonials from long-term clients.",t:"網站上刊登了長期客戶的推薦見證。",c:["customer testimonials","a glowing testimonial"],k:"來自 testify（作證）。廣告與網站文案題常見。"},
+{s:1,w:"prospective",p:"adj.",z:"潛在的；未來的",f:"prospective",e:"Brochures were mailed to all prospective customers.",t:"手冊已寄送給所有潛在客戶。",c:["a prospective client","a prospective employee"],k:"別跟 perspective（觀點）混，這組拼字陷阱 Part 5 很愛。"},
+{s:1,w:"anticipate",p:"v.",z:"預期；預料",f:"anticipates",e:"The company anticipates strong demand during the holidays.",t:"公司預期假期期間需求強勁。",c:["anticipate demand","as anticipated"],k:"後接名詞或 V-ing，不接 to V。名詞 anticipation。"},
+{s:1,w:"exceed",p:"v.",z:"超過；超越",f:"exceeded",e:"Third-quarter sales exceeded all internal forecasts.",t:"第三季銷售超越了所有內部預測。",c:["exceed expectations","exceed the limit"],k:"及物動詞，後面直接接受詞不加介系詞。形容詞 excessive（過度的）。"},
+{s:2,w:"complaint",p:"n.",z:"客訴；抱怨",f:"complaints",e:"The store received several complaints about slow service.",t:"這家店收到數件關於服務緩慢的客訴。",c:["file a complaint","a complaint about"],k:"動詞 complain about／of。file／lodge a complaint ＝ 提出申訴。"},
+{s:2,w:"refund",p:"n./v.",z:"退款",f:"refund",e:"You may request a full refund within fourteen days.",t:"您可在十四天內要求全額退款。",c:["a full refund","request a refund"],k:"名詞重音在前、動詞在後。退換貨題必出。"},
+{s:2,w:"warranty",p:"n.",z:"保固",f:"warranty",e:"The laptop comes with a two-year warranty on parts.",t:"這台筆電附有兩年零件保固。",c:["under warranty","extend the warranty"],k:"under warranty ＝ 保固期內。與 guarantee 近義但更偏書面契約。"},
+{s:2,w:"redeem",p:"v.",z:"兌換（券）",f:"redeem",e:"Points can be redeemed for gift cards or store credit.",t:"點數可兌換禮品卡或商店抵用金。",c:["redeem a coupon","redeem points for"],k:"redeem A for B。與 voucher、coupon 是固定組合。"},
+{s:2,w:"valid",p:"adj.",z:"有效的",f:"valid",e:"This offer is valid until the end of the month.",t:"此優惠有效期限至月底。",c:["valid until","a valid receipt"],k:"名詞 validity、動詞 validate。反義 invalid、expired。"},
+{s:2,w:"loyalty",p:"n.",z:"忠誠度",f:"loyalty",e:"Members of the loyalty program earn points on every purchase.",t:"會員方案的會員每次消費都能累積點數。",c:["a loyalty program","customer loyalty"],k:"loyalty program ＝ 集點／會員方案，Part 4 廣播題常見。"},
+{s:2,w:"survey",p:"n./v.",z:"問卷調查",f:"survey",e:"Please take a moment to complete our customer survey.",t:"請撥空填寫我們的顧客問卷。",c:["conduct a survey","complete a survey"],k:"名詞重音在前、動詞在後。according to the survey 是圖表題開場句。"},
+{s:2,w:"referral",p:"n.",z:"轉介；推薦",f:"referral",e:"New clients often come through referrals from existing customers.",t:"新客戶多半來自現有顧客的推薦轉介。",c:["a referral program","by referral"],k:"動詞 refer sb to sb。與 reference（推薦人）用法不同。"},
+{s:2,w:"courteous",p:"adj.",z:"有禮貌的",f:"courteous",e:"Staff are trained to remain courteous under pressure.",t:"員工受過訓練，在壓力下仍保持禮貌。",c:["courteous service","a courteous reply"],k:"唸 /ˈkɜːrtiəs/。名詞 courtesy，courtesy car ＝ 免費接送車。"},
+{s:2,w:"resolve",p:"v.",z:"解決；決心",f:"resolve",e:"The issue was resolved within two business days.",t:"該問題於兩個工作天內獲得解決。",c:["resolve an issue","resolve a dispute"],k:"名詞 resolution（解決方案／決議）。客服信收尾的固定動詞。"}
+]},
+
+{n:8,theme:"一棟辦公樓的日常",story:"施工、故障、公告、改道——Part 4 的廣播通知與 Part 7 的公告信最愛這批字。",
+ arc:[["空間與設施","場所、動線、權限。"],["維修與公告","故障、施工、通知。"]],
+ words:[
+{s:1,w:"premises",p:"n.",z:"場所；建物範圍",f:"premises",e:"Smoking is prohibited anywhere on the premises.",t:"本場所範圍內任何地方都禁止吸菸。",c:["on the premises","vacate the premises"],k:"永遠用複數形。on the premises ＝ 在這棟建物內。"},
+{s:1,w:"facility",p:"n.",z:"設施；場館",f:"facilities",e:"The new facilities include a fitness center and a cafeteria.",t:"新設施包含健身中心與員工餐廳。",c:["parking facilities","a manufacturing facility"],k:"單數可指整座廠房。與 facilitate（促進）同源但意思分家。"},
+{s:1,w:"corridor",p:"n.",z:"走廊",f:"corridor",e:"Boxes must not be left in the corridor.",t:"箱子不得留置在走廊上。",c:["a narrow corridor","block the corridor"],k:"美式也說 hallway。消防與安全公告題常見。"},
+{s:1,w:"adjacent",p:"adj.",z:"鄰接的；隔壁的",f:"adjacent",e:"The storage room is adjacent to the main lobby.",t:"儲藏室緊鄰主大廳。",c:["adjacent to","an adjacent building"],k:"固定搭配 adjacent to，不用 with。地圖與方位題高頻。"},
+{s:1,w:"accessible",p:"adj.",z:"可進入的；易取得的",f:"accessible",e:"The east entrance is accessible to wheelchair users.",t:"東側入口供輪椅使用者通行。",c:["accessible to","wheelchair accessible"],k:"名詞 access（不可數）：have access to。動詞也是 access（不加 to）。"},
+{s:1,w:"restricted",p:"adj.",z:"受限制的；管制的",f:"restricted",e:"Access to the server room is restricted to IT staff.",t:"伺服器機房僅限資訊人員進入。",c:["restricted access","a restricted area"],k:"be restricted to + 對象。與 Authorized personnel only 常同時出現。"},
+{s:1,w:"relocate",p:"v.",z:"遷移；搬遷",f:"relocate",e:"The accounting team will relocate to the fifth floor.",t:"會計團隊將遷至五樓。",c:["relocate to","relocation package"],k:"名詞 relocation。公司搬遷是 Part 4 公告題的經典主題。"},
+{s:1,w:"install",p:"v.",z:"安裝",f:"installed",e:"New air conditioning units were installed over the weekend.",t:"新的空調機組已於週末安裝完成。",c:["install equipment","installation fee"],k:"名詞 installation（安裝），別跟 installment（分期）看混。"},
+{s:1,w:"supplies",p:"n.",z:"用品；物資",f:"supplies",e:"Office supplies are stored in the cabinet near the printer.",t:"辦公用品存放在印表機旁的櫃子裡。",c:["office supplies","medical supplies"],k:"複數形才是「用品」。單數 supply 指「供應」，supply and demand。"},
+{s:1,w:"janitor",p:"n.",z:"清潔／管理人員",f:"janitor",e:"Please contact the janitor if the restroom needs attention.",t:"洗手間若需處理，請聯絡管理人員。",c:["the building janitor","janitorial services"],k:"英式常說 caretaker。大樓場景的固定角色之一。"},
+{s:2,w:"renovation",p:"n.",z:"整修；翻新",f:"renovation",e:"The lobby will be closed during the renovation.",t:"大廳將在整修期間關閉。",c:["undergo renovation","under renovation"],k:"動詞 renovate。under renovation ＝ 整修中，公告題必出。"},
+{s:2,w:"maintenance",p:"n.",z:"維護；保養",f:"maintenance",e:"Routine maintenance is scheduled for the first Monday of each month.",t:"例行維護安排在每月第一個週一。",c:["routine maintenance","maintenance crew"],k:"動詞 maintain，注意名詞拼字中間是 -ten-。不可數。"},
+{s:2,w:"inspection",p:"n.",z:"檢查；查驗",f:"inspection",e:"The elevator passed its annual safety inspection.",t:"電梯通過了年度安全檢查。",c:["a safety inspection","conduct an inspection"],k:"動詞 inspect、名詞 inspector。工廠與大樓場景常見。"},
+{s:2,w:"malfunction",p:"n./v.",z:"故障",f:"malfunction",e:"A malfunction in the heating system was reported yesterday.",t:"暖氣系統的故障已於昨日回報。",c:["a system malfunction","the machine malfunctioned"],k:"mal-（壞）＋ function（運作）。同字首：malpractice、malnutrition。"},
+{s:2,w:"faulty",p:"adj.",z:"有問題的；故障的",f:"faulty",e:"The technician replaced a faulty circuit board.",t:"技師更換了一片故障的電路板。",c:["faulty wiring","a faulty component"],k:"名詞 fault（缺陷、過錯）。與 defective 近義，defective 偏產品瑕疵。"},
+{s:2,w:"temporarily",p:"adv.",z:"暫時地",f:"temporarily",e:"The parking lot will be temporarily closed for resurfacing.",t:"停車場將因重鋪路面而暫時關閉。",c:["temporarily unavailable","temporarily closed"],k:"形容詞 temporary，反義 permanent／permanently。"},
+{s:2,w:"underway",p:"adj.",z:"進行中的",f:"underway",e:"Construction on the north wing is already underway.",t:"北翼的工程已在進行中。",c:["work is underway","get underway"],k:"通常放在 be 動詞後當補語，不放名詞前。get underway ＝ 開始進行。"},
+{s:2,w:"notify",p:"v.",z:"通知",f:"notified",e:"Residents were notified of the water shutoff in advance.",t:"住戶已事先獲知停水通知。",c:["notify sb of sth","notify in advance"],k:"notify sb of sth（不可省 of）。名詞 notification、notice。"},
+{s:2,w:"upgrade",p:"v./n.",z:"升級；更新",f:"upgraded",e:"The security system was upgraded last quarter.",t:"保全系統已於上一季升級。",c:["upgrade a system","a free upgrade"],k:"名詞重音在前、動詞在後。飯店升等也用這個字。"},
+{s:2,w:"obstruct",p:"v.",z:"阻擋；妨礙",f:"obstruct",e:"Vehicles must not obstruct the emergency exit.",t:"車輛不得阻擋緊急出口。",c:["obstruct the entrance","obstruct traffic"],k:"名詞 obstruction。與 block 同義但更正式，公告題偏好它。"}
+]}
 ];
 
+/* ============ Part 6 短文填空（每天 3 篇，每篇 4 格） ============ */
+const PART6={};
+PART6[1]=[
+{t:"Email · 報價回覆",m:"To: R. Lin｜From: Sales Department｜Subject: Your recent request",
+ x:"Thank you for your recent {1} about our conference tables. A written quotation is attached for your review. Our pricing remains highly {2} compared with other regional suppliers. The delivery date shown is {3}; we will confirm it once your order is placed. {4}",
+ q:[{o:["inquiry","inquire","inquiring","inquired"],a:0,k:"your recent ___ about 需要名詞，inquire 是動詞。"},
+    {o:["competitive","competent","competitor","competition"],a:0,k:"修飾 pricing 要形容詞「有競爭力的」；competent 是「能勝任的」，用在人身上。"},
+    {o:["tentative","mandatory","defective","eligible"],a:0,k:"分號後說「下單後再確認」，代表日期尚未定案＝暫定的。"},
+    {o:["Please let us know if you would like to proceed.","We regret that the item is no longer available.","Your refund has been processed in full.","The renovation will begin next Monday."],a:0,k:"全文停在報價階段，結尾應邀請對方推進；退款、缺貨、施工都與情境無關。"}]},
+{t:"Memo · 合約條款提醒",m:"To: All project leads｜From: Legal｜Subject: Supplier agreements",
+ x:"Before signing, please note that the standard agreement {1} that all invoices be settled within thirty days. We will not {2} this requirement for new suppliers. Once executed, the document is legally {3} on both parties. {4}",
+ q:[{o:["stipulates","stipulate","stipulating","stipulation"],a:0,k:"主詞 the standard agreement 是單數，動詞加 s。"},
+    {o:["waive","waiver","waived","waiving"],a:0,k:"will not 後面接原形動詞。waiver 是名詞。"},
+    {o:["binding","bound","binder","bind"],a:0,k:"legally ___ on both parties，需形容詞 binding（具約束力的）。"},
+    {o:["Contact the legal team if you need an exception.","Refunds are available within fourteen days.","The shuttle departs every twenty minutes.","All merchandise is now thirty percent off."],a:0,k:"前句剛說「不予免除」，接著提供例外的申請管道最自然。"}]},
+{t:"Letter · 終止通知",m:"To: Bradford Supply Co.｜From: Operations｜Subject: Notice of termination",
+ x:"We are writing to {1} our agreement dated March 4, effective sixty days from today. Repeated late deliveries constitute a {2} of the terms we agreed upon. Under the contract, a {3} may also be imposed for each delayed shipment. {4}",
+ q:[{o:["terminate","termination","terminated","terminating"],a:0,k:"to 後面接原形動詞。"},
+    {o:["breach","break","broken","breaking"],a:0,k:"固定搭配 a breach of the terms；break 的名詞不用在這個位置。"},
+    {o:["penalty","penalize","penalized","penal"],a:0,k:"a ___ may be imposed，冠詞 a 後面要名詞。"},
+    {o:["We remain open to discussing a revised arrangement.","Please bring a photo ID to the front desk.","Your subscription will renew automatically.","The orientation session begins at nine."],a:0,k:"終止信結尾留一個轉圜空間最合理；其餘三句屬完全不同場景。"}]}];
+
+PART6[2]=[
+{t:"Notice · 職缺公告",m:"Human Resources Department｜Internal posting",
+ x:"The department is currently accepting applications for one {1} in the accounting team. {2} must submit a résumé and two professional references. Candidates who meet all required {3} will be contacted for an interview. {4}",
+ q:[{o:["vacancy","vacancies","vacant","vacantly"],a:0,k:"one 後面接單數可數名詞。vacant 是形容詞。"},
+    {o:["Applicants","Applications","Applying","Applied"],a:0,k:"submit 的主詞必須是人；application 是文件不能提交文件。"},
+    {o:["qualifications","qualified","qualify","qualifying"],a:0,k:"all required ___ 需要名詞複數。"},
+    {o:["Interviews are expected to begin in early March.","All refunds are subject to approval.","The elevator passed its annual inspection.","Please retain your boarding pass."],a:0,k:"公告最後補上時程最合理；其餘與招募無關。"}]},
+{t:"Email · 錄取通知",m:"To: J. Watanabe｜From: HR｜Subject: Offer of employment",
+ x:"We are pleased to offer you the position of marketing associate. Your {1} package includes health insurance and an annual bonus. All new hires serve a three-month {2} period, during which performance is reviewed monthly. Attendance at the new employee orientation on July 3 is {3}. {4}",
+ q:[{o:["compensation","compensate","compensated","compensating"],a:0,k:"Your ___ package 是複合名詞，前面要名詞當修飾語。"},
+    {o:["probation","promotion","provision","projection"],a:0,k:"three-month ___ period 加上「每月考核」＝試用期。"},
+    {o:["mandatory","tentative","lucrative","durable"],a:0,k:"Attendance ... is ___，語意是「必須出席」。"},
+    {o:["Please confirm your acceptance by June 20.","The warehouse will be closed for inventory.","A courier will collect the documents at four.","Air freight costs more than sea freight."],a:0,k:"錄取信結尾要求回覆確認最合理。"}]},
+{t:"Memo · 人事異動",m:"To: All staff｜From: Office of the President",
+ x:"After twelve years with the company, our regional director has decided to {1} at the end of this quarter. A reception will be held on Friday to celebrate his {2}. In the meantime, Ms. Alvarez has been {3} to interim director. {4}",
+ q:[{o:["resign","recruit","relocate","restock"],a:0,k:"後文辦歡送會＋任命代理人，只有「辭職」說得通。"},
+    {o:["retirement","renewal","referral","reservation"],a:0,k:"服務十二年後離開並辦餐會，語意指向退休。"},
+    {o:["promoted","promoting","promotion","promote"],a:0,k:"has been ___ to，被動語態要用過去分詞。"},
+    {o:["Please join us in congratulating her.","Refunds will be issued within five days.","The corridor must remain clear at all times.","Sales projections appear overly optimistic."],a:0,k:"承接升任消息，恭賀是最自然的收尾。"}]}];
+
+PART6[3]=[
+{t:"Email · 會議通知",m:"To: Planning committee｜From: E. Duarte｜Subject: Thursday meeting",
+ x:"Attached please find the {1} for Thursday's planning meeting. Because the third-floor room is under renovation, the {2} has been changed to Room 210. All {3} are asked to review the attached figures beforehand. {4}",
+ q:[{o:["agenda","minutes","handout","itinerary"],a:0,k:"會前寄出的是議程；minutes 是會後紀錄，itinerary 用於旅行。"},
+    {o:["venue","vacancy","vicinity","voucher"],a:0,k:"因施工而更改的是地點＝venue。"},
+    {o:["attendees","attendance","attendant","attending"],a:0,k:"All ___ are asked，主詞要能被要求的「人」的複數。"},
+    {o:["Please confirm your attendance by Wednesday noon.","The shipment arrived two days ahead of schedule.","Your warranty covers parts for two years.","Smoking is prohibited on the premises."],a:0,k:"會議通知結尾請對方回覆出席最合理。"}]},
+{t:"Notice · 會議延期",m:"Internal announcement｜Quarterly review",
+ x:"The quarterly review originally scheduled for May 8 has been {1} until May 22. Several board members will be traveling that week, so the committee could not {2} as planned. {3} results from the first quarter are already available on the shared drive. {4}",
+ q:[{o:["postponed","adjourned","promoted","dispatched"],a:0,k:"改到更晚的日期＝postpone；adjourn 是「當場休會」，用法不同。"},
+    {o:["convene","confirm","comply","curtail"],a:0,k:"委員會無法「召開」，convene 是開會的專用動詞。"},
+    {o:["Preliminary","Preliminarily","Preliminaries","Preliminary-"],a:0,k:"修飾名詞 results 要用形容詞。"},
+    {o:["A revised agenda will be circulated next week.","Please attach all original receipts.","The east entrance is wheelchair accessible.","Points can be redeemed for gift cards."],a:0,k:"延期公告後續應交代新的議程安排。"}]},
+{t:"Memo · 會後追蹤",m:"To: Design team｜From: Project lead｜Subject: Follow-up",
+ x:"Thank you all for a productive session. After nearly two hours of discussion, the team finally reached a {1} on the new packaging design. The vote was {2}, with no objections recorded. Please review the {3} attached to this message and report any corrections. {4}",
+ q:[{o:["consensus","concession","conference","condition"],a:0,k:"reach a consensus 是固定搭配，意為達成共識。"},
+    {o:["unanimous","tentative","mandatory","faulty"],a:0,k:"後半句說「無人反對」，投票結果是一致通過。"},
+    {o:["minutes","minute","agenda","itinerary"],a:0,k:"會後隨信附上的是會議紀錄，複數形 minutes 才有這個意思。"},
+    {o:["A follow-up meeting will be held next Friday.","All applicants must provide two references.","The hotel offers a complimentary breakfast.","Freight charges are calculated by weight."],a:0,k:"會後備忘錄以下次會議時間收尾最自然。"}]}];
+
+PART6[4]=[
+{t:"Email · 出差行程",m:"To: M. Okafor｜From: Travel desk｜Subject: Osaka conference",
+ x:"Your travel {1} for the Osaka conference is attached. You will {2} from Terminal 2 at 8:15 a.m. and have a two-hour {3} in Seoul before your connecting flight. A hotel shuttle will meet you at arrivals. {4}",
+ q:[{o:["itinerary","inventory","inquiry","invoice"],a:0,k:"附上的旅行文件是行程表。"},
+    {o:["depart","departure","departed","departing"],a:0,k:"will 後面接原形動詞。"},
+    {o:["layover","leftover","turnover","handout"],a:0,k:"轉機前的停留時間＝layover。"},
+    {o:["Please keep all receipts for reimbursement.","The vacancy will be posted internally first.","Our pricing remains highly competitive.","The committee will convene at nine sharp."],a:0,k:"出差通知結尾提醒保留單據報帳最合理。"}]},
+{t:"Notice · 飯店住客須知",m:"Harborview Hotel｜Guest information",
+ x:"Thank you for choosing the Harborview Hotel. All guests enjoy a {1} breakfast served from six to ten. Additional {2}, including the fitness center and rooftop pool, are open around the clock. Several restaurants are located in the {3} of the hotel. {4}",
+ q:[{o:["complimentary","complementary","complimented","compliment"],a:0,k:"陷阱組：complimentary（免費招待的）vs complementary（互補的），只差一個字母。"},
+    {o:["amenities","amendments","attendees","allowances"],a:0,k:"健身房與泳池屬於飯店設施 amenities。"},
+    {o:["vicinity","venue","vacancy","voucher"],a:0,k:"固定搭配 in the vicinity of ＝ 在…附近。"},
+    {o:["Ask the front desk for a map of the area.","Defective merchandise may be returned for a refund.","The audit is scheduled for the end of the quarter.","New hires serve a three-month probation period."],a:0,k:"承接「附近有餐廳」，請櫃檯拿地圖最連貫。"}]},
+{t:"Memo · 差旅報帳規定",m:"To: All staff｜From: Finance｜Subject: Expense claims",
+ x:"Employees traveling on company business will be {1} for reasonable expenses. Original {2} must be attached to the expense report and submitted within two weeks of your return. {3} submission helps the finance team close each month on time. {4}",
+ q:[{o:["reimbursed","reimbursing","reimbursement","reimburse"],a:0,k:"will be ___ 是被動語態，要用過去分詞。"},
+    {o:["receipts","recipes","recipients","receipt"],a:0,k:"報帳附的是收據；recipe 是食譜、recipient 是收件人。"},
+    {o:["Prompt","Promptly","Promptness","Prompted"],a:0,k:"修飾名詞 submission 要用形容詞 Prompt。"},
+    {o:["Contact accounting with any questions about eligible expenses.","The merger is expected to close by June.","Access to the server room is restricted.","A celebrity endorsement boosted sales overnight."],a:0,k:"規定類備忘錄以「有問題請洽某單位」收尾是標準寫法。"}]}];
+
+PART6[5]=[
+{t:"Email · 出貨通知",m:"To: Customer｜From: Fulfillment｜Subject: Order #48213",
+ x:"Your order was {1} from our Denver warehouse this morning. The {2} should arrive within three business days, and you may track it using the number below. If any item is {3} on arrival, please contact us within seven days. {4}",
+ q:[{o:["dispatched","dispatch","dispatching","dispatcher"],a:0,k:"was ___ 是被動語態，要用過去分詞。"},
+    {o:["shipment","shipping","ship","shipper"],a:0,k:"The ___ should arrive，抵達的是「這批貨」。shipping 指運送這件事，不會抵達。"},
+    {o:["defective","defect","defectively","defected"],a:0,k:"be 動詞後接形容詞描述商品狀態。"},
+    {o:["A replacement will be sent at no additional cost.","The fiscal year closes on September 30.","All attendees will receive a copy of the handouts.","Smoking is prohibited on the premises."],a:0,k:"承接「商品有瑕疵請聯絡」，補上補救方式最連貫。"}]},
+{t:"Notice · 缺貨通知",m:"To: Valued customer｜Subject: Item availability",
+ x:"We regret to inform you that the model you ordered is currently on {1}. A recent {2} of components has delayed production at our supplier. We expect to {3} the item by the end of the month. {4}",
+ q:[{o:["backorder","backordered","backordering","backorders"],a:0,k:"固定片語 on backorder，不加 s。"},
+    {o:["shortage","surplus","margin","deficit"],a:0,k:"零件「短缺」才會導致停產；surplus 是過剩，語意相反。"},
+    {o:["restock","restocked","restocking","restocks"],a:0,k:"expect to 後面接原形動詞。"},
+    {o:["You may cancel your order at any time for a full refund.","Interviews are expected to begin in early March.","The venue has been changed to Room 210.","Points may be redeemed for gift cards."],a:0,k:"缺貨通知應給顧客一個出口——取消並退款。"}]},
+{t:"Memo · 盤點差異",m:"To: Warehouse team｜From: Operations｜Subject: Inventory count",
+ x:"During last week's count, staff found a {1} between our records and the physical inventory. Please review all invoices issued since April and report any errors {2}. Until the review is complete, no {3} orders will be dispatched. {4}",
+ q:[{o:["discrepancy","consensus","concession","projection"],a:0,k:"a ___ between A and B 是 discrepancy 的固定用法。"},
+    {o:["promptly","prompt","promptness","prompted"],a:0,k:"修飾動詞 report 要用副詞。"},
+    {o:["wholesale","durable","faulty","courteous"],a:0,k:"與 orders 搭配成「批發訂單」；其餘形容詞語意都不通。"},
+    {o:["We appreciate your cooperation during this process.","Your subscription includes unlimited access.","The reception will be held on Friday.","Air freight costs more than sea freight."],a:0,k:"內部備忘錄要求配合後，以感謝配合收尾最標準。"}]}];
+
+PART6[6]=[
+{t:"Email · 預算調整",m:"To: Department heads｜From: Finance｜Subject: Q3 budget",
+ x:"The finance committee has {1} an additional sum to product development for next quarter. Because {2} on office supplies fell sharply, the funds were available without raising the overall budget. Sales {3} for the coming year remain conservative. {4}",
+ q:[{o:["allocated","allocation","allocating","allocate"],a:0,k:"has ___ 是現在完成式，要用過去分詞。"},
+    {o:["expenditure","expensive","expend","expended"],a:0,k:"Because 後面缺主詞，需要名詞。"},
+    {o:["projections","projecting","projected","project"],a:0,k:"Sales ___ remain，主詞要名詞複數才配 remain。"},
+    {o:["A detailed breakdown is attached for your review.","Please bring a photo ID to the front desk.","The lobby will be closed during the renovation.","A courier will collect the documents at four."],a:0,k:"預算信附上明細供檢視，是最合理的收尾。"}]},
+{t:"Notice · 年度稽核",m:"To: All staff｜From: Controller｜Subject: External audit",
+ x:"An external {1} will take place during the first week of October. Staff should ensure that all {2} balances are recorded accurately before then. The {3} year closes on September 30. {4}",
+ q:[{o:["audit","auditor","audited","auditing"],a:0,k:"An external ___ will take place，需要單數可數名詞指這件事本身；auditor 是人。"},
+    {o:["outstanding","outstandingly","outstand","stood"],a:0,k:"帳務語境的 outstanding balance ＝ 未付餘額。"},
+    {o:["fiscal","fiscally","finance","fiscality"],a:0,k:"固定搭配 fiscal year ＝ 會計年度。"},
+    {o:["Please direct any questions to the controller's office.","Members earn points on every purchase.","The shuttle runs between the hotel and airport.","Boxes must not be left in the corridor."],a:0,k:"通知類公告以「有疑問請洽某單位」結束是慣例。"}]},
+{t:"Press release · 併購案",m:"For immediate release｜Corporate communications",
+ x:"The board today announced a {1} with Halden Industries, expected to close in June. The combined group will operate more than twenty {2} across three continents. Analysts have described the deal as highly {3} for both parties. {4}",
+ q:[{o:["merger","merge","merged","merging"],a:0,k:"announced a ___，冠詞 a 後面要名詞。"},
+    {o:["subsidiaries","subsidies","subsidiary","subsidized"],a:0,k:"twenty 後接複數名詞；subsidy 是補助金，意思不同。"},
+    {o:["lucrative","durable","tentative","courteous"],a:0,k:"形容一筆交易「極為有利可圖」用 lucrative。"},
+    {o:["Shareholders will vote on the proposal next month.","All original receipts must be attached.","The orientation session begins at nine.","Access is restricted to IT staff."],a:0,k:"併購新聞稿的下一步通常是股東投票。"}]}];
+
+PART6[7]=[
+{t:"Email · 行銷活動",m:"To: Marketing team｜From: Director｜Subject: Summer campaign",
+ x:"Our summer advertising {1} launches on June 1. This year we are targeting a younger {2} through social media rather than print. Early data suggest that demand will {3} last year's figures. {4}",
+ q:[{o:["campaign","campaigns","campaigned","campaigning"],a:0,k:"單數動詞 launches 對應單數主詞。"},
+    {o:["demographic","demography","demographically","demographics"],a:0,k:"a younger ___ 指「某一年輕客群」，用單數名詞。"},
+    {o:["exceed","exceeds","exceeded","exceeding"],a:0,k:"will 後面接原形動詞。"},
+    {o:["The full media plan is attached for your comments.","Please retain your receipt for reimbursement.","The elevator passed its annual inspection.","Your order was dispatched this morning."],a:0,k:"對內的行銷信件以附上完整計畫、徵詢意見收尾最自然。"}]},
+{t:"Notice · 會員方案",m:"Customer information｜Rewards program",
+ x:"Members of our {1} program earn points on every purchase. Points may be {2} for gift cards or store credit at any location. Please note that promotional codes issued this spring are {3} only until December 31. {4}",
+ q:[{o:["loyalty","loyal","loyally","loyalist"],a:0,k:"loyalty program 是固定複合名詞。"},
+    {o:["redeemed","redeem","redeeming","redemption"],a:0,k:"may be ___ 是被動語態，要用過去分詞。"},
+    {o:["valid","validate","validity","validly"],a:0,k:"be 動詞後接形容詞 valid（有效的）。"},
+    {o:["Visit our website to check your current balance.","The committee could not convene as planned.","Original specifications are listed in Appendix B.","A shortage of raw materials delayed production."],a:0,k:"會員通知收尾導向查詢點數的管道最合理。"}]},
+{t:"Email · 客訴回覆",m:"To: Ms. Feldman｜From: Customer Care｜Subject: Your recent experience",
+ x:"Thank you for bringing this matter to our attention. We are sorry that your recent {1} was not handled promptly by our store team. The issue has now been {2}, and a full {3} has been credited to your account. {4}",
+ q:[{o:["complaint","complain","complaining","complainant"],a:0,k:"your recent ___ 需要名詞；complain 是動詞。"},
+    {o:["resolved","resolve","resolving","resolution"],a:0,k:"has been ___ 是被動完成式，要用過去分詞。"},
+    {o:["refund","refunded","refunding","refundable"],a:0,k:"a full ___ has been credited，冠詞後要名詞。"},
+    {o:["We hope you will give us another opportunity to serve you.","The merger is expected to close by the end of June.","Vehicles must not obstruct the emergency exit.","All attendees should review the figures beforehand."],a:0,k:"客訴道歉信的標準收尾是希望再有服務機會。"}]}];
+
+PART6[8]=[
+{t:"Notice · 大廳施工",m:"Building management｜Notice to all tenants",
+ x:"Please be advised that {1} work on the main lobby begins Monday. During this period the front entrance will be {2} closed, and visitors should use the east door instead. Work is already {3} on the north wing. {4}",
+ q:[{o:["renovation","renovate","renovated","renovating"],a:0,k:"___ work 是複合名詞，前面要名詞當修飾語。"},
+    {o:["temporarily","temporary","temporariness","temporal"],a:0,k:"修飾形容詞 closed 要用副詞。"},
+    {o:["underway","under","underneath","undergone"],a:0,k:"be 動詞後接 underway 表示「進行中」。"},
+    {o:["We apologize for any inconvenience this may cause.","Points can be redeemed for gift cards.","The quotation is attached for your review.","New hires are evaluated after three months."],a:0,k:"施工公告的固定收尾句，是多益公告題的高頻答案。"}]},
+{t:"Memo · 週六停電",m:"To: All tenants｜From: Building manager｜Subject: Power interruption",
+ x:"The management office has {1} all tenants of a scheduled power interruption this Saturday. Routine {2} of the backup generators will take approximately four hours. A {3} circuit board discovered last month has since been replaced. {4}",
+ q:[{o:["notified","notify","notifying","notification"],a:0,k:"has ___ 是現在完成式，用過去分詞。notify sb of sth 是固定用法。"},
+    {o:["maintenance","maintain","maintained","maintaining"],a:0,k:"Routine ___ of，形容詞後面要名詞。"},
+    {o:["faulty","fault","faultless","faultily"],a:0,k:"修飾名詞 circuit board 要用形容詞；faultless 意思相反。"},
+    {o:["Please save your work before leaving on Friday.","Applicants must submit two professional references.","The layover in Seoul lasts about two hours.","Wholesale prices are offered to registered retailers."],a:0,k:"停電通知最實用的提醒就是事先存檔。"}]},
+{t:"Notice · 門禁調整",m:"Security update｜Effective immediately",
+ x:"Access to the storage area {1} to the loading dock is now {2} to authorized staff only. Vehicles parked overnight must not {3} the emergency exit at any time. {4}",
+ q:[{o:["adjacent","adjacently","adjoin","adjacency"],a:0,k:"the area ___ to the dock，形容詞片語後置修飾名詞；固定搭配 adjacent to。"},
+    {o:["restricted","restricting","restriction","restrict"],a:0,k:"is now ___ to 是被動語態，要用過去分詞。"},
+    {o:["obstruct","obstruction","obstructed","obstructing"],a:0,k:"must not 後面接原形動詞。"},
+    {o:["Contact the janitor if you require access outside business hours.","A free replacement will be sent within five days.","The board holds a quarterly meeting each year.","Our pricing remains highly competitive."],a:0,k:"門禁公告應提供例外情況的聯絡方式。"}]}];
+
+/* ================= 引擎 ================= */
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-const known=new Set(); let filter="all";
+const DAY_MS=864e5;
+function dayNumber(){
+  const s=new Date(START+"T00:00:00"), n=new Date();
+  const t=new Date(n.getFullYear(),n.getMonth(),n.getDate());
+  return Math.floor((t-s)/DAY_MS)+1;
+}
+const realDay=dayNumber();
+let viewDay=Math.min(Math.max(realDay,1),DAYS.length);
+let known=new Set(), filter="all", SET=[];
 
-/* ---------- render cards ---------- */
+/* 以天數為種子的固定亂數，確保同一天複習字不會每次重新整理就換 */
+function seeded(seed){let x=seed*9301+49297;return()=>{x=(x*9301+49297)%233280;return x/233280}}
+function buildSet(dn){
+  const day=DAYS[dn-1];
+  const nw=day.words.map(w=>({...w,day:dn,rev:false}));
+  const prev=DAYS.slice(0,dn-1).flatMap(d=>d.words.map(w=>({...w,day:d.n,rev:true})));
+  if(!prev.length) return nw;
+  const r=seeded(dn*77), pool=[...prev];
+  const pick=[];
+  while(pick.length<10&&pool.length) pick.push(pool.splice(Math.floor(r()*pool.length),1)[0]);
+  return nw.concat(pick);
+}
 function esc(t){return t.replace(/&/g,"&amp;").replace(/</g,"&lt;")}
-function hi(d){return esc(d.sent).replace(d.form,`<mark>${d.form}</mark>`)}
+function hi(d){return esc(d.e).replace(d.f,`<mark>${d.f}</mark>`)}
 
+function loadDay(){
+  const day=DAYS[viewDay-1];
+  SET=buildSet(viewDay); known=new Set(); filter="all";
+  $("#eyebrow").textContent=`Day ${String(viewDay).padStart(2,"0")} · 情境成組記憶法`;
+  $("#theme").textContent=day.theme;
+  $("#story").textContent=day.story;
+  $("#mNew").textContent=`${day.words.length} / ${SET.length-day.words.length}`;
+  $("#prev").disabled=viewDay<=1; $("#next").disabled=viewDay>=DAYS.length;
+  $("#backToday").style.display=(viewDay===Math.min(Math.max(realDay,1),DAYS.length))?"none":"inline-block";
+  const d=new Date(); $("#dateLabel").textContent=`今天是 ${d.getMonth()+1}/${d.getDate()}`;
+  $("#stages").innerHTML=day.arc.map((a,i)=>
+    `<div class="stage on" data-s="${i+1}"><div class="dot"></div><h3>${a[0]}</h3><p>${a[1]}</p></div>`).join("");
+  $("#seg").innerHTML=`<button aria-pressed="true" data-f="all">全部 ${SET.length}</button>`+
+    day.arc.map((a,i)=>`<button aria-pressed="false" data-f="${i+1}">${a[0]}</button>`).join("")+
+    (SET.length>day.words.length?`<button aria-pressed="false" data-f="rev">複習 10</button>`:"");
+  $("#launch").textContent=`Part 5 · ${SET.length} 題`;
+  const p6=PART6[viewDay]||[];
+  $("#launch6").textContent=`Part 6 · ${p6.length} 篇短文`;
+  $("#launch6").style.display=p6.length?"inline-block":"none";
+  $("#endNotice").innerHTML = realDay>DAYS.length
+    ? `<div class="notice">目前的單字庫到 Day ${DAYS.length} 為止，你已經走完了。回 Claude 說「補下一批單字」就能延長。在那之前，這裡會停在最後一天讓你複習。</div>`
+    : (realDay<1?`<div class="notice">課程從 ${START} 開始，現在顯示的是 Day 1。</div>`:"");
+  render();
+}
 function render(){
-  const list=DATA.map((d,i)=>({d,i})).filter(o=>filter==="all"||o.d.s==+filter);
-  $("#grid").innerHTML=list.map(({d,i})=>`
+  $("#grid").innerHTML=SET.map((d,i)=>({d,i}))
+   .filter(o=>filter==="all"||(filter==="rev"?o.d.rev:(!o.d.rev&&o.d.s==+filter)))
+   .map(({d,i})=>`
    <article class="card ${known.has(i)?"known":""}" data-i="${i}" style="animation-delay:${Math.min(i,12)*22}ms">
      <button class="head" aria-expanded="false">
-       <div><b>${d.w}</b><div class="zh">${d.zh}</div></div>
-       <span class="pos">${d.pos}</span>
+       <div><b>${d.w}</b><div class="zh">${d.z}</div></div>
+       ${d.rev?`<span class="rev">複習 D${d.day}</span>`:""}
+       <span class="pos">${d.p}</span>
        <svg class="chev" width="16" height="16" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
      </button>
      <div class="body"><div><div class="inner">
        <p class="sent">${hi(d)}</p>
-       <p class="sent-zh">${d.zhs}</p>
-       <div class="chips">${d.coll.map(c=>`<span class="chip">${c}</span>`).join("")}</div>
-       <div class="tip"><b>考點 ·</b> ${d.tip}</div>
+       <p class="sent-zh">${d.t}</p>
+       <div class="chips">${d.c.map(c=>`<span class="chip">${c}</span>`).join("")}</div>
+       <div class="tip"><b>考點 ·</b> ${d.k}</div>
        <div class="acts">
          <button class="say">🔊 唸一次</button>
          <button class="mark" data-on="${known.has(i)?1:0}">${known.has(i)?"✓ 已記住":"標記記住"}</button>
@@ -428,34 +667,26 @@ function render(){
   stats();
 }
 function stats(){
-  const n=known.size, pct=Math.round(n/DATA.length*100);
-  $("#mKnown").textContent=`${n} / 30`;
-  $("#ring").setAttribute("stroke-dasharray",`${138*n/DATA.length} 138`);
+  const n=known.size,pct=Math.round(n/SET.length*100);
+  $("#mKnown").textContent=`${n} / ${SET.length}`;
+  $("#ring").setAttribute("stroke-dasharray",`${138*n/SET.length} 138`);
   $("#ringtxt").textContent=pct+"%";
 }
 $("#grid").addEventListener("click",e=>{
   const card=e.target.closest(".card"); if(!card) return;
-  const i=+card.dataset.i, d=DATA[i];
-  if(e.target.closest(".say")){
-    const u=new SpeechSynthesisUtterance(d.sent); u.lang="en-US"; u.rate=.92;
-    speechSynthesis.cancel(); speechSynthesis.speak(u); return;
-  }
+  const i=+card.dataset.i,d=SET[i];
+  if(e.target.closest(".say")){const u=new SpeechSynthesisUtterance(d.e);u.lang="en-US";u.rate=.92;
+    speechSynthesis.cancel();speechSynthesis.speak(u);return}
   const mk=e.target.closest(".mark");
-  if(mk){
-    known.has(i)?known.delete(i):known.add(i);
-    mk.dataset.on=known.has(i)?1:0; mk.textContent=known.has(i)?"✓ 已記住":"標記記住";
-    card.classList.toggle("known",known.has(i)); stats(); return;
-  }
-  if(e.target.closest(".head")){
-    const open=card.classList.toggle("open");
-    card.querySelector(".head").setAttribute("aria-expanded",open);
-  }
+  if(mk){known.has(i)?known.delete(i):known.add(i);mk.dataset.on=known.has(i)?1:0;
+    mk.textContent=known.has(i)?"✓ 已記住":"標記記住";card.classList.toggle("known",known.has(i));stats();return}
+  if(e.target.closest(".head")){const o=card.classList.toggle("open");
+    card.querySelector(".head").setAttribute("aria-expanded",o)}
 });
 $("#seg").addEventListener("click",e=>{
   const b=e.target.closest("button"); if(!b) return;
-  filter=b.dataset.f;
-  $$("#seg button").forEach(x=>x.setAttribute("aria-pressed",x===b));
-  $$("#stages .stage").forEach(s=>s.classList.toggle("on",filter==="all"||s.dataset.s===filter));
+  filter=b.dataset.f; $$("#seg button").forEach(x=>x.setAttribute("aria-pressed",x===b));
+  $$("#stages .stage").forEach(s=>s.classList.toggle("on",filter==="all"||filter==="rev"||s.dataset.s===filter));
   render();
 });
 $("#expandAll").addEventListener("click",()=>{
@@ -463,72 +694,143 @@ $("#expandAll").addEventListener("click",()=>{
   $$(".card").forEach(c=>{c.classList.toggle("open",any);c.querySelector(".head").setAttribute("aria-expanded",any)});
   $("#expandAll").textContent=any?"全部收合":"全部展開";
 });
+$("#prev").onclick=()=>{viewDay--;loadDay();scrollTo({top:0,behavior:"smooth"})};
+$("#next").onclick=()=>{viewDay++;loadDay();scrollTo({top:0,behavior:"smooth"})};
+$("#backToday").onclick=()=>{viewDay=Math.min(Math.max(realDay,1),DAYS.length);loadDay();scrollTo({top:0,behavior:"smooth"})};
+$("#jump").innerHTML=DAYS.map(d=>`<option value="${d.n}">Day ${String(d.n).padStart(2,"0")} · ${d.theme}</option>`).join("");
+$("#jump").onchange=e=>{viewDay=+e.target.value;loadDay();scrollTo({top:0,behavior:"smooth"})};
 
-/* ---------- quiz ---------- */
+/* ---------- 測驗 ---------- */
 let Q=[],qi=0,answered=false,wrong=[];
 const shuffle=a=>a.map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(v=>v[1]);
-
 function buildQuiz(){
-  Q=shuffle(DATA.map((d,i)=>i)).map(i=>{
-    const d=DATA[i];
-    let pool=DATA.filter((x,j)=>j!==i&&x.pos===d.pos);
-    if(pool.length<3) pool=pool.concat(DATA.filter((x,j)=>j!==i&&x.pos!==d.pos));
-    const opts=shuffle([d.form,...shuffle(pool).slice(0,3).map(x=>x.form)]);
-    return {i,opts};
+  Q=shuffle(SET.map((d,i)=>i)).map(i=>{
+    const d=SET[i];
+    let pool=SET.filter((x,j)=>j!==i&&x.p===d.p);
+    if(pool.length<3) pool=pool.concat(SET.filter((x,j)=>j!==i&&x.p!==d.p));
+    return {i,opts:shuffle([d.f,...shuffle(pool).slice(0,3).map(x=>x.f)])};
   });
   qi=0;wrong=[];
 }
 function drawQ(){
   answered=false;
-  const {i,opts}=Q[qi], d=DATA[i];
+  const {i,opts}=Q[qi],d=SET[i];
   $("#quiz").innerHTML=`
    <div class="qtop"><span>第 ${qi+1} / ${Q.length} 題</span><div class="track"><i style="width:${qi/Q.length*100}%"></i></div>
    <button class="link" id="close">結束</button></div>
-   <p class="qsent">${esc(d.sent).replace(d.form,'<span class="blank"></span>')}</p>
-   <p class="qhint">${d.zhs.replace(/[，。].*/,"…")}</p>
+   <p class="qsent">${esc(d.e).replace(d.f,'<span class="blank"></span>')}</p>
+   <p class="qhint">${d.t.replace(/[，。].*/,"…")}</p>
    <div class="opts">${opts.map((o,k)=>`<button class="opt" data-o="${o}"><kbd>${k+1}</kbd>${o}</button>`).join("")}</div>
-   <div class="feedback" id="fb"></div>
-   <div class="qfoot" id="foot"></div>`;
+   <div class="feedback" id="fb"></div><div class="qfoot" id="foot"></div>`;
 }
 $("#quiz").addEventListener("click",e=>{
-  if(e.target.closest("#close")) return endQuiz(true);
-  if(e.target.closest("#next")) return (qi++, qi<Q.length?drawQ():endQuiz(false));
+  if(e.target.closest("#close")) return $("#overlay").classList.remove("on");
+  if(e.target.closest("#again6")) return startP6();
+  if(e.target.closest("#next2")) return mode==="p6"?nextP6():(qi++,qi<Q.length?drawQ():endQuiz());
   if(e.target.closest("#again")) return (buildQuiz(),drawQ());
-  const o=e.target.closest(".opt"); if(o&&!answered) pick(o.dataset.o);
+  const o=e.target.closest(".opt"); if(!o) return;
+  if(mode==="p6") pick6(+o.dataset.k); else if(!answered) pick(o.dataset.o);
 });
 function pick(choice){
   answered=true;
-  const {i}=Q[qi], d=DATA[i], ok=choice===d.form;
+  const {i}=Q[qi],d=SET[i],ok=choice===d.f;
   if(!ok) wrong.push({d,choice});
-  $$(".opt").forEach(b=>{
-    b.disabled=true;
-    if(b.dataset.o===d.form) b.classList.add("right");
-    else if(b.dataset.o===choice) b.classList.add("wrong");
-  });
+  $$(".opt").forEach(b=>{b.disabled=true;
+    if(b.dataset.o===d.f)b.classList.add("right");
+    else if(b.dataset.o===choice)b.classList.add("wrong")});
   $("#fb").className="feedback on";
-  $("#fb").innerHTML=`<div><b>${ok?"✓ 正確":"✗ 正解："+d.form}</b> — ${d.w} <span style="color:#7C7168">${d.pos} ${d.zh}</span></div>
-    <div class="zh">${d.zhs}</div><div class="zh" style="margin-top:6px">${d.tip}</div>`;
-  $("#foot").innerHTML=`<button class="primary" id="next">${qi+1<Q.length?"下一題":"看結果"}</button><span class="qhint">按 Enter 繼續</span>`;
+  $("#fb").innerHTML=`<div><b>${ok?"✓ 正確":"✗ 正解："+d.f}</b> — ${d.w} <span style="color:#7C7168">${d.p} ${d.z}</span></div>
+    <div class="zh">${d.t}</div><div class="zh" style="margin-top:6px">${d.k}</div>`;
+  $("#foot").innerHTML=`<button class="primary" id="next2">${qi+1<Q.length?"下一題":"看結果"}</button><span class="qhint">按 Enter 繼續</span>`;
 }
-function endQuiz(early){
-  if(early){$("#overlay").classList.remove("on");return}
+function endQuiz(){
   const right=Q.length-wrong.length;
   $("#quiz").innerHTML=`
-   <div class="qtop"><span>測驗結果</span><div class="track"><i style="width:100%"></i></div></div>
+   <div class="qtop"><span>Day ${viewDay} 測驗結果</span><div class="track"><i style="width:100%"></i></div></div>
    <div class="score">${right}<span style="font-size:22px;color:#A79C90"> / ${Q.length}</span></div>
-   <p class="qhint">${right>=27?"這批字已經穩了，明天可以正式進複習池。":right>=21?"底子有了，把下面錯的字再讀一次例句就夠。":"別急，把錯的字重讀例句與考點，再測一次會跳很多。"}</p>
-   ${wrong.length?`<div class="wronglist">${wrong.map(({d,choice})=>`<div class="wrongitem"><b>${d.w}</b> ${d.zh}<span>你選了 ${choice}　·　${d.tip.replace(/<[^>]+>/g,"")}</span></div>`).join("")}</div>`:""}
+   <p class="qhint">${right/Q.length>=.9?"這批字已經穩了，明天直接往下走。":right/Q.length>=.7?"底子有了，把下面錯的字再讀一次例句就夠。":"別急，把錯的字重讀例句與考點，再測一次會跳很多。"}</p>
+   ${wrong.length?`<div class="wronglist">${wrong.map(({d,choice})=>`<div class="wrongitem"><b>${d.w}</b> ${d.z}<span>你選了 ${choice}　·　${d.k}</span></div>`).join("")}</div>`:""}
    <div class="qfoot"><button class="primary" id="again">再測一次</button><button class="link" id="close">回到單字卡</button></div>`;
 }
-$("#launch").addEventListener("click",()=>{buildQuiz();drawQ();$("#overlay").classList.add("on")});
+/* ---------- Part 6 短文填空 ---------- */
+let mode="p5",P6=[],pi=0,qj=0,p6ans=[],p6done=false;
+function startP6(){
+  const set=PART6[viewDay];
+  if(!set||!set.length) return;
+  mode="p6";P6=set;pi=0;qj=0;p6ans=P6.map(p=>p.q.map(()=>null));
+  $("#quiz").classList.add("wide");$("#overlay").classList.add("on");drawP6();
+}
+function p6Passage(){
+  const p=P6[pi];
+  return p.x.replace(/\{([1-4])\}/g,(m,n)=>{
+    const k=+n-1,st=p6ans[pi][k];
+    let cls="bl",label="("+n+")";
+    if(st){cls="bl done"+(st.ok?"":" miss"); if(st.txt.length<=16) label=st.txt;}
+    else if(k===qj) cls="bl cur";
+    return '<span class="'+cls+'">'+label+'</span>';
+  });
+}
+function drawP6(){
+  p6done=false;
+  const p=P6[pi],q=p.q[qj];
+  const total=P6.reduce((a,b)=>a+b.q.length,0), doneN=p6ans.flat().filter(Boolean).length;
+  const isSent=q.o[0].length>28;
+  $("#quiz").innerHTML=`
+   <div class="qtop"><span>短文 ${pi+1} / ${P6.length}　·　第 ${qj+1} 格</span>
+   <div class="track"><i style="width:${doneN/total*100}%"></i></div>
+   <button class="link" id="close">結束</button></div>
+   <div style="font-size:15px;font-weight:650;margin-top:12px;letter-spacing:-.01em">${p.t}</div>
+   <div class="passage"><div class="pmeta">${p.m}</div><div class="ptext">${p6Passage()}</div></div>
+   <p class="qhint" style="margin-top:12px">${isSent?"這是插入句題——選出最適合填入 ("+(qj+1)+") 的句子":"選出最適合填入 ("+(qj+1)+") 的答案"}</p>
+   <div class="opts">${q.o.map((o,k)=>`<button class="opt${isSent?" optlong":""}" data-k="${k}"><kbd>${k+1}</kbd>${o}</button>`).join("")}</div>
+   <div class="feedback" id="fb"></div><div class="qfoot" id="foot"></div>`;
+}
+function pick6(k){
+  if(p6done) return;
+  p6done=true;
+  const p=P6[pi],q=p.q[qj],ok=k===q.a;
+  p6ans[pi][qj]={ok,txt:q.o[q.a]};
+  $$(".opt").forEach(b=>{b.disabled=true;
+    if(+b.dataset.k===q.a)b.classList.add("right");
+    else if(+b.dataset.k===k)b.classList.add("wrong")});
+  $("#fb").className="feedback on";
+  $("#fb").innerHTML=`<div><b>${ok?"✓ 正確":"✗ 正解："+q.o[q.a]}</b></div><div class="zh">${q.k}</div>`;
+  const last=(pi===P6.length-1&&qj===p.q.length-1);
+  $("#foot").innerHTML=`<button class="primary" id="next2">${last?"看結果":(qj===p.q.length-1?"下一篇 ›":"下一格 ›")}</button><span class="qhint">按 Enter 繼續</span>`;
+  const pt=document.querySelector(".ptext"); if(pt) pt.innerHTML=p6Passage();
+}
+function nextP6(){
+  const p=P6[pi];
+  if(qj<p.q.length-1){qj++;drawP6()}
+  else if(pi<P6.length-1){pi++;qj=0;drawP6()}
+  else endP6();
+}
+function endP6(){
+  const flat=p6ans.flat(),right=flat.filter(x=>x&&x.ok).length,total=flat.length,r=right/total;
+  const wrongs=[];
+  P6.forEach((p,a)=>p.q.forEach((q,b)=>{if(p6ans[a][b]&&!p6ans[a][b].ok)wrongs.push({p,q,n:b+1})}));
+  $("#quiz").innerHTML=`
+   <div class="qtop"><span>Day ${viewDay} · Part 6 結果</span><div class="track"><i style="width:100%"></i></div></div>
+   <div class="score">${right}<span style="font-size:22px;color:#A79C90"> / ${total}</span></div>
+   <p class="qhint">${r>=.9?"文脈判斷很穩，這是 Part 6 最難練的一塊。":r>=.7?"字彙沒問題，把錯的插入句題再看一次前後邏輯。":"Part 6 靠的是前後句關係，不是單看空格。把解析逐條讀過再測一次。"}</p>
+   ${wrongs.length?`<div class="wronglist">${wrongs.map(w=>`<div class="wrongitem"><b>${w.p.t}</b>　第 ${w.n} 格<span>正解：${w.q.o[w.q.a]}　·　${w.q.k}</span></div>`).join("")}</div>`:""}
+   <div class="qfoot"><button class="primary" id="again6">再測一次</button><button class="link" id="close">回到單字卡</button></div>`;
+}
+
+$("#launch").onclick=()=>{mode="p5";$("#quiz").classList.remove("wide");buildQuiz();drawQ();$("#overlay").classList.add("on")};
+$("#launch6").onclick=startP6;
 $("#overlay").addEventListener("click",e=>{if(e.target===$("#overlay"))$("#overlay").classList.remove("on")});
 document.addEventListener("keydown",e=>{
   if(!$("#overlay").classList.contains("on")) return;
   if(e.key==="Escape") return $("#overlay").classList.remove("on");
-  if(!answered && /^[1-4]$/.test(e.key)){const b=$$(".opt")[+e.key-1]; if(b) pick(b.dataset.o);}
-  else if(answered && (e.key==="Enter"||e.key===" ")){e.preventDefault();const n=$("#next")||$("#again");n&&n.click();}
+  const busy = mode==="p6" ? p6done : answered;
+  if(!busy&&/^[1-4]$/.test(e.key)){const b=$$(".opt")[+e.key-1];
+    if(b) mode==="p6"?pick6(+b.dataset.k):pick(b.dataset.o)}
+  else if(busy&&(e.key==="Enter"||e.key===" ")){e.preventDefault();
+    const n=$("#next2")||$("#again")||$("#again6");n&&n.click()}
 });
-render();
+loadDay();
+$("#jump").value=viewDay;
 </script>
 </body>
 </html>
