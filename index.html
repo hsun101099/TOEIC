@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<title>Day 01 · 情境單字 — 一紙合約的誕生</title>
+<style>
+:root{
+  color-scheme:light only;
+  --canvas:#FAF6F0;
+  --card:#FFFCF8;
+  --ink:#332E28;
+  --muted:#7C7168;
+  --faint:#A79C90;
+  --line:#EDE4D8;
+  --accent:#3F6B55;
+  --accent-soft:#E7F0EA;
+  --good:#4A7A5F;
+  --good-soft:#E6F1E9;
+  --warn:#9A6318;
+  --warn-soft:#F9EFDF;
+  --r:16px;
+  --shadow:0 1px 2px rgba(94,74,52,.05), 0 8px 24px rgba(94,74,52,.07);
+  --shadow-lift:0 2px 4px rgba(94,74,52,.06), 0 16px 40px rgba(94,74,52,.13);
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--canvas);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter","Segoe UI","PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
+  font-size:16.5px;line-height:1.7;letter-spacing:-.003em;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1080px;margin:0 auto;padding:48px 24px 140px}
+
+/* ---------- header ---------- */
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--accent);background:var(--accent-soft);
+  padding:6px 12px;border-radius:999px;
+}
+h1{
+  font-size:clamp(30px,5.2vw,44px);line-height:1.15;letter-spacing:-.03em;
+  font-weight:700;margin:18px 0 10px;
+}
+.sub{color:var(--muted);font-size:16px;max-width:60ch}
+.metrics{display:flex;gap:28px;margin-top:26px;flex-wrap:wrap;align-items:center}
+.metric b{display:block;font-size:22px;font-weight:650;letter-spacing:-.02em}
+.metric span{font-size:12.5px;color:var(--faint)}
+.ring{width:54px;height:54px;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:6;stroke-linecap:round}
+.ring .bg{stroke:var(--line)}
+.ring .fg{stroke:var(--accent);transition:stroke-dasharray .5s var(--ease)}
+.ringwrap{position:relative;display:grid;place-items:center}
+.ringwrap span{position:absolute;font-size:12px;font-weight:650}
+
+/* ---------- signature: the deal spine ---------- */
+.spine{
+  margin:40px 0 8px;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--r);padding:22px 24px;box-shadow:var(--shadow);
+}
+.spine-title{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);font-weight:600}
+.stages{display:flex;align-items:flex-start;margin-top:18px}
+.stage{flex:1;position:relative;padding-right:12px}
+.stage::before{
+  content:"";position:absolute;top:7px;left:0;right:0;height:2px;background:var(--line);
+}
+.stage:last-child::before{right:calc(100% - 14px)}
+.dot{
+  position:relative;width:14px;height:14px;border-radius:50%;
+  background:var(--card);border:2px solid var(--faint);z-index:1;
+  transition:all .35s var(--ease);
+}
+.stage.on .dot{border-color:var(--accent);background:var(--accent);box-shadow:0 0 0 5px var(--accent-soft)}
+.stage h3{font-size:14.5px;font-weight:650;margin:12px 0 2px;letter-spacing:-.01em}
+.stage p{font-size:12.5px;color:var(--muted);line-height:1.45}
+
+/* ---------- controls ---------- */
+.bar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:34px 0 20px;position:sticky;top:0;z-index:20;
+  padding:14px 0;background:linear-gradient(var(--canvas) 72%,rgba(250,246,240,0));}
+.seg{display:flex;background:#F1E8DB;border-radius:12px;padding:4px;gap:2px;overflow-x:auto;max-width:100%}
+.seg button{
+  border:0;background:transparent;color:var(--muted);cursor:pointer;white-space:nowrap;
+  font:inherit;font-size:13.5px;font-weight:550;padding:7px 14px;border-radius:9px;
+  transition:all .22s var(--ease);
+}
+.seg button:hover{color:var(--ink)}
+.seg button[aria-pressed="true"]{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(94,74,52,.12)}
+.ghost{
+  margin-left:auto;border:1px solid var(--line);background:var(--card);border-radius:11px;
+  font:inherit;font-size:13.5px;font-weight:550;padding:8px 15px;cursor:pointer;color:var(--ink);
+  transition:all .22s var(--ease);
+}
+.ghost:hover{border-color:#DFD2C0;box-shadow:var(--shadow);transform:translateY(-1px)}
+
+/* ---------- cards ---------- */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:var(--shadow);overflow:hidden;transition:box-shadow .3s var(--ease),transform .3s var(--ease),border-color .3s var(--ease);
+  animation:rise .45s var(--ease) both;
+}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.card:hover{box-shadow:var(--shadow-lift);transform:translateY(-2px)}
+.card.known{border-color:#C6D9CB}
+.card.known .head b{color:var(--good)}
+.head{width:100%;text-align:left;border:0;background:transparent;font:inherit;cursor:pointer;padding:20px 22px;display:flex;gap:14px;align-items:flex-start}
+.head b{font-size:20px;font-weight:650;letter-spacing:-.02em;line-height:1.25}
+.head .zh{font-size:13.5px;color:var(--muted);margin-top:3px}
+.pos{
+  font-size:11px;font-weight:650;letter-spacing:.04em;color:var(--accent);
+  background:var(--accent-soft);padding:3px 8px;border-radius:6px;flex:none;margin-top:4px;
+}
+.chev{margin-left:auto;flex:none;color:var(--faint);transition:transform .3s var(--ease)}
+.card.open .chev{transform:rotate(180deg)}
+.body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .38s var(--ease)}
+.card.open .body{grid-template-rows:1fr}
+.body>div{overflow:hidden}
+.inner{padding:0 22px 22px;border-top:1px solid var(--line);margin-top:2px;padding-top:18px}
+.sent{font-size:16px;line-height:1.75}
+mark{background:linear-gradient(transparent 56%, #F6E1B8 56%);color:inherit;padding:0 1px;font-weight:600}
+.sent-zh{font-size:14px;color:var(--muted);margin-top:7px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.chip{font-size:12.5px;color:#5E5349;background:#F4ECE1;border-radius:7px;padding:4px 9px}
+.tip{margin-top:14px;background:var(--warn-soft);border-radius:11px;padding:11px 13px;font-size:13px;color:#6E4A16;line-height:1.55}
+.tip b{font-weight:650}
+.acts{display:flex;gap:8px;margin-top:16px}
+.acts button{
+  border:1px solid var(--line);background:var(--card);border-radius:10px;font:inherit;font-size:12.5px;
+  font-weight:550;padding:7px 12px;cursor:pointer;color:var(--muted);transition:all .2s var(--ease);
+}
+.acts button:hover{color:var(--ink);border-color:#DFD2C0}
+.acts button.mark[data-on="1"]{background:var(--good-soft);border-color:#BCD6C4;color:var(--good)}
+
+/* ---------- quiz ---------- */
+.launch{
+  position:fixed;left:50%;transform:translateX(-50%);bottom:26px;z-index:40;
+  background:var(--accent);color:#FFFCF8;border:0;border-radius:14px;font:inherit;font-size:14.5px;font-weight:600;
+  padding:14px 26px;cursor:pointer;box-shadow:0 8px 26px rgba(63,107,85,.30);
+  transition:transform .25s var(--ease),box-shadow .25s var(--ease);
+}
+.launch:hover{transform:translateX(-50%) translateY(-2px);box-shadow:0 12px 34px rgba(63,107,85,.36)}
+.overlay{
+  position:fixed;inset:0;background:rgba(250,246,240,.88);backdrop-filter:blur(14px);
+  z-index:50;display:none;place-items:center;padding:20px;animation:fade .3s var(--ease)
+}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.overlay.on{display:grid}
+.quiz{
+  width:100%;max-width:620px;background:var(--card);border:1px solid var(--line);
+  border-radius:22px;box-shadow:var(--shadow-lift);padding:30px;
+}
+.qtop{display:flex;align-items:center;gap:14px;font-size:12.5px;color:var(--faint);font-weight:550}
+.track{flex:1;height:4px;background:var(--line);border-radius:99px;overflow:hidden}
+.track i{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .4s var(--ease)}
+.qsent{font-size:19px;line-height:1.7;margin:26px 0 6px;letter-spacing:-.01em}
+.blank{display:inline-block;min-width:110px;border-bottom:2px solid var(--accent);vertical-align:baseline}
+.qhint{font-size:13px;color:var(--muted)}
+.opts{display:grid;gap:9px;margin-top:22px}
+.opt{
+  display:flex;align-items:center;gap:12px;text-align:left;width:100%;
+  border:1px solid var(--line);background:var(--card);border-radius:13px;font:inherit;font-size:15px;
+  padding:14px 16px;cursor:pointer;transition:all .2s var(--ease);
+}
+.opt:hover:not(:disabled){border-color:#BFD4C6;background:#FDFAF5;transform:translateX(2px)}
+.opt kbd{
+  font:inherit;font-size:11.5px;font-weight:650;color:var(--faint);background:#F2E9DD;
+  border-radius:6px;padding:2px 7px;flex:none
+}
+.opt.right{border-color:#A6C9B2;background:var(--good-soft)}
+.opt.wrong{border-color:#E0BCA6;background:#FAEDE2}
+.opt:disabled{cursor:default}
+.feedback{margin-top:18px;border-radius:13px;padding:15px 16px;background:#F7F0E6;font-size:13.5px;line-height:1.6;display:none}
+.feedback.on{display:block;animation:rise .3s var(--ease)}
+.feedback .zh{color:var(--muted);margin-top:5px}
+.qfoot{display:flex;gap:10px;margin-top:20px;align-items:center}
+.primary{
+  border:0;background:var(--accent);color:#fff;border-radius:12px;font:inherit;font-size:14px;font-weight:600;
+  padding:12px 22px;cursor:pointer;transition:all .22s var(--ease);
+}
+.primary:hover{filter:brightness(1.07);transform:translateY(-1px)}
+.link{border:0;background:none;font:inherit;font-size:13px;color:var(--muted);cursor:pointer;padding:8px}
+.link:hover{color:var(--ink)}
+.score{font-size:52px;font-weight:700;letter-spacing:-.03em}
+.wronglist{margin-top:18px;display:grid;gap:8px;max-height:38vh;overflow:auto}
+.wrongitem{border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px}
+.wrongitem span{color:var(--muted);font-size:12.5px;display:block;margin-top:3px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
+@media (max-width:600px){
+  .wrap{padding:32px 18px 130px}
+  .stages{flex-direction:column;gap:16px}
+  .stage::before{display:none}
+  .stage{padding-right:0}
+  .quiz{padding:22px 20px;border-radius:18px}
+  .qsent{font-size:17px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="eyebrow">Day 01 · 情境成組記憶法</span>
+  <h1>一紙合約的誕生</h1>
+  <p class="sub">今天的 30 個字不是隨機清單，而是一筆生意從報價到履約的完整流程。照順序讀完，你記住的是<strong>劇情</strong>，不是單字表。</p>
+
+  <div class="metrics">
+    <div class="ringwrap">
+      <svg class="ring" viewBox="0 0 54 54"><circle class="bg" cx="27" cy="27" r="22"/><circle class="fg" id="ring" cx="27" cy="27" r="22" stroke-dasharray="0 138"/></svg>
+      <span id="ringtxt">0%</span>
+    </div>
+    <div class="metric"><b id="mKnown">0 / 30</b><span>已標記記住</span></div>
+    <div class="metric"><b>3</b><span>情境段落</span></div>
+    <div class="metric"><b>15–20 分</b><span>建議時間</span></div>
+  </div>
+
+  <section class="spine">
+    <div class="spine-title">今日情境軸線</div>
+    <div class="stages" id="stages">
+      <div class="stage on" data-s="1"><div class="dot"></div><h3>提案與報價</h3><p>買方詢價、賣方投標，數字還沒定案。</p></div>
+      <div class="stage" data-s="2"><div class="dot"></div><h3>條款協商</h3><p>雙方對責任與例外來回拉鋸。</p></div>
+      <div class="stage" data-s="3"><div class="dot"></div><h3>簽約與履約</h3><p>白紙黑字生效，違約就要付代價。</p></div>
+    </div>
+  </section>
+
+  <div class="bar">
+    <div class="seg" id="seg">
+      <button aria-pressed="true" data-f="all">全部 30</button>
+      <button aria-pressed="false" data-f="1">提案與報價</button>
+      <button aria-pressed="false" data-f="2">條款協商</button>
+      <button aria-pressed="false" data-f="3">簽約與履約</button>
+    </div>
+    <button class="ghost" id="expandAll">全部展開</button>
+  </div>
+
+  <div class="grid" id="grid"></div>
+</div>
+
+<button class="launch" id="launch">開始測驗 · 30 題克漏字</button>
+
+<div class="overlay" id="overlay"><div class="quiz" id="quiz"></div></div>
+
+<script>
+const DATA=[
+{s:1,w:"proposal",pos:"n.",zh:"提案；企劃書",form:"proposal",
+ sent:"The marketing team will submit its proposal to the board by Friday.",
+ zhs:"行銷團隊將在週五前把提案送交董事會。",
+ coll:["submit a proposal","review / accept a proposal","a proposal for the project"],
+ tip:"動詞 propose → 名詞 proposal，Part 5 最愛考詞性轉換。別和 purpose（目的）看混。"},
+{s:1,w:"quotation",pos:"n.",zh:"報價（單）",form:"quotation",
+ sent:"Please send us a written quotation for the office furniture.",
+ zhs:"請將辦公家具的書面報價單寄給我們。",
+ coll:["request / provide a quotation","a quotation for + 物品"],
+ tip:"口語與 email 常縮成 quote。quotation 另一個意思是「引文」，看情境判斷。"},
+{s:1,w:"estimate",pos:"n./v.",zh:"估價；估計",form:"estimate",
+ sent:"The contractor's estimate exceeded our budget by 15 percent.",
+ zhs:"承包商的估價超出我們預算 15%。",
+ coll:["a rough / preliminary estimate","estimate that ...","cost estimate"],
+ tip:"名詞唸 /ˈestɪmət/、動詞唸 /ˈestɪmeɪt/，聽力 Part 3 靠重音分辨。"},
+{s:1,w:"bid",pos:"n./v.",zh:"投標；出價",form:"bids",
+ sent:"Three firms placed bids on the construction project.",
+ zhs:"三家公司對這項工程投標。",
+ coll:["submit / place a bid","the winning bid","bid for a contract"],
+ tip:"三態同形 bid–bid–bid，看到 bidded 就是錯的選項。"},
+{s:1,w:"vendor",pos:"n.",zh:"供應商；賣方",form:"vendors",
+ sent:"We have shortlisted two vendors for the software upgrade.",
+ zhs:"我們已為軟體升級篩選出兩家供應商。",
+ coll:["approved / preferred vendor","vendor selection"],
+ tip:"＝ supplier。另有「街頭攤販」之意，多益圖片題出現過 street vendor。"},
+{s:1,w:"specification",pos:"n.",zh:"規格；明細",form:"specifications",
+ sent:"All materials must meet the specifications listed in Appendix B.",
+ zhs:"所有材料都必須符合附錄 B 所列規格。",
+ coll:["meet / comply with the specifications","technical specs"],
+ tip:"常縮寫成 spec；動詞是 specify。合約與產品說明題型高頻。"},
+{s:1,w:"competitive",pos:"adj.",zh:"有競爭力的；價格優惠的",form:"competitive",
+ sent:"Their pricing is highly competitive compared with other suppliers.",
+ zhs:"與其他供應商相比，他們的定價非常有競爭力。",
+ coll:["competitive pricing / rate","a competitive salary"],
+ tip:"三兄弟必分清：competitive（有競爭力）／competent（能勝任）／competitor（競爭者）。"},
+{s:1,w:"submit",pos:"v.",zh:"提交；呈交",form:"submit",
+ sent:"Applicants must submit all required documents before the deadline.",
+ zhs:"申請人必須在截止日前提交所有必要文件。",
+ coll:["submit a report / an application","submit A to B"],
+ tip:"重音在後，變化要雙寫：submitted、submitting。名詞 submission。"},
+{s:1,w:"inquiry",pos:"n.",zh:"詢問；詢價",form:"inquiry",
+ sent:"We received an inquiry about bulk discounts from a new client.",
+ zhs:"我們收到一位新客戶關於大量採購折扣的詢問。",
+ coll:["make / handle an inquiry","an inquiry about + 事"],
+ tip:"英式拼法 enquiry。動詞 inquire about（詢問）／inquire into（調查）。"},
+{s:1,w:"tentative",pos:"adj.",zh:"暫定的；初步的",form:"tentative",
+ sent:"The tentative delivery date is set for March 10.",
+ zhs:"暫定的交貨日期訂在 3 月 10 日。",
+ coll:["a tentative agreement / schedule","tentatively scheduled"],
+ tip:"和 confirmed（已確認）相對，聽力改期題常靠這個字判斷答案。"},
+
+{s:2,w:"negotiate",pos:"v.",zh:"談判；協商",form:"negotiated",
+ sent:"Both parties negotiated the terms for nearly three hours.",
+ zhs:"雙方就條款協商了將近三小時。",
+ coll:["negotiate a contract / the terms","negotiate with sb over sth"],
+ tip:"名詞 negotiation。徵才廣告的 salary negotiable ＝ 薪資面議。"},
+{s:2,w:"clause",pos:"n.",zh:"條款",form:"clause",
+ sent:"The confidentiality clause prohibits sharing client data.",
+ zhs:"保密條款禁止分享客戶資料。",
+ coll:["confidentiality / termination / penalty clause"],
+ tip:"別和 cause（原因）看混。一份 contract 由許多 clauses 組成。"},
+{s:2,w:"provision",pos:"n.",zh:"條款；規定；供應",form:"provision",
+ sent:"Under this provision, either party may cancel with 30 days' notice.",
+ zhs:"依據本條規定，任一方均可提前 30 天通知取消。",
+ coll:["under the provisions of","make provision for"],
+ tip:"一字兩義：法律「規定」＋「提供」。衍生 provided that ＝ 假如。"},
+{s:2,w:"amend",pos:"v.",zh:"修訂；修正",form:"amended",
+ sent:"The agreement was amended to include an extended warranty.",
+ zhs:"該協議經修訂，納入了延長保固。",
+ coll:["amend a contract / policy","an amendment to the agreement"],
+ tip:"比 change 正式，合約題必考。名詞 amendment。"},
+{s:2,w:"waive",pos:"v.",zh:"放棄（權利）；免除",form:"waive",
+ sent:"The bank agreed to waive the transfer fee for premium members.",
+ zhs:"銀行同意免除高級會員的轉帳手續費。",
+ coll:["waive a fee / requirement / right"],
+ tip:"發音同 wave 但意思無關。名詞 waiver ＝ 免責同意書。"},
+{s:2,w:"liability",pos:"n.",zh:"責任；債務",form:"liability",
+ sent:"The clause limits the supplier's liability to the value of the order.",
+ zhs:"該條款將供應商的責任限制在訂單金額之內。",
+ coll:["limit / assume liability","liability for damages"],
+ tip:"形容詞 liable：be liable for。財報中 liabilities（負債）與 assets（資產）相對。"},
+{s:2,w:"binding",pos:"adj.",zh:"具約束力的",form:"binding",
+ sent:"Once signed, the document becomes legally binding on both parties.",
+ zhs:"一經簽署，該文件即對雙方具有法律約束力。",
+ coll:["legally binding","a binding agreement","non-binding"],
+ tip:"來自 bind–bound–bound。看到 non-binding 就是「無約束力」。"},
+{s:2,w:"concession",pos:"n.",zh:"讓步；特許經營",form:"concessions",
+ sent:"Neither side was willing to make further concessions.",
+ zhs:"雙方都不願再做出進一步讓步。",
+ coll:["make / offer a concession"],
+ tip:"動詞 concede。機場的 concession stand 指特許商店，聽力出現過。"},
+{s:2,w:"mutually",pos:"adv.",zh:"互相地；雙方地",form:"mutually",
+ sent:"The two companies reached a mutually beneficial arrangement.",
+ zhs:"兩家公司達成了互惠的安排。",
+ coll:["mutually beneficial / agreeable","a mutually agreed date"],
+ tip:"形容詞 mutual。mutually beneficial 幾乎是合約新聞稿的固定搭配。"},
+{s:2,w:"stipulate",pos:"v.",zh:"明訂；規定",form:"stipulates",
+ sent:"The contract stipulates that payment be made within 30 days.",
+ zhs:"合約明訂款項須於 30 天內支付。",
+ coll:["stipulate that ...","as stipulated in the agreement"],
+ tip:"陷阱：stipulate/require/recommend 後的 that 子句用<b>原形動詞</b>（be made，不是 is made）。"},
+
+{s:3,w:"execute",pos:"v.",zh:"簽署使生效；執行",form:"executed",
+ sent:"The agreement was executed by both parties on May 1.",
+ zhs:"該協議由雙方於 5 月 1 日簽署生效。",
+ coll:["execute a contract","execute a plan"],
+ tip:"多益考的多半是「簽署生效」而非「執行」。名詞 execution。"},
+{s:3,w:"comply",pos:"v.",zh:"遵守",form:"comply",
+ sent:"All employees must comply with the updated safety regulations.",
+ zhs:"全體員工都必須遵守更新後的安全規範。",
+ coll:["comply with（with 不可省）"],
+ tip:"名詞 compliance（in compliance with）、形容詞 compliant。少了 with 就是錯選項。"},
+{s:3,w:"obligation",pos:"n.",zh:"義務；責任",form:"obligations",
+ sent:"The vendor failed to fulfill its contractual obligations.",
+ zhs:"該供應商未能履行合約義務。",
+ coll:["fulfill / meet an obligation","under no obligation to"],
+ tip:"動詞 oblige、形容詞 obligatory。廣告常見 with no obligation ＝ 無需承諾。"},
+{s:3,w:"terminate",pos:"v.",zh:"終止",form:"terminate",
+ sent:"Either party may terminate the agreement with written notice.",
+ zhs:"任一方均可以書面通知終止本協議。",
+ coll:["terminate a contract / employment"],
+ tip:"名詞 termination，比 end 正式。termination clause 就是解約條款。"},
+{s:3,w:"renewal",pos:"n.",zh:"續約；更新",form:"renewal",
+ sent:"Your subscription is up for renewal at the end of the month.",
+ zhs:"您的訂閱將於月底到期續約。",
+ coll:["automatic renewal","renewal notice","be up for renewal"],
+ tip:"動詞 renew。renewable 另指「可再生的」（renewable energy）。"},
+{s:3,w:"breach",pos:"n./v.",zh:"違約；違反",form:"breach",
+ sent:"Late delivery constitutes a breach of contract.",
+ zhs:"延遲交貨構成違約。",
+ coll:["a breach of contract / security","be in breach of"],
+ tip:"＝ violation。別把 break 的名詞誤用成 breach 的位置。"},
+{s:3,w:"penalty",pos:"n.",zh:"罰款；違約金",form:"penalty",
+ sent:"A penalty will be imposed for any delay in shipment.",
+ zhs:"任何出貨延遲都將被處以罰款。",
+ coll:["impose / incur a penalty","penalty clause","late penalty"],
+ tip:"動詞 penalize。帳單與通知類文章常見 late payment penalty。"},
+{s:3,w:"effective",pos:"adj.",zh:"生效的；有效的",form:"effective",
+ sent:"The new pricing policy is effective as of June 1.",
+ zhs:"新的定價政策自 6 月 1 日起生效。",
+ coll:["effective immediately","effective from / as of + 日期"],
+ tip:"多益考「生效」的次數遠多於「有效果」。effective ≠ efficient（有效率的）。"},
+{s:3,w:"subject to",pos:"phr.",zh:"須經…核准；受制於",form:"subject to",
+ sent:"All contracts are subject to approval by the legal department.",
+ zhs:"所有合約均須經法務部門核准。",
+ coll:["subject to change / approval / availability"],
+ tip:"後面接名詞或 V-ing，<b>不接原形動詞</b>。廣告常見 Prices are subject to change。"},
+{s:3,w:"in accordance with",pos:"phr.",zh:"依照；根據",form:"in accordance with",
+ sent:"Refunds will be processed in accordance with company policy.",
+ zhs:"退款將依照公司政策處理。",
+ coll:["in accordance with the terms / regulations"],
+ tip:"不能寫成 in accordance to。較口語的同義說法是 according to。"}
+];
+
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const known=new Set(); let filter="all";
+
+/* ---------- render cards ---------- */
+function esc(t){return t.replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+function hi(d){return esc(d.sent).replace(d.form,`<mark>${d.form}</mark>`)}
+
+function render(){
+  const list=DATA.map((d,i)=>({d,i})).filter(o=>filter==="all"||o.d.s==+filter);
+  $("#grid").innerHTML=list.map(({d,i})=>`
+   <article class="card ${known.has(i)?"known":""}" data-i="${i}" style="animation-delay:${Math.min(i,12)*22}ms">
+     <button class="head" aria-expanded="false">
+       <div><b>${d.w}</b><div class="zh">${d.zh}</div></div>
+       <span class="pos">${d.pos}</span>
+       <svg class="chev" width="16" height="16" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+     </button>
+     <div class="body"><div><div class="inner">
+       <p class="sent">${hi(d)}</p>
+       <p class="sent-zh">${d.zhs}</p>
+       <div class="chips">${d.coll.map(c=>`<span class="chip">${c}</span>`).join("")}</div>
+       <div class="tip"><b>考點 ·</b> ${d.tip}</div>
+       <div class="acts">
+         <button class="say">🔊 唸一次</button>
+         <button class="mark" data-on="${known.has(i)?1:0}">${known.has(i)?"✓ 已記住":"標記記住"}</button>
+       </div>
+     </div></div></div>
+   </article>`).join("");
+  stats();
+}
+function stats(){
+  const n=known.size, pct=Math.round(n/DATA.length*100);
+  $("#mKnown").textContent=`${n} / 30`;
+  $("#ring").setAttribute("stroke-dasharray",`${138*n/DATA.length} 138`);
+  $("#ringtxt").textContent=pct+"%";
+}
+$("#grid").addEventListener("click",e=>{
+  const card=e.target.closest(".card"); if(!card) return;
+  const i=+card.dataset.i, d=DATA[i];
+  if(e.target.closest(".say")){
+    const u=new SpeechSynthesisUtterance(d.sent); u.lang="en-US"; u.rate=.92;
+    speechSynthesis.cancel(); speechSynthesis.speak(u); return;
+  }
+  const mk=e.target.closest(".mark");
+  if(mk){
+    known.has(i)?known.delete(i):known.add(i);
+    mk.dataset.on=known.has(i)?1:0; mk.textContent=known.has(i)?"✓ 已記住":"標記記住";
+    card.classList.toggle("known",known.has(i)); stats(); return;
+  }
+  if(e.target.closest(".head")){
+    const open=card.classList.toggle("open");
+    card.querySelector(".head").setAttribute("aria-expanded",open);
+  }
+});
+$("#seg").addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b) return;
+  filter=b.dataset.f;
+  $$("#seg button").forEach(x=>x.setAttribute("aria-pressed",x===b));
+  $$("#stages .stage").forEach(s=>s.classList.toggle("on",filter==="all"||s.dataset.s===filter));
+  render();
+});
+$("#expandAll").addEventListener("click",()=>{
+  const any=$$(".card.open").length===0;
+  $$(".card").forEach(c=>{c.classList.toggle("open",any);c.querySelector(".head").setAttribute("aria-expanded",any)});
+  $("#expandAll").textContent=any?"全部收合":"全部展開";
+});
+
+/* ---------- quiz ---------- */
+let Q=[],qi=0,answered=false,wrong=[];
+const shuffle=a=>a.map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(v=>v[1]);
+
+function buildQuiz(){
+  Q=shuffle(DATA.map((d,i)=>i)).map(i=>{
+    const d=DATA[i];
+    let pool=DATA.filter((x,j)=>j!==i&&x.pos===d.pos);
+    if(pool.length<3) pool=pool.concat(DATA.filter((x,j)=>j!==i&&x.pos!==d.pos));
+    const opts=shuffle([d.form,...shuffle(pool).slice(0,3).map(x=>x.form)]);
+    return {i,opts};
+  });
+  qi=0;wrong=[];
+}
+function drawQ(){
+  answered=false;
+  const {i,opts}=Q[qi], d=DATA[i];
+  $("#quiz").innerHTML=`
+   <div class="qtop"><span>第 ${qi+1} / ${Q.length} 題</span><div class="track"><i style="width:${qi/Q.length*100}%"></i></div>
+   <button class="link" id="close">結束</button></div>
+   <p class="qsent">${esc(d.sent).replace(d.form,'<span class="blank"></span>')}</p>
+   <p class="qhint">${d.zhs.replace(/[，。].*/,"…")}</p>
+   <div class="opts">${opts.map((o,k)=>`<button class="opt" data-o="${o}"><kbd>${k+1}</kbd>${o}</button>`).join("")}</div>
+   <div class="feedback" id="fb"></div>
+   <div class="qfoot" id="foot"></div>`;
+}
+$("#quiz").addEventListener("click",e=>{
+  if(e.target.closest("#close")) return endQuiz(true);
+  if(e.target.closest("#next")) return (qi++, qi<Q.length?drawQ():endQuiz(false));
+  if(e.target.closest("#again")) return (buildQuiz(),drawQ());
+  const o=e.target.closest(".opt"); if(o&&!answered) pick(o.dataset.o);
+});
+function pick(choice){
+  answered=true;
+  const {i}=Q[qi], d=DATA[i], ok=choice===d.form;
+  if(!ok) wrong.push({d,choice});
+  $$(".opt").forEach(b=>{
+    b.disabled=true;
+    if(b.dataset.o===d.form) b.classList.add("right");
+    else if(b.dataset.o===choice) b.classList.add("wrong");
+  });
+  $("#fb").className="feedback on";
+  $("#fb").innerHTML=`<div><b>${ok?"✓ 正確":"✗ 正解："+d.form}</b> — ${d.w} <span style="color:#7C7168">${d.pos} ${d.zh}</span></div>
+    <div class="zh">${d.zhs}</div><div class="zh" style="margin-top:6px">${d.tip}</div>`;
+  $("#foot").innerHTML=`<button class="primary" id="next">${qi+1<Q.length?"下一題":"看結果"}</button><span class="qhint">按 Enter 繼續</span>`;
+}
+function endQuiz(early){
+  if(early){$("#overlay").classList.remove("on");return}
+  const right=Q.length-wrong.length;
+  $("#quiz").innerHTML=`
+   <div class="qtop"><span>測驗結果</span><div class="track"><i style="width:100%"></i></div></div>
+   <div class="score">${right}<span style="font-size:22px;color:#A79C90"> / ${Q.length}</span></div>
+   <p class="qhint">${right>=27?"這批字已經穩了，明天可以正式進複習池。":right>=21?"底子有了，把下面錯的字再讀一次例句就夠。":"別急，把錯的字重讀例句與考點，再測一次會跳很多。"}</p>
+   ${wrong.length?`<div class="wronglist">${wrong.map(({d,choice})=>`<div class="wrongitem"><b>${d.w}</b> ${d.zh}<span>你選了 ${choice}　·　${d.tip.replace(/<[^>]+>/g,"")}</span></div>`).join("")}</div>`:""}
+   <div class="qfoot"><button class="primary" id="again">再測一次</button><button class="link" id="close">回到單字卡</button></div>`;
+}
+$("#launch").addEventListener("click",()=>{buildQuiz();drawQ();$("#overlay").classList.add("on")});
+$("#overlay").addEventListener("click",e=>{if(e.target===$("#overlay"))$("#overlay").classList.remove("on")});
+document.addEventListener("keydown",e=>{
+  if(!$("#overlay").classList.contains("on")) return;
+  if(e.key==="Escape") return $("#overlay").classList.remove("on");
+  if(!answered && /^[1-4]$/.test(e.key)){const b=$$(".opt")[+e.key-1]; if(b) pick(b.dataset.o);}
+  else if(answered && (e.key==="Enter"||e.key===" ")){e.preventDefault();const n=$("#next")||$("#again");n&&n.click();}
+});
+render();
+</script>
+</body>
+</html>
