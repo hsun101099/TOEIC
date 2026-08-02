@@ -169,6 +169,15 @@ mark{background:linear-gradient(transparent 56%, #F6E1B8 56%);color:inherit;padd
 .sn.ev{background:#F7E2B6;box-shadow:inset 0 -2px 0 #CE9F3C;padding:1px 2px}
 .qtext{font-size:16.5px;font-weight:620;line-height:1.6;margin:10px 0 2px;letter-spacing:-.01em}
 .evnote{font-size:12.5px;color:var(--warn);margin-top:12px;font-weight:550}
+.glosshead{font-size:13px;font-weight:650;margin:22px 0 10px;padding-top:18px;border-top:1px solid var(--line);
+  letter-spacing:-.01em}
+.glosshead span{font-weight:500;color:var(--faint);font-size:12px}
+.gloss{display:grid;gap:8px;max-height:34vh;overflow:auto}
+.gitem{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:#FDFBF7}
+.gitem b{font-size:14.5px;font-weight:650}
+.gitem i{font-style:normal;font-size:12.5px;color:var(--accent);background:var(--accent-soft);
+  border-radius:6px;padding:2px 7px;margin-left:8px}
+.gitem span{display:block;color:var(--muted);font-size:12.8px;line-height:1.6;margin-top:6px}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
 @media (max-width:600px){
   .wrap{padding:30px 18px 130px}
@@ -737,6 +746,62 @@ qs:[
 {q:"What is the most likely response to the elevator request?",o:["It cannot be granted at that hour","It will be approved without conditions","It requires a fee","It must be made in writing"],a:0,ev:[[0,2,0],[1,1,1]],
  k:"最難的一題。他想在 5 日早上使用貨梯，而公告寫明每天 8:00–11:00 貨梯保留給施工人員——時間正好衝突，所以答案是不能。這種題只能靠兩份文件的時間交叉比對。"}]};
 
+/* ---- Part 7 難字與常考片語（結果頁顯示） ---- */
+const GLOSS={
+1:[{w:"long-standing",z:"adj. 長期存在的",n:"a long-standing agreement／relationship，商業文章描述合作關係的固定用字。"},
+{w:"principal",z:"adj. 主要的",n:"principal supplier ＝ 主要供應商。與 principle（原則，名詞）發音相同但詞性、意思都不同，Part 5 常拿來設陷阱。"},
+{w:"stand idle",z:"閒置、停擺不運轉",n:"The assembly lines stood idle. 描述產線停工的道地說法，比 stop working 高階。"},
+{w:"decline to + 原形",z:"婉拒（做某事）",n:"she declined to give a figure ＝ 她不願提供數字。這裡不是「下降」，這個雙義是閱讀常見誤讀點。"},
+{w:"place the losses at",z:"估計損失為…",n:"place／put A at B ＝ 把 A 估計為 B。與 estimate A at B 同義，財經文章高頻。"},
+{w:"pass down to",z:"轉嫁給（下游）",n:"the schedule will be passed down to them ＝ 壓力轉嫁到下游廠商身上。"},
+{w:"corresponding",z:"adj. 相應的、對應的",n:"without any corresponding increase in price ＝ 價格卻沒有相應調漲。Part 6 也常考。"},
+{w:"bid on / for",z:"投標爭取",n:"stop bidding on contracts ＝ 不再投標。bid 三態同形，別寫成 bidded。"}],
+2:[{w:"the successful candidate",z:"錄取者",n:"徵才廣告的固定說法，指「最後獲選的人」，不是「成功的候選人」。看到它就知道下文在描述工作內容。"},
+{w:"be willing to + 原形",z:"願意…",n:"be willing to travel abroad。徵才條件句的高頻結構。"},
+{w:"twice a quarter",z:"每季兩次",n:"頻率表達：once a week／twice a month／three times a year。這種數字條件常成為跨篇比對的關鍵。"},
+{w:"an asset",z:"加分條件、有價值的特質",n:"is considered an asset ＝ 屬加分項，非必要條件。與 mandatory（必要）形成對比，是本篇最容易誤判的地方。"},
+{w:"inbound / outbound",z:"進貨的／出貨的",n:"inbound freight ＝ 進貨運輸。物流題常成對出現。"},
+{w:"by + 幅度",z:"表示增減的幅度",n:"reduced errors by nearly a third ＝ 減少了將近三分之一。by 後面接的是「差額」，不是最終值——圖表題必考。"},
+{w:"centre / center on",z:"聚焦於、以…為核心",n:"my work has centred on reconciling counts ＝ 我的工作核心是核對數量。"},
+{w:"reconcile A against / with B",z:"核對、使相符",n:"會計與倉儲場景的專業動詞，與 Day 5 的 discrepancy 是一組。"}],
+3:[{w:"be fitted with",z:"裝設有…",n:"The east wing has been fitted with a card-access system. 描述建物設備的固定被動用法。"},
+{w:"be issued a card",z:"被核發（證件、卡片）",n:"issue sb sth 是雙受詞動詞，被動時人當主詞。公告題高頻。"},
+{w:"on sb's behalf",z:"代表某人、替某人",n:"retrieve documents on their behalf ＝ 替他們取件。也可說 on behalf of sb。"},
+{w:"retrieve",z:"v. 取回、調閱",n:"比 get 正式，用於文件、資料、行李。"},
+{w:"accordingly",z:"adv. 據此、相應地",n:"update their calendars accordingly ＝ 據此更新行事曆。放句尾，是公告結尾的常見副詞。"},
+{w:"normally be handled",z:"通常會被處理",n:"normally／typically 這類副詞是「原則性說明」的訊號，題目常拿來考「是否為絕對規定」。"}],
+4:[{w:"beforehand",z:"adv. 事先、提前",n:"you will not be able to check in beforehand。＝ in advance，但更口語，常出現在行程說明。"},
+{w:"carry-on",z:"n. 隨身行李",n:"與 checked baggage（託運行李）相對。旅行題必備的一組對照。"},
+{w:"for an additional fee",z:"需額外付費",n:"飯店與航空公司公告的關鍵片語，題目最愛問「哪一項要另外收費」。"},
+{w:"at no charge",z:"免費",n:"＝ free of charge、complimentary。三種說法同義，換句話說就是考點。"},
+{w:"be scheduled for + 時間",z:"排定於…",n:"Your presentation is scheduled for 1:30 p.m. 注意介系詞是 for，不是 at。"},
+{w:"complimentary vs complementary",z:"免費招待的／互補的",n:"只差一個字母，意思完全不同。ETS 每年都考，看到務必放慢。"}],
+5:[{w:"fall by half",z:"減少一半",n:"by 表示幅度。fall by half（減少一半）vs fall to half（降到剩一半），差一個介系詞結果差很多。"},
+{w:"closer to",z:"更接近於…",n:"The reduction has been closer to seventy percent. 用來修正前面提到的預期值，是本篇第一題的答題關鍵。"},
+{w:"adopt",z:"v. 採用（標準、政策）",n:"adopt a standard／policy。別跟 adapt（調整、適應）混，這組是 Part 5 經典陷阱。"},
+{w:"struggle with",z:"難以負擔、應付吃力",n:"smaller suppliers would struggle with the cost ＝ 小廠商會吃不消成本。"},
+{w:"have no plans to + 原形",z:"沒有打算…",n:"比 will not 委婉，公司聲明常用。題目常拿它考「是否會強制實施」。"},
+{w:"in other words",z:"換句話說",n:"看到它就知道下一句是前一句的改寫——通常也是答案句所在。"}],
+6:[{w:"come in ahead of",z:"優於（預期、預測）",n:"came in slightly ahead of our forecast ＝ 略優於我們的預測。財經報告固定說法。"},
+{w:"ease",z:"v.（價格、壓力）趨緩下降",n:"We had expected freight costs to ease ＝ 我們原本預期運費會回落。這裡不是「容易」。"},
+{w:"rest on",z:"建立在…之上、取決於",n:"confidence rests on an assumption ＝ 信心建立在某個假設上。用來指出論點的前提。"},
+{w:"attribute A to B",z:"把 A 歸因於 B",n:"The company attributed the gap to higher costs. 被動 be attributed to 也很常見。"},
+{w:"read / view A as B",z:"將 A 解讀為 B",n:"read the dividend as a signal of confidence。考的是觀點題，注意誰在解讀。"},
+{w:"rather than",z:"而非",n:"a signal of confidence rather than caution。rather than 後面是被否定的那一邊，讀太快很容易看反方向。"},
+{w:"leave ... unchanged",z:"維持…不變",n:"leaving our revenue estimate unchanged。與前半句的 lowering 形成對比，是第三題的陷阱來源。"}],
+7:[{w:"replace A with B",z:"以 B 取代 A",n:"replaced punch cards with an app。介系詞是 with；若用 substitute 則是 substitute B for A，方向相反。"},
+{w:"redemption rate",z:"（點數）兌換率",n:"動詞 redeem。行銷與會員方案文章的核心指標。"},
+{w:"exceed every internal forecast",z:"超出所有內部預測",n:"exceed 是及物動詞，後面不加介系詞。"},
+{w:"in effect",z:"實際上、等於是",n:"The rewards, in effect, had become invisible. 用來下總結，常是主旨題的答案句。注意與 in effect（生效中）的另一義區分，看逗號位置。"},
+{w:"yet",z:"conj. 然而",n:"Sign-ups exceeded forecasts, yet redemption rates fell. 轉折詞就是答案的分界線，畫線標記它。"},
+{w:"closest to being earned",z:"最接近可以達成的",n:"形容詞最高級 + to + V-ing。指「差一點就能兌換的那個獎勵」。"}],
+8:[{w:"be carried out",z:"被執行、進行",n:"No work will be carried out at weekends. ＝ conduct、perform 的被動說法，公告題高頻。"},
+{w:"in advance",z:"事先",n:"at least three working days in advance ＝ 至少提前三個工作天。注意 working days（工作天）不含週末，這是本篇的細節陷阱。"},
+{w:"be reserved for",z:"保留給（特定對象）",n:"The freight elevator will be reserved for contractors. 第五題的答題關鍵就在這一句。"},
+{w:"on a recurring basis",z:"定期地、經常性地",n:"與 case by case（逐案處理）形成對比，這正是租戶信件的訴求重點。"},
+{w:"case by case",z:"逐案、個案處理",n:"也寫作 on a case-by-case basis（當形容詞時加連字號）。"},
+{w:"run through + 時間",z:"持續到…",n:"Our bookings run through the end of June ＝ 我們的預約排到六月底。"}]};
+
 /* ================= 引擎 ================= */
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const DAY_MS=864e5;
@@ -1022,7 +1087,7 @@ function pick7(k){
 function nextP7(){ if(ri<R7.qs.length-1){ri++;drawP7()} else endP7(); }
 function endP7(){
   const right=r7ans.filter(x=>x.ok).length,total=R7.qs.length,r=right/total;
-  const allEv=R7.qs.flatMap(q=>q.ev);
+  const allEv=R7.qs.flatMap(q=>q.ev), gl=GLOSS[viewDay]||[];
   $("#quiz").innerHTML=`
    <div class="qtop"><span>Day ${viewDay} · Part 7 結果</span><div class="track"><i style="width:100%"></i></div></div>
    <div class="score">${right}<span style="font-size:22px;color:#A79C90"> / ${total}</span></div>
@@ -1030,6 +1095,8 @@ function endP7(){
    <p class="evnote">以下全文已標出全部 ${allEv.length} 處答案依據</p>
    <div class="docwrap" style="max-height:42vh">${docsHTML(allEv)}</div>
    <div class="wronglist">${r7ans.map((x,i)=>`<div class="wrongitem">${x.ok?"✓":"✗"} 第 ${i+1} 題　<b>${x.q.o[x.q.a]}</b><span>${x.q.k}</span></div>`).join("")}</div>
+   ${gl.length?`<div class="glosshead">本篇難字與常考片語　<span>${gl.length} 則</span></div>
+   <div class="gloss">${gl.map(g=>`<div class="gitem"><b>${g.w}</b><i>${g.z}</i><span>${g.n}</span></div>`).join("")}</div>`:""}
    <div class="qfoot"><button class="primary" id="again7">再讀一次</button><button class="link" id="close">回到單字卡</button></div>`;
 }
 
