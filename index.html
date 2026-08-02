@@ -158,6 +158,17 @@ mark{background:linear-gradient(transparent 56%, #F6E1B8 56%);color:inherit;padd
 .bl.done.miss{border-color:#C97B4E;color:#B0693F}
 .optlong{font-size:14.5px;line-height:1.5;align-items:flex-start}
 .optlong kbd{margin-top:2px}
+/* ---- Part 7 ---- */
+.quiz.reading{max-width:900px}
+.docwrap{max-height:36vh;overflow:auto;margin:16px 0 6px;padding-right:4px}
+.doc{background:#FDF9F3;border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:12px}
+.doc h4{font-size:14.5px;font-weight:650;letter-spacing:-.01em;margin-bottom:4px}
+.doc p{font-size:15px;line-height:2;margin-bottom:11px}
+.doc p:last-child{margin-bottom:0}
+.sn{transition:background .45s var(--ease),box-shadow .45s var(--ease);border-radius:3px}
+.sn.ev{background:#F7E2B6;box-shadow:inset 0 -2px 0 #CE9F3C;padding:1px 2px}
+.qtext{font-size:16.5px;font-weight:620;line-height:1.6;margin:10px 0 2px;letter-spacing:-.01em}
+.evnote{font-size:12.5px;color:var(--warn);margin-top:12px;font-weight:550}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
 @media (max-width:600px){
   .wrap{padding:30px 18px 130px}
@@ -210,6 +221,7 @@ mark{background:linear-gradient(transparent 56%, #F6E1B8 56%);color:inherit;padd
 <div class="launchbar">
   <button class="p5" id="launch">Part 5 · 30 題</button>
   <button class="p6" id="launch6">Part 6 · 短文填空</button>
+  <button class="p6" id="launch7">Part 7 · 閱讀</button>
 </div>
 <div class="overlay" id="overlay"><div class="quiz" id="quiz"></div></div>
 
@@ -591,6 +603,140 @@ PART6[8]=[
     {o:["obstruct","obstruction","obstructed","obstructing"],a:0,k:"must not 後面接原形動詞。"},
     {o:["Contact the janitor if you require access outside business hours.","A free replacement will be sent within five days.","The board holds a quarterly meeting each year.","Our pricing remains highly competitive."],a:0,k:"門禁公告應提供例外情況的聯絡方式。"}]}];
 
+/* ============ Part 7 閱讀（單篇 3 題 / 雙篇 5 題，附答案出處） ============ */
+const PART7={};
+PART7[1]={k:"single",title:"單篇閱讀 · 3 題",docs:[
+{t:"Riverton Manufacturing Revises Supplier Terms",m:"Industry Weekly｜Business section",p:[
+["Riverton Manufacturing announced last week that it has amended its long-standing agreement with Calder Components, its principal supplier of precision parts.","Under the revised terms, Calder must now deliver all orders within twenty-one days rather than thirty.","In exchange, Riverton has agreed to waive the penalty it had previously imposed for shipments arriving after the agreed date."],
+["The change follows a difficult year for Riverton, whose assembly lines stood idle for nearly three weeks last autumn after a shipment of housings failed inspection.","Company president Dana Ochoa described the shutdown as the most expensive disruption in the firm's history, though she declined to give a figure.","Analysts place the losses at close to four million dollars."],
+["Not everyone has welcomed the new arrangement.","Calder's own suppliers, many of them small workshops in the region, say the tighter schedule will be passed down to them without any corresponding increase in price.","One workshop owner, who asked not to be named, said his firm would likely stop bidding on Calder contracts altogether."]]}],
+qs:[
+{q:"What did Riverton give up under the revised agreement?",o:["Its right to charge a fee for late shipments","A discount on precision parts","Its claim for last autumn's losses","Exclusive use of Calder's factory"],a:0,ev:[[0,0,2]],
+ k:"第一段最後一句：Riverton 同意 waive（放棄）它原本對延遲到貨所課的罰款。waive 就是 Day 1 學過的字。"},
+{q:"What most likely motivated Riverton to demand faster delivery?",o:["A costly production stoppage the previous year","A rise in the price of housings","New government inspection rules","The loss of its largest customer"],a:0,ev:[[0,1,0]],
+ k:"推論題。第二段說產線因一批不合格零件停擺近三週，這是要求縮短交期最直接的動機。文章沒有明說「因此」，要自己把兩段連起來。"},
+{q:"What is suggested about Calder's smaller suppliers?",o:["Some may stop competing for Calder's business","They have already raised their prices","They will be paid in installments","They intend to merge with Calder"],a:0,ev:[[0,2,2]],
+ k:"最後一句某工廠老闆說可能不再投標，這是「暗示」而非陳述事實，選項用 some may 保留程度最貼近原文。"}]};
+
+PART7[2]={k:"multi",title:"雙篇閱讀 · 5 題",docs:[
+{t:"Job Posting #LC-114",m:"Meridian Freight｜Careers",p:[
+["Meridian Freight is seeking a logistics coordinator for its Kaohsiung office.","The successful candidate will monitor inventory levels across three warehouses and resolve discrepancies between shipping records and physical counts."],
+["Applicants must have at least four years of experience in freight operations and be willing to travel abroad twice a quarter.","A degree in supply chain management is preferred but not required.","Fluency in Mandarin and English is mandatory; a third language is considered an asset."],
+["Send a résumé and two professional references to our hiring address by 30 September.","Interviews will be conducted in early October, and the selected candidate is expected to begin in January."]]},
+{t:"Letter of Application",m:"From: Talia Brandt｜Subject: Position #LC-114",p:[
+["I am writing to apply for the logistics coordinator position advertised on your website.","For the past six years I have managed inbound freight for a regional distributor, where I reduced reporting errors by nearly a third."],
+["Although my degree is in accounting rather than supply chain management, my daily work has centred on reconciling warehouse counts against invoices.","I also speak Japanese, which I understand may be useful for your Osaka accounts.","I should mention that I am unable to travel outside Taiwan until March, when my current contract ends."],
+["My references are attached, and I would welcome the chance to discuss the role."]]}],
+qs:[
+{q:"What is one responsibility of the advertised position?",o:["Reconciling records with physical stock","Negotiating contracts with carriers","Supervising the Osaka office","Preparing the company's annual audit"],a:0,ev:[[0,0,1]],
+ k:"廣告第一段第二句：resolve discrepancies between shipping records and physical counts，選項用 reconciling 換句話說。"},
+{q:"What are applicants asked to send?",o:["A résumé and two references","A portfolio and a cover letter","A degree certificate","A list of previous clients"],a:0,ev:[[0,2,0]],
+ k:"細節題，答案在廣告最後一段第一句。這種題不要靠印象，一定回原文找。"},
+{q:"What does Ms. Brandt acknowledge about her background?",o:["Her degree is not in the preferred field","She has less than four years of experience","She has never worked with warehouses","She does not speak English fluently"],a:0,ev:[[1,1,0]],
+ k:"Although 開頭那句就是自承弱點。其他選項都與信中內容相反。"},
+{q:"Which requirement is Ms. Brandt currently unable to meet?",o:["The travel requirement","The language requirement","The experience requirement","The reference requirement"],a:0,ev:[[0,1,0],[1,1,2]],
+ k:"跨篇題——這是 Part 7 拉開分數的關鍵題型。廣告要求每季出國兩次，而她表示三月前無法出國，兩份文件對照才看得出來。"},
+{q:"What can be inferred about Ms. Brandt's Japanese?",o:["It goes beyond what the job requires","It is required for the Osaka accounts","It compensates for her lack of English","It was learned during her current job"],a:0,ev:[[0,1,2],[1,1,1]],
+ k:"廣告說第三語言是 an asset（加分項）而非必要；她會日文因此屬於超出要求。選項 B 把加分誤讀成必要條件，是典型陷阱。"}]};
+
+PART7[3]={k:"single",title:"單篇閱讀 · 3 題",docs:[
+{t:"Relocation of Accounts Payable",m:"Internal memo｜To: All finance staff｜From: Operations",p:[
+["Beginning 1 November, the accounts payable team will move from the fourth floor to the newly renovated east wing.","The move is expected to take two days, during which staff should work from home."],
+["The east wing has been fitted with a card-access system.","Only employees whose duties require entry to the records room will be issued a card; everyone else should ask a colleague to retrieve documents on their behalf.","Requests submitted after four o'clock will normally be handled the following morning."],
+["Because the new floor has fewer meeting rooms than the old one, the weekly reconciliation meeting will move to Room 210 in the main building.","Team leads should update their calendars accordingly.","The first meeting in the new location will take place on 5 November."]]}],
+qs:[
+{q:"What are staff instructed to do while the move takes place?",o:["Work remotely","Use the east stairwell","Report to Room 210","Take two days of leave"],a:0,ev:[[0,0,1]],
+ k:"第一段第二句 work from home。注意選項用 remotely 改寫，同義轉換是 Part 7 的基本功。"},
+{q:"What is implied about the records room?",o:["Not all staff will be able to enter it","It will remain on the fourth floor","It is open only in the afternoon","It requires two people to be present"],a:0,ev:[[0,1,1]],
+ k:"只有職務需要的人才發卡，其餘人須請同事代取——等於暗示多數人進不去。原文沒有 not all 這句話，要自己推。"},
+{q:"Why is the weekly meeting being moved?",o:["The new floor has fewer meeting rooms","Room 210 is larger","The old room is being renovated","More departments will attend"],a:0,ev:[[0,2,0]],
+ k:"Because 子句直接給了原因。C 是誘答——被整修的是東翼，不是原本的會議室。"}]};
+
+PART7[4]={k:"multi",title:"雙篇閱讀 · 5 題",docs:[
+{t:"Osaka Trip, 12–15 March",m:"To: K. Serrano｜From: Travel Desk",p:[
+["Your flight departs Taoyuan at 6:40 a.m. on 12 March and lands at Kansai at 10:05 a.m.","A colleague from our Osaka office will meet you at arrivals and take you directly to the conference venue."],
+["Your presentation is scheduled for 1:30 p.m. that same afternoon, so you will not be able to check in beforehand.","Please pack anything you need for the session in your carry-on bag.","The hotel has agreed to take your luggage until the evening."],
+["Remember that expenses must be submitted within two weeks of your return, with original receipts attached."]]},
+{t:"Reservation Confirmation #77-4120",m:"Harborview Osaka｜Guest services",p:[
+["Thank you for choosing Harborview Osaka. Your reservation is confirmed for three nights, 12–15 March.","Standard check-in begins at 3:00 p.m.; early check-in may be arranged for an additional fee."],
+["A complimentary breakfast is served from 6:00 to 10:00 a.m. in the lobby restaurant.","Guests arriving before check-in may leave luggage with the concierge at no charge.","Please note that the fitness centre will be closed for maintenance until 14 March."]]}],
+qs:[
+{q:"What will happen immediately after Mr. Serrano lands?",o:["He will be met and driven to the venue","He will check in at the hotel","He will collect a rental car","He will attend a lunch meeting"],a:0,ev:[[0,0,1]],
+ k:"第一份文件第一段第二句。directly to the conference venue 排除了先去飯店的可能。"},
+{q:"Why is Mr. Serrano advised to use a carry-on bag?",o:["He must go straight to his presentation","Checked baggage is not permitted","His flight allows only one bag","The hotel has no storage space"],a:0,ev:[[0,1,0]],
+ k:"因為 1:30 就要簡報、無法先入住，所以必要物品要隨身。D 與第二份文件直接矛盾——飯店明確提供寄放。"},
+{q:"What is temporarily unavailable at the hotel?",o:["The fitness centre","The lobby restaurant","The concierge desk","The breakfast service"],a:0,ev:[[1,1,2]],
+ k:"細節題，藏在第二份文件最後一句。這種「唯一不同的那一項」是 Part 7 最常見的送分題，但漏讀就沒了。"},
+{q:"How will Mr. Serrano's luggage most likely be handled on 12 March?",o:["It will be stored free of charge until the evening","It will be sent ahead to the venue","It will remain at the airport","It will incur a storage fee"],a:0,ev:[[0,1,2],[1,1,1]],
+ k:"跨篇題。第一份說飯店會代收行李，第二份說提前抵達的房客可免費寄放於禮賓部——兩邊合起來才能確定「免費」。"},
+{q:"What would require an extra payment?",o:["Checking in before 3:00 p.m.","Eating breakfast in the lobby","Leaving luggage with the concierge","Submitting expenses late"],a:0,ev:[[1,0,1]],
+ k:"early check-in may be arranged for an additional fee。B 和 C 原文都寫明免費，D 則是公司內規、與飯店收費無關。"}]};
+
+PART7[5]={k:"single",title:"單篇閱讀 · 3 題",docs:[
+{t:"What the Machines Found",m:"Logistics Review｜Feature",p:[
+["When Halvorsen Logistics installed automated sorting equipment at its Rotterdam warehouse two years ago, managers predicted that shipping errors would fall by half.","The actual reduction has been closer to seventy percent."],
+["What surprised the company was where the remaining errors came from.","Nearly all of them now occur before goods reach the warehouse, at the point where suppliers label their cartons.","The machines, in other words, have exposed mistakes that used to disappear into the general noise of the operation."],
+["Halvorsen has since begun offering a small discount to suppliers who adopt its labelling standard.","Roughly forty percent have done so.","The company says it has no plans to make the standard mandatory, arguing that its smallest suppliers would struggle with the cost of new equipment."]]}],
+qs:[
+{q:"How did the results compare with what managers expected?",o:["They were better than predicted","They matched the forecast exactly","They fell short of the target","They could not be measured"],a:0,ev:[[0,0,1]],
+ k:"預測減少一半，實際接近七成——兩個數字要自己比較。文章從不說 better than expected，這正是難度所在。"},
+{q:"Where do most remaining errors now originate?",o:["With suppliers, before goods arrive","In the sorting machines themselves","During delivery to customers","In the accounting department"],a:0,ev:[[0,1,1]],
+ k:"第二段第二句寫得很清楚。B 是誘答：機器是「揭露」錯誤，不是製造錯誤。"},
+{q:"Why has Halvorsen chosen not to require the labelling standard?",o:["It would burden its smallest suppliers","Most suppliers already comply","The standard is still being tested","Regulators have not approved it"],a:0,ev:[[0,2,2]],
+ k:"最後一句的 arguing that... 給了理由。B 是數字陷阱——只有四成採用，稱不上 most。"}]};
+
+PART7[6]={k:"multi",title:"雙篇閱讀 · 5 題",docs:[
+{t:"Second-Quarter Results",m:"Nordvik Group｜Press release",p:[
+["Nordvik Group today reported revenue of 412 million euros for the second quarter, an increase of nine percent over the same period last year.","Operating profit rose more modestly, by four percent."],
+["The company attributed the gap to higher freight costs and to depreciation on newly acquired equipment.","Chief executive Ines Halvard said the investment would begin to pay off in the second half of the year.","Nordvik confirmed that its dividend will remain unchanged."]]},
+{t:"Analyst Note — Nordvik Group",m:"Bergstrom Research｜For institutional clients",p:[
+["Nordvik's revenue figure came in slightly ahead of our forecast, but the margin story is less encouraging.","We had expected freight costs to ease by now, and they have not."],
+["Management's confidence about the second half rests on an assumption of stable fuel prices, which we do not share.","We are therefore lowering our full-year profit projection by six percent, while leaving our revenue estimate unchanged.","We continue to read the unchanged dividend as a signal of confidence rather than caution."]]}],
+qs:[
+{q:"What does the press release indicate about the quarter?",o:["Revenue grew faster than operating profit","Profit grew faster than revenue","Both grew by the same amount","Revenue declined slightly"],a:0,ev:[[0,0,1]],
+ k:"營收 +9%、營業利益 +4%，more modestly 就是提示。數字比較題不要憑感覺，回頭核對。"},
+{q:"What reason does Nordvik give for the difference?",o:["Freight costs and equipment depreciation","A drop in customer demand","An unfavourable exchange rate","Delays at its main supplier"],a:0,ev:[[0,1,0]],
+ k:"第二段第一句直接列出兩個原因。depreciation 是 Day 6 的字。"},
+{q:"What action did Bergstrom Research take?",o:["It reduced its profit forecast","It raised its revenue estimate","It downgraded the dividend outlook","It withdrew its coverage"],a:0,ev:[[1,1,1]],
+ k:"lowering our full-year profit projection by six percent。同一句還說營收預估不變，B 因此錯。"},
+{q:"On what point do Nordvik and Bergstrom disagree?",o:["The outlook for the second half of the year","The size of the quarterly revenue","The level of the dividend","The cause of the margin gap"],a:0,ev:[[0,1,1],[1,1,0]],
+ k:"跨篇對照題。執行長說下半年會回收投資，分析師說那個樂觀建立在燃料價格穩定的假設上，而他們不認同——分歧點在展望，不在已發生的數字。"},
+{q:"How does Bergstrom interpret the unchanged dividend?",o:["As a positive sign","As evidence of weak cash flow","As a temporary measure","As a response to shareholder pressure"],a:0,ev:[[1,1,2]],
+ k:"a signal of confidence rather than caution ＝ 正面解讀。這題考的是 rather than 的方向，讀太快很容易看反。"}]};
+
+PART7[7]={k:"single",title:"單篇閱讀 · 3 題",docs:[
+{t:"The Points Nobody Spent",m:"Retail Monthly｜Case study",p:[
+["Two years ago the Fennimore chain replaced its paper punch cards with a mobile loyalty app.","Sign-ups exceeded every internal forecast, yet redemption rates fell sharply."],
+["Customers were collecting points and then forgetting them.","A survey found that most respondents could not say how many points they held, and that a third had never opened the app again after installing it.","The rewards, in effect, had become invisible."],
+["The chain now sends a monthly message showing each customer's balance together with the single reward closest to being earned.","Redemptions have since doubled.","Fennimore notes that the change required no new technology and almost no additional spending."]]}],
+qs:[
+{q:"What happened after the app was introduced?",o:["Enrolment rose but fewer rewards were claimed","Both enrolment and redemptions rose","Customers returned to paper cards","Sales fell across the chain"],a:0,ev:[[0,0,1]],
+ k:"yet 這個轉折詞是關鍵：報名超乎預期，但兌換率下滑。連接詞常常就是答案的分界線。"},
+{q:"What did the survey reveal about customers?",o:["Many were unaware of their point balances","Most preferred cash discounts","They found the app difficult to install","They shopped less often than before"],a:0,ev:[[0,1,1]],
+ k:"could not say how many points they held ＝ 不知道自己有多少點。C 是誘答——問題不在安裝，而在安裝後不再打開。"},
+{q:"What is suggested about Fennimore's solution?",o:["It was inexpensive to implement","It took two years to develop","It replaced the app entirely","It was tested in one region first"],a:0,ev:[[0,2,2]],
+ k:"no new technology and almost no additional spending ＝ 成本極低。這題考的是把原文的具體描述抽象成 inexpensive。"}]};
+
+PART7[8]={k:"multi",title:"雙篇閱讀 · 5 題",docs:[
+{t:"Notice to Tenants",m:"Kestrel Tower｜Building management",p:[
+["Renovation of the lobby and east stairwell will begin on 3 April and is expected to last six weeks.","During this period the main entrance will be closed, and all tenants should use the loading-dock door on Wilmot Street."],
+["Contractors will work between 8:00 a.m. and 6:00 p.m. on weekdays.","No work will be carried out at weekends.","Tenants who require quiet for scheduled meetings may request a temporary pause by contacting building management at least three working days in advance."],
+["The freight elevator will be reserved for contractors from 8:00 to 11:00 each morning."]]},
+{t:"Re: Recording Sessions",m:"To: Building management｜From: P. Oyelaran, Suite 1104",p:[
+["Our studio records interviews on Tuesday and Thursday mornings, usually between nine and eleven.","I am writing to ask whether the pause you mention could be arranged for those hours on a recurring basis rather than case by case."],
+["If that is not possible, we will move the sessions to Saturdays.","We would also appreciate knowing whether we may use the freight elevator to bring in equipment on the morning of 5 April.","Our current bookings run through the end of June."]]}],
+qs:[
+{q:"Which entrance should tenants use during the renovation?",o:["The loading-dock door on Wilmot Street","The east stairwell","The main lobby entrance","The parking garage entrance"],a:0,ev:[[0,0,1]],
+ k:"第一段第二句。B 是誘答——東側樓梯間正是施工範圍之一。"},
+{q:"How much advance notice is needed to request a pause in the work?",o:["Three working days","Twenty-four hours","One week","Three weeks"],a:0,ev:[[0,1,2]],
+ k:"at least three working days in advance。數字細節題必須回原文，憑印象很容易記成一週。"},
+{q:"What alternative does Mr. Oyelaran propose?",o:["Recording on Saturdays instead","Moving to a different suite","Ending the bookings early","Recording in the evening"],a:0,ev:[[1,1,0]],
+ k:"If that is not possible 之後就是備案。這種「條件句帶出替代方案」的結構，Part 7 很愛拿來出題。"},
+{q:"Why would Saturday sessions solve the studio's problem?",o:["Contractors do not work at weekends","The freight elevator is free then","The lobby reopens on Saturdays","Fewer tenants are in the building"],a:0,ev:[[0,1,1],[1,1,0]],
+ k:"跨篇推論。公告說週末不施工，租戶提議改到週六——把兩件事連起來才成立。原文從未直接說明這個因果。"},
+{q:"What is the most likely response to the elevator request?",o:["It cannot be granted at that hour","It will be approved without conditions","It requires a fee","It must be made in writing"],a:0,ev:[[0,2,0],[1,1,1]],
+ k:"最難的一題。他想在 5 日早上使用貨梯，而公告寫明每天 8:00–11:00 貨梯保留給施工人員——時間正好衝突，所以答案是不能。這種題只能靠兩份文件的時間交叉比對。"}]};
+
 /* ================= 引擎 ================= */
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const DAY_MS=864e5;
@@ -637,6 +783,9 @@ function loadDay(){
   const p6=PART6[viewDay]||[];
   $("#launch6").textContent=`Part 6 · ${p6.length} 篇短文`;
   $("#launch6").style.display=p6.length?"inline-block":"none";
+  const p7=PART7[viewDay];
+  $("#launch7").textContent=p7?`Part 7 · ${p7.qs.length} 題閱讀`:"Part 7";
+  $("#launch7").style.display=p7?"inline-block":"none";
   $("#endNotice").innerHTML = realDay>DAYS.length
     ? `<div class="notice">目前的單字庫到 Day ${DAYS.length} 為止，你已經走完了。回 Claude 說「補下一批單字」就能延長。在那之前，這裡會停在最後一天讓你複習。</div>`
     : (realDay<1?`<div class="notice">課程從 ${START} 開始，現在顯示的是 Day 1。</div>`:"");
@@ -726,10 +875,17 @@ function drawQ(){
 $("#quiz").addEventListener("click",e=>{
   if(e.target.closest("#close")) return $("#overlay").classList.remove("on");
   if(e.target.closest("#again6")) return startP6();
-  if(e.target.closest("#next2")) return mode==="p6"?nextP6():(qi++,qi<Q.length?drawQ():endQuiz());
+  if(e.target.closest("#again7")) return startP7();
+  if(e.target.closest("#next2")){
+    if(mode==="p6") return nextP6();
+    if(mode==="p7") return nextP7();
+    return (qi++,qi<Q.length?drawQ():endQuiz());
+  }
   if(e.target.closest("#again")) return (buildQuiz(),drawQ());
   const o=e.target.closest(".opt"); if(!o) return;
-  if(mode==="p6") pick6(+o.dataset.k); else if(!answered) pick(o.dataset.o);
+  if(mode==="p6") return pick6(+o.dataset.k);
+  if(mode==="p7") return pick7(+o.dataset.k);
+  if(!answered) pick(o.dataset.o);
 });
 function pick(choice){
   answered=true;
@@ -817,17 +973,78 @@ function endP6(){
    <div class="qfoot"><button class="primary" id="again6">再測一次</button><button class="link" id="close">回到單字卡</button></div>`;
 }
 
-$("#launch").onclick=()=>{mode="p5";$("#quiz").classList.remove("wide");buildQuiz();drawQ();$("#overlay").classList.add("on")};
-$("#launch6").onclick=startP6;
+/* ---------- Part 7 閱讀（附答案出處標示） ---------- */
+let R7=null,ri=0,r7done=false,r7ans=[];
+function startP7(){
+  const d=PART7[viewDay];
+  if(!d) return;
+  mode="p7";R7=d;ri=0;r7ans=[];
+  $("#quiz").classList.remove("wide");$("#quiz").classList.add("reading");
+  $("#overlay").classList.add("on");drawP7();
+}
+function docsHTML(ev){
+  return R7.docs.map((d,di)=>
+    `<div class="doc"><h4>${d.t}</h4><div class="pmeta">${d.m}</div>`+
+    d.p.map((para,pj)=>`<p>${para.map((s,si)=>{
+      const on=ev&&ev.some(e=>e[0]===di&&e[1]===pj&&e[2]===si);
+      return `<span class="sn${on?" ev":""}" id="s${di}-${pj}-${si}">${s}</span>`;
+    }).join(" ")}</p>`).join("")+`</div>`).join("");
+}
+function drawP7(){
+  r7done=false;
+  const q=R7.qs[ri];
+  $("#quiz").innerHTML=`
+   <div class="qtop"><span>${R7.title}　·　第 ${ri+1} / ${R7.qs.length} 題</span>
+   <div class="track"><i style="width:${ri/R7.qs.length*100}%"></i></div>
+   <button class="link" id="close">結束</button></div>
+   <div class="docwrap" id="docwrap">${docsHTML(null)}</div>
+   <p class="qtext">${q.q}</p>
+   <div class="opts">${q.o.map((o,k)=>`<button class="opt" data-k="${k}"><kbd>${k+1}</kbd>${o}</button>`).join("")}</div>
+   <div class="feedback" id="fb"></div><div class="qfoot" id="foot"></div>`;
+}
+function pick7(k){
+  if(r7done) return;
+  r7done=true;
+  const q=R7.qs[ri],ok=k===q.a;
+  r7ans.push({q,ok});
+  $$(".opt").forEach(b=>{b.disabled=true;
+    if(+b.dataset.k===q.a)b.classList.add("right");
+    else if(+b.dataset.k===k)b.classList.add("wrong")});
+  $("#docwrap").innerHTML=docsHTML(q.ev);
+  const first=document.getElementById(`s${q.ev[0][0]}-${q.ev[0][1]}-${q.ev[0][2]}`);
+  if(first) first.scrollIntoView({block:"center",behavior:"smooth"});
+  $("#fb").className="feedback on";
+  $("#fb").innerHTML=`<div><b>${ok?"✓ 正確":"✗ 正解："+q.o[q.a]}</b></div>
+    <div class="zh">${q.k}</div>
+    <div class="evnote">答案依據已在原文中標示${q.ev.length>1?`（共 ${q.ev.length} 處，需跨段落／跨文件對照）`:""}</div>`;
+  $("#foot").innerHTML=`<button class="primary" id="next2">${ri+1<R7.qs.length?"下一題 ›":"看結果"}</button><span class="qhint">按 Enter 繼續</span>`;
+}
+function nextP7(){ if(ri<R7.qs.length-1){ri++;drawP7()} else endP7(); }
+function endP7(){
+  const right=r7ans.filter(x=>x.ok).length,total=R7.qs.length,r=right/total;
+  const allEv=R7.qs.flatMap(q=>q.ev);
+  $("#quiz").innerHTML=`
+   <div class="qtop"><span>Day ${viewDay} · Part 7 結果</span><div class="track"><i style="width:100%"></i></div></div>
+   <div class="score">${right}<span style="font-size:22px;color:#A79C90"> / ${total}</span></div>
+   <p class="qhint">${r>=.9?"閱讀定位很準，這個水準已經接近滿分區。":r>=.6?"大方向對了，把錯的題目回原文重讀一次標示的句子。":"別急，Part 7 錯多半是「沒回原文找」。下面全文已標出所有答案依據，逐句對照一次。"}</p>
+   <p class="evnote">以下全文已標出全部 ${allEv.length} 處答案依據</p>
+   <div class="docwrap" style="max-height:42vh">${docsHTML(allEv)}</div>
+   <div class="wronglist">${r7ans.map((x,i)=>`<div class="wrongitem">${x.ok?"✓":"✗"} 第 ${i+1} 題　<b>${x.q.o[x.q.a]}</b><span>${x.q.k}</span></div>`).join("")}</div>
+   <div class="qfoot"><button class="primary" id="again7">再讀一次</button><button class="link" id="close">回到單字卡</button></div>`;
+}
+
+$("#launch").onclick=()=>{mode="p5";$("#quiz").classList.remove("wide","reading");buildQuiz();drawQ();$("#overlay").classList.add("on")};
+$("#launch6").onclick=()=>{$("#quiz").classList.remove("reading");startP6()};
+$("#launch7").onclick=startP7;
 $("#overlay").addEventListener("click",e=>{if(e.target===$("#overlay"))$("#overlay").classList.remove("on")});
 document.addEventListener("keydown",e=>{
   if(!$("#overlay").classList.contains("on")) return;
   if(e.key==="Escape") return $("#overlay").classList.remove("on");
-  const busy = mode==="p6" ? p6done : answered;
+  const busy = mode==="p6"?p6done : mode==="p7"?r7done : answered;
   if(!busy&&/^[1-4]$/.test(e.key)){const b=$$(".opt")[+e.key-1];
-    if(b) mode==="p6"?pick6(+b.dataset.k):pick(b.dataset.o)}
+    if(b) mode==="p6"?pick6(+b.dataset.k) : mode==="p7"?pick7(+b.dataset.k) : pick(b.dataset.o)}
   else if(busy&&(e.key==="Enter"||e.key===" ")){e.preventDefault();
-    const n=$("#next2")||$("#again")||$("#again6");n&&n.click()}
+    const n=$("#next2")||$("#again")||$("#again6")||$("#again7");n&&n.click()}
 });
 loadDay();
 $("#jump").value=viewDay;
