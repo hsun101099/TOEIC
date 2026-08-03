@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<title>考前計畫 · 11/29 目標 900</title>
+<style>
+:root{
+  color-scheme:light only;
+  --canvas:#FAF6F0; --card:#FFFCF8; --ink:#332E28; --muted:#7C7168; --faint:#A79C90;
+  --line:#EDE4D8; --accent:#3F6B55; --accent-soft:#E7F0EA; --good:#4A7A5F; --good-soft:#E6F1E9;
+  --warn:#9A6318; --warn-soft:#F9EFDF; --r:16px;
+  --shadow:0 1px 2px rgba(94,74,52,.05), 0 8px 24px rgba(94,74,52,.07);
+  --shadow-lift:0 2px 4px rgba(94,74,52,.06), 0 16px 40px rgba(94,74,52,.13);
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--canvas);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter","Segoe UI","PingFang TC","Noto Sans TC",sans-serif;
+  font-size:16.5px;line-height:1.7;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:44px 24px 140px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:6px 12px;border-radius:999px}
+h1{font-size:clamp(29px,5vw,42px);line-height:1.18;letter-spacing:-.03em;font-weight:700;margin:16px 0 8px}
+.sub{color:var(--muted);font-size:16px;max-width:62ch}
+.nav{display:flex;align-items:center;gap:8px;margin-top:22px;flex-wrap:wrap}
+.nav button{border:1px solid var(--line);background:var(--card);border-radius:11px;font:inherit;font-size:13.5px;
+  font-weight:550;padding:8px 14px;cursor:pointer;color:var(--ink);transition:all .22s var(--ease)}
+.nav button:hover:not(:disabled){border-color:#DFD2C0;box-shadow:var(--shadow);transform:translateY(-1px)}
+.nav button:disabled{opacity:.4;cursor:default}
+.nav select{border:1px solid var(--line);background:var(--card);border-radius:11px;font:inherit;font-size:13.5px;
+  font-weight:550;padding:8px 12px;color:var(--ink);cursor:pointer}
+.today{font-size:12.5px;color:var(--faint);margin-left:4px}
+.metrics{display:flex;gap:26px;margin-top:24px;flex-wrap:wrap;align-items:center}
+.metric b{display:block;font-size:21px;font-weight:650;letter-spacing:-.02em}
+.metric span{font-size:12.5px;color:var(--faint)}
+.ring{width:54px;height:54px;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:6;stroke-linecap:round}
+.ring .bg{stroke:var(--line)} .ring .fg{stroke:var(--accent);transition:stroke-dasharray .5s var(--ease)}
+.ringwrap{position:relative;display:grid;place-items:center}
+.ringwrap span{position:absolute;font-size:12px;font-weight:650}
+.spine{margin:34px 0 8px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:22px 24px;box-shadow:var(--shadow)}
+.spine-title{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);font-weight:600}
+.stages{display:flex;align-items:flex-start;margin-top:16px}
+.stage{flex:1;position:relative;padding-right:12px}
+.stage::before{content:"";position:absolute;top:7px;left:0;right:0;height:2px;background:var(--line)}
+.stage:last-child::before{right:calc(100% - 14px)}
+.dot{position:relative;width:14px;height:14px;border-radius:50%;background:var(--card);
+  border:2px solid var(--faint);z-index:1;transition:all .35s var(--ease)}
+.stage.on .dot{border-color:var(--accent);background:var(--accent);box-shadow:0 0 0 5px var(--accent-soft)}
+.stage h3{font-size:14.5px;font-weight:650;margin:12px 0 2px;letter-spacing:-.01em}
+.stage p{font-size:12.5px;color:var(--muted);line-height:1.45}
+.bar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:30px 0 18px;position:sticky;top:0;z-index:20;
+  padding:14px 0;background:linear-gradient(var(--canvas) 72%,rgba(250,246,240,0))}
+.seg{display:flex;background:#F1E8DB;border-radius:12px;padding:4px;gap:2px;overflow-x:auto;max-width:100%}
+.seg button{border:0;background:transparent;color:var(--muted);cursor:pointer;white-space:nowrap;font:inherit;
+  font-size:13.5px;font-weight:550;padding:7px 14px;border-radius:9px;transition:all .22s var(--ease)}
+.seg button:hover{color:var(--ink)}
+.seg button[aria-pressed="true"]{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(94,74,52,.12)}
+.ghost{margin-left:auto;border:1px solid var(--line);background:var(--card);border-radius:11px;font:inherit;
+  font-size:13.5px;font-weight:550;padding:8px 15px;cursor:pointer;color:var(--ink);transition:all .22s var(--ease)}
+.ghost:hover{border-color:#DFD2C0;box-shadow:var(--shadow);transform:translateY(-1px)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);
+  overflow:hidden;transition:box-shadow .3s var(--ease),transform .3s var(--ease),border-color .3s var(--ease);
+  animation:rise .45s var(--ease) both}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.card:hover{box-shadow:var(--shadow-lift);transform:translateY(-2px)}
+.card.known{border-color:#C6D9CB} .card.known .head b{color:var(--good)}
+.head{width:100%;text-align:left;border:0;background:transparent;font:inherit;cursor:pointer;padding:20px 22px;
+  display:flex;gap:12px;align-items:flex-start}
+.head b{font-size:20px;font-weight:650;letter-spacing:-.02em;line-height:1.25}
+.head .zh{font-size:13.5px;color:var(--muted);margin-top:3px}
+.pos{font-size:11px;font-weight:650;color:var(--accent);background:var(--accent-soft);padding:3px 8px;
+  border-radius:6px;flex:none;margin-top:4px}
+.rev{font-size:10.5px;font-weight:650;color:var(--warn);background:var(--warn-soft);padding:3px 7px;
+  border-radius:6px;flex:none;margin-top:4px}
+.chev{margin-left:auto;flex:none;color:var(--faint);transition:transform .3s var(--ease)}
+.card.open .chev{transform:rotate(180deg)}
+.body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .38s var(--ease)}
+.card.open .body{grid-template-rows:1fr}
+.body>div{overflow:hidden}
+.inner{padding:0 22px 22px;border-top:1px solid var(--line);margin-top:2px;padding-top:18px}
+.sent{font-size:16px;line-height:1.75}
+mark{background:linear-gradient(transparent 56%, #F6E1B8 56%);color:inherit;padding:0 1px;font-weight:600}
+.sent-zh{font-size:14px;color:var(--muted);margin-top:7px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.chip{font-size:12.5px;color:#5E5349;background:#F4ECE1;border-radius:7px;padding:4px 9px}
+.tip{margin-top:14px;background:var(--warn-soft);border-radius:11px;padding:11px 13px;font-size:13px;
+  color:#6E4A16;line-height:1.55}
+.acts{display:flex;gap:8px;margin-top:16px}
+.acts button{border:1px solid var(--line);background:var(--card);border-radius:10px;font:inherit;font-size:12.5px;
+  font-weight:550;padding:7px 12px;cursor:pointer;color:var(--muted);transition:all .2s var(--ease)}
+.acts button:hover{color:var(--ink);border-color:#DFD2C0}
+.acts button.mark[data-on="1"]{background:var(--good-soft);border-color:#BCD6C4;color:var(--good)}
+.launch{position:fixed;left:50%;transform:translateX(-50%);bottom:26px;z-index:40;background:var(--accent);
+  color:#FFFCF8;border:0;border-radius:14px;font:inherit;font-size:14.5px;font-weight:600;padding:14px 26px;
+  cursor:pointer;box-shadow:0 8px 26px rgba(63,107,85,.30);transition:all .25s var(--ease)}
+.launch:hover{transform:translateX(-50%) translateY(-2px);box-shadow:0 12px 34px rgba(63,107,85,.36)}
+.overlay{position:fixed;inset:0;background:rgba(250,246,240,.88);backdrop-filter:blur(14px);z-index:50;
+  display:none;place-items:center;padding:20px;animation:fade .3s var(--ease)}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.overlay.on{display:grid}
+.quiz{width:100%;max-width:620px;background:var(--card);border:1px solid var(--line);border-radius:22px;
+  box-shadow:var(--shadow-lift);padding:30px}
+.qtop{display:flex;align-items:center;gap:14px;font-size:12.5px;color:var(--faint);font-weight:550}
+.track{flex:1;height:4px;background:var(--line);border-radius:99px;overflow:hidden}
+.track i{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .4s var(--ease)}
+.qsent{font-size:19px;line-height:1.7;margin:24px 0 6px}
+.blank{display:inline-block;min-width:110px;border-bottom:2px solid var(--accent)}
+.qhint{font-size:13px;color:var(--muted)}
+.opts{display:grid;gap:9px;margin-top:20px}
+.opt{display:flex;align-items:center;gap:12px;text-align:left;width:100%;border:1px solid var(--line);
+  background:var(--card);border-radius:13px;font:inherit;font-size:15px;padding:14px 16px;cursor:pointer;
+  transition:all .2s var(--ease)}
+.opt:hover:not(:disabled){border-color:#BFD4C6;background:#FDFAF5;transform:translateX(2px)}
+.opt kbd{font:inherit;font-size:11.5px;font-weight:650;color:var(--faint);background:#F2E9DD;border-radius:6px;
+  padding:2px 7px;flex:none}
+.opt.right{border-color:#A6C9B2;background:var(--good-soft)}
+.opt.wrong{border-color:#E0BCA6;background:#FAEDE2}
+.opt:disabled{cursor:default}
+.feedback{margin-top:18px;border-radius:13px;padding:15px 16px;background:#F7F0E6;font-size:13.5px;
+  line-height:1.6;display:none}
+.feedback.on{display:block;animation:rise .3s var(--ease)}
+.feedback .zh{color:var(--muted);margin-top:5px}
+.qfoot{display:flex;gap:10px;margin-top:20px;align-items:center}
+.primary{border:0;background:var(--accent);color:#FFFCF8;border-radius:12px;font:inherit;font-size:14px;
+  font-weight:600;padding:12px 22px;cursor:pointer;transition:all .22s var(--ease)}
+.primary:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.link{border:0;background:none;font:inherit;font-size:13px;color:var(--muted);cursor:pointer;padding:8px}
+.link:hover{color:var(--ink)}
+.score{font-size:52px;font-weight:700;letter-spacing:-.03em}
+.wronglist{margin-top:18px;display:grid;gap:8px;max-height:38vh;overflow:auto}
+.wrongitem{border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px}
+.wrongitem span{color:var(--muted);font-size:12.5px;display:block;margin-top:3px}
+.notice{background:var(--warn-soft);border:1px solid #EBD9BC;border-radius:var(--r);padding:16px 18px;
+  font-size:14px;color:#6E4A16;margin-top:20px}
+/* ---- Part 6 ---- */
+.launchbar{position:fixed;left:50%;transform:translateX(-50%);bottom:24px;z-index:40;display:flex;gap:10px}
+.launchbar button{border:0;border-radius:14px;font:inherit;font-size:14px;font-weight:600;padding:13px 20px;
+  cursor:pointer;transition:all .25s var(--ease)}
+.launchbar .p5{background:var(--accent);color:#FFFCF8;box-shadow:0 8px 26px rgba(63,107,85,.30)}
+.launchbar .p6{background:var(--card);color:var(--ink);border:1px solid var(--line);
+  box-shadow:0 8px 26px rgba(94,74,52,.16)}
+.launchbar button:hover{transform:translateY(-2px)}
+.quiz.wide{max-width:760px}
+.passage{background:#FDF9F3;border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:18px 0 4px;
+  max-height:34vh;overflow:auto}
+.pmeta{font-size:12px;color:var(--faint);line-height:1.7;padding-bottom:10px;margin-bottom:12px;
+  border-bottom:1px dashed var(--line)}
+.ptext{font-size:15.5px;line-height:1.95}
+.bl{display:inline-block;min-width:74px;text-align:center;border-bottom:2px solid var(--faint);
+  color:var(--faint);font-size:13px;font-weight:650;transition:all .25s var(--ease)}
+.bl.cur{border-color:var(--accent);color:var(--accent);background:var(--accent-soft);border-radius:5px 5px 0 0}
+.bl.done{border-color:var(--good);color:var(--good);font-weight:550}
+.bl.done.miss{border-color:#C97B4E;color:#B0693F}
+.optlong{font-size:14.5px;line-height:1.5;align-items:flex-start}
+.optlong kbd{margin-top:2px}
+/* ---- Part 7 ---- */
+.quiz.reading{max-width:900px}
+.docwrap{max-height:36vh;overflow:auto;margin:16px 0 6px;padding-right:4px}
+.doc{background:#FDF9F3;border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:12px}
+.doc h4{font-size:14.5px;font-weight:650;letter-spacing:-.01em;margin-bottom:4px}
+.doc p{font-size:15px;line-height:2;margin-bottom:11px}
+.doc p:last-child{margin-bottom:0}
+.sn{transition:background .45s var(--ease),box-shadow .45s var(--ease);border-radius:3px}
+.sn.ev{background:#F7E2B6;box-shadow:inset 0 -2px 0 #CE9F3C;padding:1px 2px}
+.qtext{font-size:16.5px;font-weight:620;line-height:1.6;margin:10px 0 2px;letter-spacing:-.01em}
+.evnote{font-size:12.5px;color:var(--warn);margin-top:12px;font-weight:550}
+.glosshead{font-size:13px;font-weight:650;margin:22px 0 10px;padding-top:18px;border-top:1px solid var(--line);
+  letter-spacing:-.01em}
+.glosshead span{font-weight:500;color:var(--faint);font-size:12px}
+.gloss{display:grid;gap:8px;max-height:34vh;overflow:auto}
+.gitem{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:#FDFBF7}
+.gitem b{font-size:14.5px;font-weight:650}
+.gitem i{font-style:normal;font-size:12.5px;color:var(--accent);background:var(--accent-soft);
+  border-radius:6px;padding:2px 7px;margin-left:8px}
+.gitem span{display:block;color:var(--muted);font-size:12.8px;line-height:1.6;margin-top:6px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
+@media (max-width:600px){
+  .wrap{padding:30px 18px 130px}
+  .stages{flex-direction:column;gap:16px}
+  .stage::before{display:none} .stage{padding-right:0}
+  .quiz{padding:22px 20px;border-radius:18px} .qsent{font-size:17px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.pagenav{display:flex;gap:4px;background:#F1E8DB;border-radius:12px;padding:4px;margin-bottom:26px;
+  width:fit-content;max-width:100%;overflow:auto}
+.pagenav a{text-decoration:none;color:var(--muted);font-size:13.5px;font-weight:550;padding:8px 16px;
+  border-radius:9px;white-space:nowrap;transition:all .22s var(--ease)}
+.pagenav a:hover{color:var(--ink)}
+.pagenav a.on{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(94,74,52,.12)}
+.mem{margin-top:13px;background:var(--accent-soft);border-radius:11px;padding:11px 13px;
+  font-size:13px;color:#2C563F;line-height:1.6}
+.mem b{display:block;font-size:11px;letter-spacing:.06em;color:var(--accent);margin-bottom:4px;
+  font-weight:700}
+.plist{display:grid;gap:14px;margin-top:8px}
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;
+  box-shadow:var(--shadow);cursor:pointer;transition:all .28s var(--ease);animation:rise .45s var(--ease) both}
+.pcard:hover{box-shadow:var(--shadow-lift);transform:translateY(-2px)}
+.pcard h3{font-size:16.5px;font-weight:650;letter-spacing:-.015em}
+.pcard .pm{font-size:12.5px;color:var(--faint);margin-top:4px}
+.pcard .pv{font-size:13.5px;color:var(--muted);margin-top:10px;line-height:1.6}
+.pcard .tag{display:inline-block;font-size:11.5px;font-weight:650;color:var(--accent);
+  background:var(--accent-soft);border-radius:6px;padding:3px 9px;margin-top:12px}
+.startbig{border:0;background:var(--accent);color:#FFFCF8;border-radius:13px;font:inherit;font-size:14.5px;
+  font-weight:600;padding:13px 24px;cursor:pointer;margin-top:22px;
+  box-shadow:0 6px 20px rgba(63,107,85,.24);transition:all .25s var(--ease)}
+.startbig:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(63,107,85,.30)}
+
+.dochead{display:flex;justify-content:flex-end;margin:8px 0 -4px}
+.dochead button{border:1px solid var(--line);background:var(--card);border-radius:9px;font:inherit;
+  font-size:12.5px;font-weight:550;color:var(--muted);padding:5px 11px;cursor:pointer;
+  transition:all .2s var(--ease)}
+.dochead button:hover{color:var(--ink);border-color:#DFD2C0}
+.quiz.docexp .docwrap,.quiz.docexp .passage{max-height:none}
+
+.cd{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:26px 28px;
+  box-shadow:var(--shadow);margin-bottom:20px;display:flex;gap:34px;flex-wrap:wrap;align-items:center}
+.cd .big{font-size:56px;font-weight:700;letter-spacing:-.04em;line-height:1;color:var(--accent)}
+.cd .lbl{font-size:12.5px;color:var(--faint);margin-top:6px}
+.cd .col b{display:block;font-size:21px;font-weight:650;letter-spacing:-.02em}
+.bararea{flex:1;min-width:200px}
+.bararea .t{height:8px;background:#F1E8DB;border-radius:99px;overflow:hidden}
+.bararea .t i{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .6s var(--ease)}
+.bararea .cap{font-size:12.5px;color:var(--muted);margin-top:8px}
+.phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin:26px 0}
+.ph{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;
+  box-shadow:var(--shadow);transition:all .28s var(--ease)}
+.ph:hover{box-shadow:var(--shadow-lift);transform:translateY(-2px)}
+.ph.now{border-color:var(--accent);background:linear-gradient(180deg,var(--accent-soft),var(--card) 60%)}
+.ph h3{font-size:15.5px;font-weight:650;letter-spacing:-.015em}
+.ph .rg{font-size:12px;color:var(--faint);margin-top:3px}
+.ph p{font-size:13.2px;color:var(--muted);line-height:1.65;margin-top:10px}
+.ph .goal{display:inline-block;font-size:12px;font-weight:650;color:var(--accent);
+  background:var(--accent-soft);border-radius:7px;padding:4px 10px;margin-top:12px}
+.sect{font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);
+  font-weight:650;margin:34px 0 14px}
+.wk{background:var(--card);border:1px solid var(--line);border-radius:var(--r);margin-bottom:12px;
+  box-shadow:var(--shadow);overflow:hidden;transition:all .28s var(--ease)}
+.wk.now{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft),var(--shadow)}
+.wk.done{opacity:.62}
+.wkhead{display:flex;align-items:center;gap:13px;padding:17px 20px;cursor:pointer;
+  border:0;background:transparent;font:inherit;width:100%;text-align:left}
+.wkno{flex:none;width:38px;height:38px;border-radius:11px;background:#F4ECE1;color:var(--muted);
+  display:grid;place-items:center;font-size:13px;font-weight:700}
+.wk.now .wkno{background:var(--accent);color:#FFFCF8}
+.wkhead h3{font-size:15.5px;font-weight:650;letter-spacing:-.015em}
+.wkhead .rg{font-size:12px;color:var(--faint);margin-top:2px}
+.badge{font-size:11px;font-weight:650;padding:3px 9px;border-radius:6px;flex:none;
+  background:var(--warn-soft);color:var(--warn);margin-left:auto}
+.badge.now{background:var(--accent-soft);color:var(--accent)}
+.wkbody{display:grid;grid-template-rows:0fr;transition:grid-template-rows .38s var(--ease)}
+.wk.open .wkbody{grid-template-rows:1fr}
+.wkbody>div{overflow:hidden}
+.wkinner{padding:0 20px 20px;border-top:1px solid var(--line);padding-top:16px}
+.wkinner .focus{font-size:13.5px;color:var(--muted);line-height:1.7;margin-bottom:14px}
+.task{display:flex;gap:11px;align-items:flex-start;padding:10px 12px;border-radius:11px;
+  cursor:pointer;transition:background .2s var(--ease)}
+.task:hover{background:#FAF5EE}
+.box{flex:none;width:20px;height:20px;border-radius:6px;border:1.8px solid #D8CCBC;margin-top:2px;
+  display:grid;place-items:center;transition:all .2s var(--ease)}
+.task.on .box{background:var(--accent);border-color:var(--accent)}
+.task.on .box::after{content:"";width:5px;height:9px;border:solid #FFFCF8;border-width:0 2px 2px 0;
+  transform:rotate(45deg) translate(-1px,-1px)}
+.task span{font-size:14px;line-height:1.6}
+.task.on span{color:var(--faint);text-decoration:line-through}
+.wkprog{font-size:12px;color:var(--faint);margin-top:10px;padding-left:12px}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.ic{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:19px 21px;
+  box-shadow:var(--shadow)}
+.ic h4{font-size:14px;font-weight:650;margin-bottom:11px;letter-spacing:-.01em}
+.ic table{width:100%;border-collapse:collapse;font-size:13.2px}
+.ic td{padding:6px 0;border-bottom:1px solid var(--line);color:var(--muted)}
+.ic td:last-child{text-align:right;color:var(--ink);font-weight:600}
+.ic tr:last-child td{border-bottom:0}
+/* ---- 手機版可捲動彈窗 + 固定底部按鈕 ---- */
+.overlay{align-items:center;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.quiz{max-height:calc(100vh - 28px);max-height:calc(100dvh - 28px);overflow-y:auto;
+  -webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.qfoot{position:sticky;bottom:0;z-index:6;margin-top:16px;padding:14px 0 4px;
+  background:linear-gradient(to top,var(--card) 72%,rgba(255,252,248,0))}
+.qtop{position:sticky;top:0;z-index:6;background:var(--card);padding-bottom:10px}
+@media (max-width:640px){
+  .overlay{padding:12px;align-items:flex-start}
+  .quiz,.quiz.wide,.quiz.reading{max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px);
+    padding:18px 16px;border-radius:16px}
+  .docwrap{max-height:48vh}
+  .passage{max-height:42vh}
+  .doc p{line-height:1.88;font-size:15.5px}
+  .ptext{line-height:1.95}
+  .gloss{max-height:none}
+  .qsent{font-size:16px}
+  .qtext{font-size:15.5px}
+  .opt{padding:12px 14px;font-size:14.5px}
+  .optlong{font-size:13.8px}
+  .score{font-size:42px}
+  .launchbar{bottom:16px;gap:8px}
+  .launchbar button{padding:12px 15px;font-size:13px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="pagenav"><a href="plan.html" class='on'>考前計畫</a><a href="index.html">單字 · Part 5</a><a href="part6.html">Part 6 短文填空</a><a href="part7.html">Part 7 閱讀</a></nav>
+  <span class="eyebrow">17 週 · 目標 900+</span>
+  <h1>11/29 考前計畫</h1>
+  <p class="sub">聽力已是強項，這份計畫把資源集中在閱讀。三個階段、十七週、69 項任務，勾選後會自動記住進度。</p>
+
+  <div class="cd">
+    <div><div class="big" id="dleft">—</div><div class="lbl">天後考試 · 11/29（日）</div></div>
+    <div class="col"><b id="wleft">—</b><div class="lbl">剩餘完整週數</div></div>
+    <div class="col"><b id="curw">—</b><div class="lbl">目前進度</div></div>
+    <div class="bararea"><div class="t"><i id="pbar" style="width:0"></i></div>
+      <div class="cap" id="pcap">—</div></div>
+  </div>
+  <div class="phases" id="phases"></div>
+  <div class="info">
+    <div class="ic"><h4>分數目標拆解</h4><table>
+      <tr><td>聽力 Listening</td><td>400 → 470</td></tr>
+      <tr><td>閱讀 Reading</td><td>250 → 430</td></tr>
+      <tr><td>總分</td><td>650 → 900</td></tr>
+      <tr><td>閱讀需提升</td><td>+180 分</td></tr>
+    </table><p style="font-size:12.5px;color:var(--muted);margin-top:11px;line-height:1.6">
+    你的聽力底子好，這 250 分的差距幾乎全在閱讀。所有安排都圍繞這件事。</p></div>
+    <div class="ic"><h4>考場時間分配</h4><table>
+      <tr><td>Part 5（30 題）</td><td>10 分鐘</td></tr>
+      <tr><td>Part 6（16 題）</td><td>8 分鐘</td></tr>
+      <tr><td>Part 7（54 題）</td><td>57 分鐘</td></tr>
+      <tr><td>閱讀總計</td><td>75 分鐘</td></tr>
+    </table><p style="font-size:12.5px;color:var(--muted);margin-top:11px;line-height:1.6">
+    換算下來：Part 5 每題 20 秒、Part 6 每題 30 秒、Part 7 每題 63 秒。超時就跳過。</p></div>
+    <div class="ic"><h4>每日固定節奏</h4><table>
+      <tr><td>平日 22:00 單字</td><td>15 分</td></tr>
+      <tr><td>Part 5 三十題計時</td><td>15 分</td></tr>
+      <tr><td>Part 6 三篇</td><td>15 分</td></tr>
+      <tr><td>Part 7 一組</td><td>15 分</td></tr>
+      <tr><td>通勤零碎聽力</td><td>不計入</td></tr>
+    </table><p style="font-size:12.5px;color:var(--muted);margin-top:11px;line-height:1.6">
+    平日約 60 分鐘，週末各 2.5–3 小時做整套與檢討，一週約 12 小時。</p></div>
+  </div>
+  <div class="sect">十七週任務清單</div>
+  <div id="wklist"></div>
+
+</div>
+<script>
+const EXAM="2026-11-29";
+const PHASES=[[1, "第一階段 · 地基重建", "把字彙與文法系統化，讓 Part 5、6 的錯誤從「不會」變成「不小心」。", "750"], [2, "第二階段 · 題型與速度", "Part 7 拆解成可操作的解題流程，並把閱讀速度推到能做完全卷。", "830"], [3, "第三階段 · 實戰收斂", "每週一次完整模考，只修弱點，把狀態調到考試當天最高點。", "900+"]];
+const WEEKS=[{"n": 1, "ph": 1, "t": "診斷與建立節奏", "f": "先量出真實起點，後面所有調整都靠這組數字。", "from": "08/03", "to": "08/09", "iso": "2026-08-03", "tasks": ["完成一次完整計時模考（聽力 45 分 + 閱讀 75 分，中間不休息）", "記錄閱讀部分「做到第幾題鈴響」，這比分數更重要", "測 Part 7 閱讀速度：一篇單篇計時，算出每分鐘字數（WPM）", "確認 11/29 場次已報名並完成繳費", "把每天 22:00 的單字時段固定下來，連續七天不中斷"], "ms": null}, {"n": 2, "ph": 1, "t": "Part 5 詞性與字尾", "f": "先把「看字尾就知道詞性」變成反射，Part 5 有三分之一靠這個。", "from": "08/10", "to": "08/16", "iso": "2026-08-10", "tasks": ["整理名詞／形容詞／副詞常見字尾各 20 個，寫成一頁", "Part 5 每天 30 題計時，記錄平均每題秒數", "錯題只問一件事：為什麼另外三個不能選", "週末做 60 題詞性專項，目標正確率 85%"], "ms": null}, {"n": 3, "ph": 1, "t": "動詞時態與語態", "f": "時態題答案幾乎都藏在時間副詞裡，養成先找時間線索的習慣。", "from": "08/17", "to": "08/23", "iso": "2026-08-17", "tasks": ["複習 12 時態 + 被動語態，各寫 3 個自己的例句", "假設語氣與 that 子句原形動詞（stipulate/require/recommend 類）專項", "Part 5 每天 30 題，平均秒數目標降到 22 秒以內", "週末做 60 題動詞專項"], "ms": null}, {"n": 4, "ph": 1, "t": "介系詞、連接詞、關係詞", "f": "這三類是 Part 5 剩下的大宗，也是 Part 6 的基礎。", "from": "08/24", "to": "08/30", "iso": "2026-08-24", "tasks": ["整理易混介系詞組（by/until、for/during/while、in/on/at 時間用法）", "連接詞 vs 介系詞 vs 副詞的三欄對照表（because/because of/therefore）", "Part 5 每天 30 題，開始要求 20 秒內完成", "週末：把前三週所有錯題重做一次"], "ms": null}, {"n": 5, "ph": 1, "t": "Part 6 文脈與插入句", "f": "Part 6 難的不是空格，是前後句的邏輯關係。", "from": "08/31", "to": "09/06", "iso": "2026-08-31", "tasks": ["每天 3 篇 Part 6，插入句題單獨標記出來檢討", "整理轉折訊號詞清單（however / therefore / in addition / nevertheless）", "練習：只讀空格前後兩句，能不能選對？不能就代表要讀整段", "週末做 5 篇 Part 6，目標 20 題錯 3 題以內"], "ms": null}, {"n": 6, "ph": 1, "t": "階段驗收", "f": "第一階段結束，用一次完整模考檢查地基。", "from": "09/07", "to": "09/13", "iso": "2026-09-07", "tasks": ["完成第二次完整計時模考", "對照第一次：閱讀多做了幾題？Part 5 秒數降了多少？", "把兩次模考的錯題分類：字彙／文法／速度／粗心，算出各佔幾成", "依比例決定第二階段要加重哪一塊"], "ms": {"name": "模考 2", "target": "目標 750"}}, {"n": 7, "ph": 2, "t": "Part 7 單篇：題型定位", "f": "Part 7 不是從頭讀到尾，是帶著題目回去找。", "from": "09/14", "to": "09/20", "iso": "2026-09-14", "tasks": ["學會五大題型：主旨、細節、推論、NOT、字義", "每天 1 篇單篇，先讀題再讀文，記錄找答案花了幾秒", "所有答案都要能指出原文出處在第幾段第幾句", "週末：連續 5 篇單篇，每篇限時 4 分鐘"], "ms": null}, {"n": 8, "ph": 2, "t": "Part 7 推論與 NOT 題", "f": "這兩類最耗時，也是 800 以上的分水嶺。", "from": "09/21", "to": "09/27", "iso": "2026-09-21", "tasks": ["推論題訓練：原文沒明說，但可以百分之百推出的才是答案", "NOT 題訓練：用刪去法，三個找得到出處的就是錯的", "每天 1 篇，專挑含推論題的文章", "週末：整理十道推論題的錯誤選項，看 ETS 怎麼設陷阱"], "ms": null}, {"n": 9, "ph": 2, "t": "Part 7 雙篇：跨文件比對", "f": "答案拆成兩半藏在兩份文件裡，這是拉分關鍵。", "from": "09/28", "to": "10/04", "iso": "2026-09-28", "tasks": ["每天 1 組雙篇，特別留意「兩份文件都要看」的題目", "訓練畫線習慣：第一份提到的條件，到第二份找對應", "常見組合：公告＋回信、廣告＋訂單、行程＋確認信", "週末：3 組雙篇連做，每組限時 9 分鐘"], "ms": null}, {"n": 10, "ph": 2, "t": "Part 7 三篇 + 期中驗收", "f": "三篇是新制最難的區塊，也是最後 50 分的所在。", "from": "10/05", "to": "10/11", "iso": "2026-10-05", "tasks": ["每天 1 組三篇，習慣資訊分散在三個地方", "完成第三次完整計時模考", "檢查：閱讀是否已能全部做完？做不完差幾題？", "錯題重讀，只看原文出處那幾句"], "ms": {"name": "模考 3", "target": "目標 800"}}, {"n": 11, "ph": 2, "t": "閱讀速度衝刺", "f": "知識夠了，剩下的是速度。這週只練快。", "from": "10/12", "to": "10/18", "iso": "2026-10-12", "tasks": ["每天測一次 WPM，目標推到 150 字／分鐘", "不回讀訓練：讀完一句不許往回看，逼自己一次讀懂", "Part 5 秒數壓到 18 秒／題，Part 6 壓到 28 秒／題", "週末：閱讀部分單獨計時 75 分鐘，看能否提前 3 分鐘做完"], "ms": null}, {"n": 12, "ph": 2, "t": "階段驗收", "f": "第二階段結束，這時應該已經能做完整份閱讀。", "from": "10/19", "to": "10/25", "iso": "2026-10-19", "tasks": ["完成第四次完整計時模考", "統計三次模考的閱讀完成題數變化", "把仍然會錯的題型列成清單，這就是第三階段的專攻名單", "聽力若低於 450，開始加入每日 15 分鐘精聽"], "ms": {"name": "模考 4", "target": "目標 830"}}, {"n": 13, "ph": 3, "t": "全套模考 + 錯題歸類", "f": "進入實戰期，每週一次完整模考成為固定節奏。", "from": "10/26", "to": "11/01", "iso": "2026-10-26", "tasks": ["完成第五次模考，嚴格按考試時間", "建立錯題本：只記「為什麼會錯」，不抄題目", "重做第二階段所有錯題，重複錯的標星號", "調整作息：把讀書時間往考試時段（上午）靠"], "ms": null}, {"n": 14, "ph": 3, "t": "聽力補強 Part 3／4", "f": "閱讀穩住後，聽力每多 20 分都是淨賺。", "from": "11/02", "to": "11/08", "iso": "2026-11-02", "tasks": ["Part 3／4 每天 10 題，答錯的做逐句聽寫", "訓練「先讀題目再聽」，三題預覽時間壓在 10 秒內", "通勤全程英文播客，不查字典只求耳朵習慣", "完成第六次模考"], "ms": {"name": "模考 5", "target": "目標 870"}}, {"n": 15, "ph": 3, "t": "弱點題型專攻", "f": "不再全面練習，只打還在漏分的地方。", "from": "11/09", "to": "11/15", "iso": "2026-11-09", "tasks": ["依錯題本挑出前三名弱點題型，各做 30 題", "重複錯三次以上的單字整理成一頁，貼在看得到的地方", "Part 7 維持每天 1 組，保持手感即可", "檢查作答策略：哪一部分該放棄猜答、哪一部分必須全對"], "ms": null}, {"n": 16, "ph": 3, "t": "最後模考與考場節奏", "f": "這是最後一次全力模考，之後只做維持。", "from": "11/16", "to": "11/22", "iso": "2026-11-16", "tasks": ["完成第七次模考，這次的分數最接近真實表現", "演練考場時間分配：Part 5 十分鐘、Part 6 八分鐘、Part 7 五十七分鐘", "練習劃卡節奏：每做完一個 Part 立刻劃卡，不留到最後", "確認考試當天交通、證件、文具"], "ms": {"name": "模考 6", "target": "目標 900"}}, {"n": 17, "ph": 3, "t": "收斂複習", "f": "不練新題，只把已經會的變得更穩。", "from": "11/23", "to": "11/29", "iso": "2026-11-23", "tasks": ["每天只複習錯題本與單字，不做新題", "考前三天完全不碰模考，避免信心受挫", "考前一天：只看筆記，晚上十一點前睡", "考試當天：提前 40 分鐘到場，先做十題暖身"], "ms": null}];
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const store={
+  get(){try{return JSON.parse(localStorage.getItem("toeicPlan")||"{}")}catch(e){return this._m||{}}},
+  set(v){this._m=v;try{localStorage.setItem("toeicPlan",JSON.stringify(v))}catch(e){}}
+};
+let done=store.get();
+const today=new Date(), t0=new Date(today.getFullYear(),today.getMonth(),today.getDate());
+const exam=new Date(EXAM+"T00:00:00");
+const dleft=Math.max(0,Math.round((exam-t0)/864e5));
+let curWeek=WEEKS.length;
+for(const w of WEEKS){const a=new Date(w.iso+"T00:00:00");
+  if(t0>=a&&t0<new Date(a.getTime()+7*864e5)){curWeek=w.n;break}
+  if(t0<a){curWeek=w.n;break}}
+const total=WEEKS.reduce((a,w)=>a+w.tasks.length,0);
+function doneCount(){return Object.values(done).filter(Boolean).length}
+function paint(){
+  $("#dleft").textContent=dleft;
+  $("#wleft").textContent=Math.ceil(dleft/7)+" 週";
+  $("#curw").textContent="第 "+curWeek+" 週";
+  const d=doneCount();
+  $("#pbar").style.width=(d/total*100)+"%";
+  $("#pcap").textContent=`任務完成 ${d} / ${total}（${Math.round(d/total*100)}%）`;
+}
+$("#phases").innerHTML=PHASES.map(([n,t,d,g])=>{
+  const ws=WEEKS.filter(w=>w.ph===n), on=ws.some(w=>w.n===curWeek);
+  return `<article class="ph ${on?"now":""}"><h3>${t}</h3>
+    <div class="rg">第 ${ws[0].n}–${ws[ws.length-1].n} 週　·　${ws[0].from} – ${ws[ws.length-1].to}</div>
+    <p>${d}</p><span class="goal">階段目標 ${g}</span></article>`}).join("");
+function renderWeeks(){
+  $("#wklist").innerHTML=WEEKS.map(w=>{
+    const dn=w.tasks.filter((_,i)=>done[w.n+"-"+i]).length;
+    const isNow=w.n===curWeek, isPast=w.n<curWeek;
+    return `<section class="wk ${isNow?"now open":""} ${isPast&&dn===w.tasks.length?"done":""}" data-w="${w.n}">
+      <button class="wkhead"><div class="wkno">W${w.n}</div>
+        <div><h3>${w.t}</h3><div class="rg">${w.from} – ${w.to}${w.ms?"　·　"+w.ms.name:""}</div></div>
+        ${w.ms?`<span class="badge">${w.ms.target}</span>`:(isNow?`<span class="badge now">本週</span>`:"")}
+      </button>
+      <div class="wkbody"><div><div class="wkinner">
+        <p class="focus">${w.f}</p>
+        ${w.tasks.map((t,i)=>`<div class="task ${done[w.n+"-"+i]?"on":""}" data-k="${w.n}-${i}">
+          <div class="box"></div><span>${t}</span></div>`).join("")}
+        <div class="wkprog">已完成 ${dn} / ${w.tasks.length}</div>
+      </div></div></div></section>`}).join("");
+  paint();
+}
+$("#wklist").addEventListener("click",e=>{
+  const tk=e.target.closest(".task");
+  if(tk){const k=tk.dataset.k;done[k]=!done[k];store.set(done);
+    tk.classList.toggle("on",done[k]);
+    const wk=tk.closest(".wk"),n=+wk.dataset.w,W=WEEKS[n-1];
+    wk.querySelector(".wkprog").textContent=`已完成 ${W.tasks.filter((_,i)=>done[n+"-"+i]).length} / ${W.tasks.length}`;
+    paint();return}
+  const h=e.target.closest(".wkhead");
+  if(h)h.closest(".wk").classList.toggle("open");
+});
+renderWeeks();
+const cur=document.querySelector(".wk.now");
+if(cur&&curWeek>2)setTimeout(()=>cur.scrollIntoView({block:"center",behavior:"smooth"}),400);
+
+</script>
+</body>
+</html>

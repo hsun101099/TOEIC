@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<title>Part 6 短文填空｜多益每日訓練</title>
+<style>
+:root{
+  color-scheme:light only;
+  --canvas:#FAF6F0; --card:#FFFCF8; --ink:#332E28; --muted:#7C7168; --faint:#A79C90;
+  --line:#EDE4D8; --accent:#3F6B55; --accent-soft:#E7F0EA; --good:#4A7A5F; --good-soft:#E6F1E9;
+  --warn:#9A6318; --warn-soft:#F9EFDF; --r:16px;
+  --shadow:0 1px 2px rgba(94,74,52,.05), 0 8px 24px rgba(94,74,52,.07);
+  --shadow-lift:0 2px 4px rgba(94,74,52,.06), 0 16px 40px rgba(94,74,52,.13);
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--canvas);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter","Segoe UI","PingFang TC","Noto Sans TC",sans-serif;
+  font-size:16.5px;line-height:1.7;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:44px 24px 140px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:6px 12px;border-radius:999px}
+h1{font-size:clamp(29px,5vw,42px);line-height:1.18;letter-spacing:-.03em;font-weight:700;margin:16px 0 8px}
+.sub{color:var(--muted);font-size:16px;max-width:62ch}
+.nav{display:flex;align-items:center;gap:8px;margin-top:22px;flex-wrap:wrap}
+.nav button{border:1px solid var(--line);background:var(--card);border-radius:11px;font:inherit;font-size:13.5px;
+  font-weight:550;padding:8px 14px;cursor:pointer;color:var(--ink);transition:all .22s var(--ease)}
+.nav button:hover:not(:disabled){border-color:#DFD2C0;box-shadow:var(--shadow);transform:translateY(-1px)}
+.nav button:disabled{opacity:.4;cursor:default}
+.nav select{border:1px solid var(--line);background:var(--card);border-radius:11px;font:inherit;font-size:13.5px;
+  font-weight:550;padding:8px 12px;color:var(--ink);cursor:pointer}
+.today{font-size:12.5px;color:var(--faint);margin-left:4px}
+.metrics{display:flex;gap:26px;margin-top:24px;flex-wrap:wrap;align-items:center}
+.metric b{display:block;font-size:21px;font-weight:650;letter-spacing:-.02em}
+.metric span{font-size:12.5px;color:var(--faint)}
+.ring{width:54px;height:54px;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:6;stroke-linecap:round}
+.ring .bg{stroke:var(--line)} .ring .fg{stroke:var(--accent);transition:stroke-dasharray .5s var(--ease)}
+.ringwrap{position:relative;display:grid;place-items:center}
+.ringwrap span{position:absolute;font-size:12px;font-weight:650}
+.spine{margin:34px 0 8px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:22px 24px;box-shadow:var(--shadow)}
+.spine-title{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);font-weight:600}
+.stages{display:flex;align-items:flex-start;margin-top:16px}
+.stage{flex:1;position:relative;padding-right:12px}
+.stage::before{content:"";position:absolute;top:7px;left:0;right:0;height:2px;background:var(--line)}
+.stage:last-child::before{right:calc(100% - 14px)}
+.dot{position:relative;width:14px;height:14px;border-radius:50%;background:var(--card);
+  border:2px solid var(--faint);z-index:1;transition:all .35s var(--ease)}
+.stage.on .dot{border-color:var(--accent);background:var(--accent);box-shadow:0 0 0 5px var(--accent-soft)}
+.stage h3{font-size:14.5px;font-weight:650;margin:12px 0 2px;letter-spacing:-.01em}
+.stage p{font-size:12.5px;color:var(--muted);line-height:1.45}
+.bar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:30px 0 18px;position:sticky;top:0;z-index:20;
+  padding:14px 0;background:linear-gradient(var(--canvas) 72%,rgba(250,246,240,0))}
+.seg{display:flex;background:#F1E8DB;border-radius:12px;padding:4px;gap:2px;overflow-x:auto;max-width:100%}
+.seg button{border:0;background:transparent;color:var(--muted);cursor:pointer;white-space:nowrap;font:inherit;
+  font-size:13.5px;font-weight:550;padding:7px 14px;border-radius:9px;transition:all .22s var(--ease)}
+.seg button:hover{color:var(--ink)}
+.seg button[aria-pressed="true"]{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(94,74,52,.12)}
+.ghost{margin-left:auto;border:1px solid var(--line);background:var(--card);border-radius:11px;font:inherit;
+  font-size:13.5px;font-weight:550;padding:8px 15px;cursor:pointer;color:var(--ink);transition:all .22s var(--ease)}
+.ghost:hover{border-color:#DFD2C0;box-shadow:var(--shadow);transform:translateY(-1px)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);
+  overflow:hidden;transition:box-shadow .3s var(--ease),transform .3s var(--ease),border-color .3s var(--ease);
+  animation:rise .45s var(--ease) both}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.card:hover{box-shadow:var(--shadow-lift);transform:translateY(-2px)}
+.card.known{border-color:#C6D9CB} .card.known .head b{color:var(--good)}
+.head{width:100%;text-align:left;border:0;background:transparent;font:inherit;cursor:pointer;padding:20px 22px;
+  display:flex;gap:12px;align-items:flex-start}
+.head b{font-size:20px;font-weight:650;letter-spacing:-.02em;line-height:1.25}
+.head .zh{font-size:13.5px;color:var(--muted);margin-top:3px}
+.pos{font-size:11px;font-weight:650;color:var(--accent);background:var(--accent-soft);padding:3px 8px;
+  border-radius:6px;flex:none;margin-top:4px}
+.rev{font-size:10.5px;font-weight:650;color:var(--warn);background:var(--warn-soft);padding:3px 7px;
+  border-radius:6px;flex:none;margin-top:4px}
+.chev{margin-left:auto;flex:none;color:var(--faint);transition:transform .3s var(--ease)}
+.card.open .chev{transform:rotate(180deg)}
+.body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .38s var(--ease)}
+.card.open .body{grid-template-rows:1fr}
+.body>div{overflow:hidden}
+.inner{padding:0 22px 22px;border-top:1px solid var(--line);margin-top:2px;padding-top:18px}
+.sent{font-size:16px;line-height:1.75}
+mark{background:linear-gradient(transparent 56%, #F6E1B8 56%);color:inherit;padding:0 1px;font-weight:600}
+.sent-zh{font-size:14px;color:var(--muted);margin-top:7px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.chip{font-size:12.5px;color:#5E5349;background:#F4ECE1;border-radius:7px;padding:4px 9px}
+.tip{margin-top:14px;background:var(--warn-soft);border-radius:11px;padding:11px 13px;font-size:13px;
+  color:#6E4A16;line-height:1.55}
+.acts{display:flex;gap:8px;margin-top:16px}
+.acts button{border:1px solid var(--line);background:var(--card);border-radius:10px;font:inherit;font-size:12.5px;
+  font-weight:550;padding:7px 12px;cursor:pointer;color:var(--muted);transition:all .2s var(--ease)}
+.acts button:hover{color:var(--ink);border-color:#DFD2C0}
+.acts button.mark[data-on="1"]{background:var(--good-soft);border-color:#BCD6C4;color:var(--good)}
+.launch{position:fixed;left:50%;transform:translateX(-50%);bottom:26px;z-index:40;background:var(--accent);
+  color:#FFFCF8;border:0;border-radius:14px;font:inherit;font-size:14.5px;font-weight:600;padding:14px 26px;
+  cursor:pointer;box-shadow:0 8px 26px rgba(63,107,85,.30);transition:all .25s var(--ease)}
+.launch:hover{transform:translateX(-50%) translateY(-2px);box-shadow:0 12px 34px rgba(63,107,85,.36)}
+.overlay{position:fixed;inset:0;background:rgba(250,246,240,.88);backdrop-filter:blur(14px);z-index:50;
+  display:none;place-items:center;padding:20px;animation:fade .3s var(--ease)}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.overlay.on{display:grid}
+.quiz{width:100%;max-width:620px;background:var(--card);border:1px solid var(--line);border-radius:22px;
+  box-shadow:var(--shadow-lift);padding:30px}
+.qtop{display:flex;align-items:center;gap:14px;font-size:12.5px;color:var(--faint);font-weight:550}
+.track{flex:1;height:4px;background:var(--line);border-radius:99px;overflow:hidden}
+.track i{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .4s var(--ease)}
+.qsent{font-size:19px;line-height:1.7;margin:24px 0 6px}
+.blank{display:inline-block;min-width:110px;border-bottom:2px solid var(--accent)}
+.qhint{font-size:13px;color:var(--muted)}
+.opts{display:grid;gap:9px;margin-top:20px}
+.opt{display:flex;align-items:center;gap:12px;text-align:left;width:100%;border:1px solid var(--line);
+  background:var(--card);border-radius:13px;font:inherit;font-size:15px;padding:14px 16px;cursor:pointer;
+  transition:all .2s var(--ease)}
+.opt:hover:not(:disabled){border-color:#BFD4C6;background:#FDFAF5;transform:translateX(2px)}
+.opt kbd{font:inherit;font-size:11.5px;font-weight:650;color:var(--faint);background:#F2E9DD;border-radius:6px;
+  padding:2px 7px;flex:none}
+.opt.right{border-color:#A6C9B2;background:var(--good-soft)}
+.opt.wrong{border-color:#E0BCA6;background:#FAEDE2}
+.opt:disabled{cursor:default}
+.feedback{margin-top:18px;border-radius:13px;padding:15px 16px;background:#F7F0E6;font-size:13.5px;
+  line-height:1.6;display:none}
+.feedback.on{display:block;animation:rise .3s var(--ease)}
+.feedback .zh{color:var(--muted);margin-top:5px}
+.qfoot{display:flex;gap:10px;margin-top:20px;align-items:center}
+.primary{border:0;background:var(--accent);color:#FFFCF8;border-radius:12px;font:inherit;font-size:14px;
+  font-weight:600;padding:12px 22px;cursor:pointer;transition:all .22s var(--ease)}
+.primary:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.link{border:0;background:none;font:inherit;font-size:13px;color:var(--muted);cursor:pointer;padding:8px}
+.link:hover{color:var(--ink)}
+.score{font-size:52px;font-weight:700;letter-spacing:-.03em}
+.wronglist{margin-top:18px;display:grid;gap:8px;max-height:38vh;overflow:auto}
+.wrongitem{border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px}
+.wrongitem span{color:var(--muted);font-size:12.5px;display:block;margin-top:3px}
+.notice{background:var(--warn-soft);border:1px solid #EBD9BC;border-radius:var(--r);padding:16px 18px;
+  font-size:14px;color:#6E4A16;margin-top:20px}
+/* ---- Part 6 ---- */
+.launchbar{position:fixed;left:50%;transform:translateX(-50%);bottom:24px;z-index:40;display:flex;gap:10px}
+.launchbar button{border:0;border-radius:14px;font:inherit;font-size:14px;font-weight:600;padding:13px 20px;
+  cursor:pointer;transition:all .25s var(--ease)}
+.launchbar .p5{background:var(--accent);color:#FFFCF8;box-shadow:0 8px 26px rgba(63,107,85,.30)}
+.launchbar .p6{background:var(--card);color:var(--ink);border:1px solid var(--line);
+  box-shadow:0 8px 26px rgba(94,74,52,.16)}
+.launchbar button:hover{transform:translateY(-2px)}
+.quiz.wide{max-width:760px}
+.passage{background:#FDF9F3;border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:18px 0 4px;
+  max-height:34vh;overflow:auto}
+.pmeta{font-size:12px;color:var(--faint);line-height:1.7;padding-bottom:10px;margin-bottom:12px;
+  border-bottom:1px dashed var(--line)}
+.ptext{font-size:15.5px;line-height:1.95}
+.bl{display:inline-block;min-width:74px;text-align:center;border-bottom:2px solid var(--faint);
+  color:var(--faint);font-size:13px;font-weight:650;transition:all .25s var(--ease)}
+.bl.cur{border-color:var(--accent);color:var(--accent);background:var(--accent-soft);border-radius:5px 5px 0 0}
+.bl.done{border-color:var(--good);color:var(--good);font-weight:550}
+.bl.done.miss{border-color:#C97B4E;color:#B0693F}
+.optlong{font-size:14.5px;line-height:1.5;align-items:flex-start}
+.optlong kbd{margin-top:2px}
+/* ---- Part 7 ---- */
+.quiz.reading{max-width:900px}
+.docwrap{max-height:36vh;overflow:auto;margin:16px 0 6px;padding-right:4px}
+.doc{background:#FDF9F3;border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:12px}
+.doc h4{font-size:14.5px;font-weight:650;letter-spacing:-.01em;margin-bottom:4px}
+.doc p{font-size:15px;line-height:2;margin-bottom:11px}
+.doc p:last-child{margin-bottom:0}
+.sn{transition:background .45s var(--ease),box-shadow .45s var(--ease);border-radius:3px}
+.sn.ev{background:#F7E2B6;box-shadow:inset 0 -2px 0 #CE9F3C;padding:1px 2px}
+.qtext{font-size:16.5px;font-weight:620;line-height:1.6;margin:10px 0 2px;letter-spacing:-.01em}
+.evnote{font-size:12.5px;color:var(--warn);margin-top:12px;font-weight:550}
+.glosshead{font-size:13px;font-weight:650;margin:22px 0 10px;padding-top:18px;border-top:1px solid var(--line);
+  letter-spacing:-.01em}
+.glosshead span{font-weight:500;color:var(--faint);font-size:12px}
+.gloss{display:grid;gap:8px;max-height:34vh;overflow:auto}
+.gitem{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:#FDFBF7}
+.gitem b{font-size:14.5px;font-weight:650}
+.gitem i{font-style:normal;font-size:12.5px;color:var(--accent);background:var(--accent-soft);
+  border-radius:6px;padding:2px 7px;margin-left:8px}
+.gitem span{display:block;color:var(--muted);font-size:12.8px;line-height:1.6;margin-top:6px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
+@media (max-width:600px){
+  .wrap{padding:30px 18px 130px}
+  .stages{flex-direction:column;gap:16px}
+  .stage::before{display:none} .stage{padding-right:0}
+  .quiz{padding:22px 20px;border-radius:18px} .qsent{font-size:17px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.pagenav{display:flex;gap:4px;background:#F1E8DB;border-radius:12px;padding:4px;margin-bottom:26px;
+  width:fit-content;max-width:100%;overflow:auto}
+.pagenav a{text-decoration:none;color:var(--muted);font-size:13.5px;font-weight:550;padding:8px 16px;
+  border-radius:9px;white-space:nowrap;transition:all .22s var(--ease)}
+.pagenav a:hover{color:var(--ink)}
+.pagenav a.on{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(94,74,52,.12)}
+.mem{margin-top:13px;background:var(--accent-soft);border-radius:11px;padding:11px 13px;
+  font-size:13px;color:#2C563F;line-height:1.6}
+.mem b{display:block;font-size:11px;letter-spacing:.06em;color:var(--accent);margin-bottom:4px;
+  font-weight:700}
+.plist{display:grid;gap:14px;margin-top:8px}
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;
+  box-shadow:var(--shadow);cursor:pointer;transition:all .28s var(--ease);animation:rise .45s var(--ease) both}
+.pcard:hover{box-shadow:var(--shadow-lift);transform:translateY(-2px)}
+.pcard h3{font-size:16.5px;font-weight:650;letter-spacing:-.015em}
+.pcard .pm{font-size:12.5px;color:var(--faint);margin-top:4px}
+.pcard .pv{font-size:13.5px;color:var(--muted);margin-top:10px;line-height:1.6}
+.pcard .tag{display:inline-block;font-size:11.5px;font-weight:650;color:var(--accent);
+  background:var(--accent-soft);border-radius:6px;padding:3px 9px;margin-top:12px}
+.startbig{border:0;background:var(--accent);color:#FFFCF8;border-radius:13px;font:inherit;font-size:14.5px;
+  font-weight:600;padding:13px 24px;cursor:pointer;margin-top:22px;
+  box-shadow:0 6px 20px rgba(63,107,85,.24);transition:all .25s var(--ease)}
+.startbig:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(63,107,85,.30)}
+
+.dochead{display:flex;justify-content:flex-end;margin:8px 0 -4px}
+.dochead button{border:1px solid var(--line);background:var(--card);border-radius:9px;font:inherit;
+  font-size:12.5px;font-weight:550;color:var(--muted);padding:5px 11px;cursor:pointer;
+  transition:all .2s var(--ease)}
+.dochead button:hover{color:var(--ink);border-color:#DFD2C0}
+.quiz.docexp .docwrap,.quiz.docexp .passage{max-height:none}
+
+.cd{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:26px 28px;
+  box-shadow:var(--shadow);margin-bottom:20px;display:flex;gap:34px;flex-wrap:wrap;align-items:center}
+.cd .big{font-size:56px;font-weight:700;letter-spacing:-.04em;line-height:1;color:var(--accent)}
+.cd .lbl{font-size:12.5px;color:var(--faint);margin-top:6px}
+.cd .col b{display:block;font-size:21px;font-weight:650;letter-spacing:-.02em}
+.bararea{flex:1;min-width:200px}
+.bararea .t{height:8px;background:#F1E8DB;border-radius:99px;overflow:hidden}
+.bararea .t i{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .6s var(--ease)}
+.bararea .cap{font-size:12.5px;color:var(--muted);margin-top:8px}
+.phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin:26px 0}
+.ph{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;
+  box-shadow:var(--shadow);transition:all .28s var(--ease)}
+.ph:hover{box-shadow:var(--shadow-lift);transform:translateY(-2px)}
+.ph.now{border-color:var(--accent);background:linear-gradient(180deg,var(--accent-soft),var(--card) 60%)}
+.ph h3{font-size:15.5px;font-weight:650;letter-spacing:-.015em}
+.ph .rg{font-size:12px;color:var(--faint);margin-top:3px}
+.ph p{font-size:13.2px;color:var(--muted);line-height:1.65;margin-top:10px}
+.ph .goal{display:inline-block;font-size:12px;font-weight:650;color:var(--accent);
+  background:var(--accent-soft);border-radius:7px;padding:4px 10px;margin-top:12px}
+.sect{font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);
+  font-weight:650;margin:34px 0 14px}
+.wk{background:var(--card);border:1px solid var(--line);border-radius:var(--r);margin-bottom:12px;
+  box-shadow:var(--shadow);overflow:hidden;transition:all .28s var(--ease)}
+.wk.now{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft),var(--shadow)}
+.wk.done{opacity:.62}
+.wkhead{display:flex;align-items:center;gap:13px;padding:17px 20px;cursor:pointer;
+  border:0;background:transparent;font:inherit;width:100%;text-align:left}
+.wkno{flex:none;width:38px;height:38px;border-radius:11px;background:#F4ECE1;color:var(--muted);
+  display:grid;place-items:center;font-size:13px;font-weight:700}
+.wk.now .wkno{background:var(--accent);color:#FFFCF8}
+.wkhead h3{font-size:15.5px;font-weight:650;letter-spacing:-.015em}
+.wkhead .rg{font-size:12px;color:var(--faint);margin-top:2px}
+.badge{font-size:11px;font-weight:650;padding:3px 9px;border-radius:6px;flex:none;
+  background:var(--warn-soft);color:var(--warn);margin-left:auto}
+.badge.now{background:var(--accent-soft);color:var(--accent)}
+.wkbody{display:grid;grid-template-rows:0fr;transition:grid-template-rows .38s var(--ease)}
+.wk.open .wkbody{grid-template-rows:1fr}
+.wkbody>div{overflow:hidden}
+.wkinner{padding:0 20px 20px;border-top:1px solid var(--line);padding-top:16px}
+.wkinner .focus{font-size:13.5px;color:var(--muted);line-height:1.7;margin-bottom:14px}
+.task{display:flex;gap:11px;align-items:flex-start;padding:10px 12px;border-radius:11px;
+  cursor:pointer;transition:background .2s var(--ease)}
+.task:hover{background:#FAF5EE}
+.box{flex:none;width:20px;height:20px;border-radius:6px;border:1.8px solid #D8CCBC;margin-top:2px;
+  display:grid;place-items:center;transition:all .2s var(--ease)}
+.task.on .box{background:var(--accent);border-color:var(--accent)}
+.task.on .box::after{content:"";width:5px;height:9px;border:solid #FFFCF8;border-width:0 2px 2px 0;
+  transform:rotate(45deg) translate(-1px,-1px)}
+.task span{font-size:14px;line-height:1.6}
+.task.on span{color:var(--faint);text-decoration:line-through}
+.wkprog{font-size:12px;color:var(--faint);margin-top:10px;padding-left:12px}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.ic{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:19px 21px;
+  box-shadow:var(--shadow)}
+.ic h4{font-size:14px;font-weight:650;margin-bottom:11px;letter-spacing:-.01em}
+.ic table{width:100%;border-collapse:collapse;font-size:13.2px}
+.ic td{padding:6px 0;border-bottom:1px solid var(--line);color:var(--muted)}
+.ic td:last-child{text-align:right;color:var(--ink);font-weight:600}
+.ic tr:last-child td{border-bottom:0}
+/* ---- 手機版可捲動彈窗 + 固定底部按鈕 ---- */
+.overlay{align-items:center;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.quiz{max-height:calc(100vh - 28px);max-height:calc(100dvh - 28px);overflow-y:auto;
+  -webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.qfoot{position:sticky;bottom:0;z-index:6;margin-top:16px;padding:14px 0 4px;
+  background:linear-gradient(to top,var(--card) 72%,rgba(255,252,248,0))}
+.qtop{position:sticky;top:0;z-index:6;background:var(--card);padding-bottom:10px}
+@media (max-width:640px){
+  .overlay{padding:12px;align-items:flex-start}
+  .quiz,.quiz.wide,.quiz.reading{max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px);
+    padding:18px 16px;border-radius:16px}
+  .docwrap{max-height:48vh}
+  .passage{max-height:42vh}
+  .doc p{line-height:1.88;font-size:15.5px}
+  .ptext{line-height:1.95}
+  .gloss{max-height:none}
+  .qsent{font-size:16px}
+  .qtext{font-size:15.5px}
+  .opt{padding:12px 14px;font-size:14.5px}
+  .optlong{font-size:13.8px}
+  .score{font-size:42px}
+  .launchbar{bottom:16px;gap:8px}
+  .launchbar button{padding:12px 15px;font-size:13px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="pagenav"><a href="plan.html">考前計畫</a><a href="index.html">單字 · Part 5</a><a href="part6.html" class='on'>Part 6 短文填空</a><a href="part7.html">Part 7 閱讀</a></nav>
+  <span class="eyebrow" id="eyebrow">Day 01</span>
+  <h1 id="theme">—</h1>
+  <p class="sub" id="story">—</p>
+
+  <div class="nav">
+    <button id="prev">‹ 前一天</button>
+    <select id="jump"></select>
+    <button id="next">後一天 ›</button>
+    <button id="backToday" style="display:none">回到今天</button>
+    <span class="today" id="dateLabel"></span>
+  </div>
+
+  <div class="plist" id="plist"></div>
+  <button class="startbig" id="startAll">依序作答全部短文 ›</button>
+  <div id="endNotice"></div>
+</div>
+<div class="overlay" id="overlay"><div class="quiz" id="quiz"></div></div>
+<script>
+const DAYS=[{"n": 1, "theme": "一紙合約的誕生", "story": "一筆生意從報價到履約的完整流程。照順序讀，你記住的是劇情，不是單字表。"}, {"n": 2, "theme": "一個職缺的旅程", "story": "從貼出徵才啟事到新人報到，這是多益 Part 4、Part 7 出現頻率最高的場景之一。"}, {"n": 3, "theme": "一場會議的前後", "story": "從發出議程到會後追蹤——Part 3 對話與 Part 4 通知幾乎有三分之一落在這個場景。"}, {"n": 4, "theme": "一趟出差的全程", "story": "訂票、登機、住宿、報帳——多益最愛的旅行場景，Part 2 到 Part 7 通吃。"}, {"n": 5, "theme": "一箱貨的旅程", "story": "下單、出貨、缺件、退換——Part 7 的採購信與物流通知，幾乎全在這批字裡。"}, {"n": 6, "theme": "一份財報背後", "story": "營收、成本、稽核、擴張——圖表題與商業新聞最常出現的一批字。"}, {"n": 7, "theme": "一個顧客的來去", "story": "從被廣告吸引到申訴退款，這條線把行銷與客服兩個高頻場景串在一起。"}, {"n": 8, "theme": "一棟辦公樓的日常", "story": "施工、故障、公告、改道——Part 4 的廣播通知與 Part 7 的公告信最愛這批字。"}];const PART6={};
+PART6[1]=[
+{t:"Email · 報價回覆",m:"To: R. Lin｜From: Sales Department｜Subject: Your recent request",
+ x:"Thank you for your recent {1} about our conference tables. A written quotation is attached for your review. Our pricing remains highly {2} compared with other regional suppliers. The delivery date shown is {3}; we will confirm it once your order is placed. {4}",
+ q:[{o:["inquiry","inquire","inquiring","inquired"],a:0,k:"your recent ___ about 需要名詞，inquire 是動詞。"},
+    {o:["competitive","competent","competitor","competition"],a:0,k:"修飾 pricing 要形容詞「有競爭力的」；competent 是「能勝任的」，用在人身上。"},
+    {o:["tentative","mandatory","defective","eligible"],a:0,k:"分號後說「下單後再確認」，代表日期尚未定案＝暫定的。"},
+    {o:["Please let us know if you would like to proceed.","We regret that the item is no longer available.","Your refund has been processed in full.","The renovation will begin next Monday."],a:0,k:"全文停在報價階段，結尾應邀請對方推進；退款、缺貨、施工都與情境無關。"}]},
+{t:"Memo · 合約條款提醒",m:"To: All project leads｜From: Legal｜Subject: Supplier agreements",
+ x:"Before signing, please note that the standard agreement {1} that all invoices be settled within thirty days. We will not {2} this requirement for new suppliers. Once executed, the document is legally {3} on both parties. {4}",
+ q:[{o:["stipulates","stipulate","stipulating","stipulation"],a:0,k:"主詞 the standard agreement 是單數，動詞加 s。"},
+    {o:["waive","waiver","waived","waiving"],a:0,k:"will not 後面接原形動詞。waiver 是名詞。"},
+    {o:["binding","bound","binder","bind"],a:0,k:"legally ___ on both parties，需形容詞 binding（具約束力的）。"},
+    {o:["Contact the legal team if you need an exception.","Refunds are available within fourteen days.","The shuttle departs every twenty minutes.","All merchandise is now thirty percent off."],a:0,k:"前句剛說「不予免除」，接著提供例外的申請管道最自然。"}]},
+{t:"Letter · 終止通知",m:"To: Bradford Supply Co.｜From: Operations｜Subject: Notice of termination",
+ x:"We are writing to {1} our agreement dated March 4, effective sixty days from today. Repeated late deliveries constitute a {2} of the terms we agreed upon. Under the contract, a {3} may also be imposed for each delayed shipment. {4}",
+ q:[{o:["terminate","termination","terminated","terminating"],a:0,k:"to 後面接原形動詞。"},
+    {o:["breach","break","broken","breaking"],a:0,k:"固定搭配 a breach of the terms；break 的名詞不用在這個位置。"},
+    {o:["penalty","penalize","penalized","penal"],a:0,k:"a ___ may be imposed，冠詞 a 後面要名詞。"},
+    {o:["We remain open to discussing a revised arrangement.","Please bring a photo ID to the front desk.","Your subscription will renew automatically.","The orientation session begins at nine."],a:0,k:"終止信結尾留一個轉圜空間最合理；其餘三句屬完全不同場景。"}]}];
+
+PART6[2]=[
+{t:"Notice · 職缺公告",m:"Human Resources Department｜Internal posting",
+ x:"The department is currently accepting applications for one {1} in the accounting team. {2} must submit a résumé and two professional references. Candidates who meet all required {3} will be contacted for an interview. {4}",
+ q:[{o:["vacancy","vacancies","vacant","vacantly"],a:0,k:"one 後面接單數可數名詞。vacant 是形容詞。"},
+    {o:["Applicants","Applications","Applying","Applied"],a:0,k:"submit 的主詞必須是人；application 是文件不能提交文件。"},
+    {o:["qualifications","qualified","qualify","qualifying"],a:0,k:"all required ___ 需要名詞複數。"},
+    {o:["Interviews are expected to begin in early March.","All refunds are subject to approval.","The elevator passed its annual inspection.","Please retain your boarding pass."],a:0,k:"公告最後補上時程最合理；其餘與招募無關。"}]},
+{t:"Email · 錄取通知",m:"To: J. Watanabe｜From: HR｜Subject: Offer of employment",
+ x:"We are pleased to offer you the position of marketing associate. Your {1} package includes health insurance and an annual bonus. All new hires serve a three-month {2} period, during which performance is reviewed monthly. Attendance at the new employee orientation on July 3 is {3}. {4}",
+ q:[{o:["compensation","compensate","compensated","compensating"],a:0,k:"Your ___ package 是複合名詞，前面要名詞當修飾語。"},
+    {o:["probation","promotion","provision","projection"],a:0,k:"three-month ___ period 加上「每月考核」＝試用期。"},
+    {o:["mandatory","tentative","lucrative","durable"],a:0,k:"Attendance ... is ___，語意是「必須出席」。"},
+    {o:["Please confirm your acceptance by June 20.","The warehouse will be closed for inventory.","A courier will collect the documents at four.","Air freight costs more than sea freight."],a:0,k:"錄取信結尾要求回覆確認最合理。"}]},
+{t:"Memo · 人事異動",m:"To: All staff｜From: Office of the President",
+ x:"After twelve years with the company, our regional director has decided to {1} at the end of this quarter. A reception will be held on Friday to celebrate his {2}. In the meantime, Ms. Alvarez has been {3} to interim director. {4}",
+ q:[{o:["resign","recruit","relocate","restock"],a:0,k:"後文辦歡送會＋任命代理人，只有「辭職」說得通。"},
+    {o:["retirement","renewal","referral","reservation"],a:0,k:"服務十二年後離開並辦餐會，語意指向退休。"},
+    {o:["promoted","promoting","promotion","promote"],a:0,k:"has been ___ to，被動語態要用過去分詞。"},
+    {o:["Please join us in congratulating her.","Refunds will be issued within five days.","The corridor must remain clear at all times.","Sales projections appear overly optimistic."],a:0,k:"承接升任消息，恭賀是最自然的收尾。"}]}];
+
+PART6[3]=[
+{t:"Email · 會議通知",m:"To: Planning committee｜From: E. Duarte｜Subject: Thursday meeting",
+ x:"Attached please find the {1} for Thursday's planning meeting. Because the third-floor room is under renovation, the {2} has been changed to Room 210. All {3} are asked to review the attached figures beforehand. {4}",
+ q:[{o:["agenda","minutes","handout","itinerary"],a:0,k:"會前寄出的是議程；minutes 是會後紀錄，itinerary 用於旅行。"},
+    {o:["venue","vacancy","vicinity","voucher"],a:0,k:"因施工而更改的是地點＝venue。"},
+    {o:["attendees","attendance","attendant","attending"],a:0,k:"All ___ are asked，主詞要能被要求的「人」的複數。"},
+    {o:["Please confirm your attendance by Wednesday noon.","The shipment arrived two days ahead of schedule.","Your warranty covers parts for two years.","Smoking is prohibited on the premises."],a:0,k:"會議通知結尾請對方回覆出席最合理。"}]},
+{t:"Notice · 會議延期",m:"Internal announcement｜Quarterly review",
+ x:"The quarterly review originally scheduled for May 8 has been {1} until May 22. Several board members will be traveling that week, so the committee could not {2} as planned. {3} results from the first quarter are already available on the shared drive. {4}",
+ q:[{o:["postponed","adjourned","promoted","dispatched"],a:0,k:"改到更晚的日期＝postpone；adjourn 是「當場休會」，用法不同。"},
+    {o:["convene","confirm","comply","curtail"],a:0,k:"委員會無法「召開」，convene 是開會的專用動詞。"},
+    {o:["Preliminary","Preliminarily","Preliminaries","Preliminary-"],a:0,k:"修飾名詞 results 要用形容詞。"},
+    {o:["A revised agenda will be circulated next week.","Please attach all original receipts.","The east entrance is wheelchair accessible.","Points can be redeemed for gift cards."],a:0,k:"延期公告後續應交代新的議程安排。"}]},
+{t:"Memo · 會後追蹤",m:"To: Design team｜From: Project lead｜Subject: Follow-up",
+ x:"Thank you all for a productive session. After nearly two hours of discussion, the team finally reached a {1} on the new packaging design. The vote was {2}, with no objections recorded. Please review the {3} attached to this message and report any corrections. {4}",
+ q:[{o:["consensus","concession","conference","condition"],a:0,k:"reach a consensus 是固定搭配，意為達成共識。"},
+    {o:["unanimous","tentative","mandatory","faulty"],a:0,k:"後半句說「無人反對」，投票結果是一致通過。"},
+    {o:["minutes","minute","agenda","itinerary"],a:0,k:"會後隨信附上的是會議紀錄，複數形 minutes 才有這個意思。"},
+    {o:["A follow-up meeting will be held next Friday.","All applicants must provide two references.","The hotel offers a complimentary breakfast.","Freight charges are calculated by weight."],a:0,k:"會後備忘錄以下次會議時間收尾最自然。"}]}];
+
+PART6[4]=[
+{t:"Email · 出差行程",m:"To: M. Okafor｜From: Travel desk｜Subject: Osaka conference",
+ x:"Your travel {1} for the Osaka conference is attached. You will {2} from Terminal 2 at 8:15 a.m. and have a two-hour {3} in Seoul before your connecting flight. A hotel shuttle will meet you at arrivals. {4}",
+ q:[{o:["itinerary","inventory","inquiry","invoice"],a:0,k:"附上的旅行文件是行程表。"},
+    {o:["depart","departure","departed","departing"],a:0,k:"will 後面接原形動詞。"},
+    {o:["layover","leftover","turnover","handout"],a:0,k:"轉機前的停留時間＝layover。"},
+    {o:["Please keep all receipts for reimbursement.","The vacancy will be posted internally first.","Our pricing remains highly competitive.","The committee will convene at nine sharp."],a:0,k:"出差通知結尾提醒保留單據報帳最合理。"}]},
+{t:"Notice · 飯店住客須知",m:"Harborview Hotel｜Guest information",
+ x:"Thank you for choosing the Harborview Hotel. All guests enjoy a {1} breakfast served from six to ten. Additional {2}, including the fitness center and rooftop pool, are open around the clock. Several restaurants are located in the {3} of the hotel. {4}",
+ q:[{o:["complimentary","complementary","complimented","compliment"],a:0,k:"陷阱組：complimentary（免費招待的）vs complementary（互補的），只差一個字母。"},
+    {o:["amenities","amendments","attendees","allowances"],a:0,k:"健身房與泳池屬於飯店設施 amenities。"},
+    {o:["vicinity","venue","vacancy","voucher"],a:0,k:"固定搭配 in the vicinity of ＝ 在…附近。"},
+    {o:["Ask the front desk for a map of the area.","Defective merchandise may be returned for a refund.","The audit is scheduled for the end of the quarter.","New hires serve a three-month probation period."],a:0,k:"承接「附近有餐廳」，請櫃檯拿地圖最連貫。"}]},
+{t:"Memo · 差旅報帳規定",m:"To: All staff｜From: Finance｜Subject: Expense claims",
+ x:"Employees traveling on company business will be {1} for reasonable expenses. Original {2} must be attached to the expense report and submitted within two weeks of your return. {3} submission helps the finance team close each month on time. {4}",
+ q:[{o:["reimbursed","reimbursing","reimbursement","reimburse"],a:0,k:"will be ___ 是被動語態，要用過去分詞。"},
+    {o:["receipts","recipes","recipients","receipt"],a:0,k:"報帳附的是收據；recipe 是食譜、recipient 是收件人。"},
+    {o:["Prompt","Promptly","Promptness","Prompted"],a:0,k:"修飾名詞 submission 要用形容詞 Prompt。"},
+    {o:["Contact accounting with any questions about eligible expenses.","The merger is expected to close by June.","Access to the server room is restricted.","A celebrity endorsement boosted sales overnight."],a:0,k:"規定類備忘錄以「有問題請洽某單位」收尾是標準寫法。"}]}];
+
+PART6[5]=[
+{t:"Email · 出貨通知",m:"To: Customer｜From: Fulfillment｜Subject: Order #48213",
+ x:"Your order was {1} from our Denver warehouse this morning. The {2} should arrive within three business days, and you may track it using the number below. If any item is {3} on arrival, please contact us within seven days. {4}",
+ q:[{o:["dispatched","dispatch","dispatching","dispatcher"],a:0,k:"was ___ 是被動語態，要用過去分詞。"},
+    {o:["shipment","shipping","ship","shipper"],a:0,k:"The ___ should arrive，抵達的是「這批貨」。shipping 指運送這件事，不會抵達。"},
+    {o:["defective","defect","defectively","defected"],a:0,k:"be 動詞後接形容詞描述商品狀態。"},
+    {o:["A replacement will be sent at no additional cost.","The fiscal year closes on September 30.","All attendees will receive a copy of the handouts.","Smoking is prohibited on the premises."],a:0,k:"承接「商品有瑕疵請聯絡」，補上補救方式最連貫。"}]},
+{t:"Notice · 缺貨通知",m:"To: Valued customer｜Subject: Item availability",
+ x:"We regret to inform you that the model you ordered is currently on {1}. A recent {2} of components has delayed production at our supplier. We expect to {3} the item by the end of the month. {4}",
+ q:[{o:["backorder","backordered","backordering","backorders"],a:0,k:"固定片語 on backorder，不加 s。"},
+    {o:["shortage","surplus","margin","deficit"],a:0,k:"零件「短缺」才會導致停產；surplus 是過剩，語意相反。"},
+    {o:["restock","restocked","restocking","restocks"],a:0,k:"expect to 後面接原形動詞。"},
+    {o:["You may cancel your order at any time for a full refund.","Interviews are expected to begin in early March.","The venue has been changed to Room 210.","Points may be redeemed for gift cards."],a:0,k:"缺貨通知應給顧客一個出口——取消並退款。"}]},
+{t:"Memo · 盤點差異",m:"To: Warehouse team｜From: Operations｜Subject: Inventory count",
+ x:"During last week's count, staff found a {1} between our records and the physical inventory. Please review all invoices issued since April and report any errors {2}. Until the review is complete, no {3} orders will be dispatched. {4}",
+ q:[{o:["discrepancy","consensus","concession","projection"],a:0,k:"a ___ between A and B 是 discrepancy 的固定用法。"},
+    {o:["promptly","prompt","promptness","prompted"],a:0,k:"修飾動詞 report 要用副詞。"},
+    {o:["wholesale","durable","faulty","courteous"],a:0,k:"與 orders 搭配成「批發訂單」；其餘形容詞語意都不通。"},
+    {o:["We appreciate your cooperation during this process.","Your subscription includes unlimited access.","The reception will be held on Friday.","Air freight costs more than sea freight."],a:0,k:"內部備忘錄要求配合後，以感謝配合收尾最標準。"}]}];
+
+PART6[6]=[
+{t:"Email · 預算調整",m:"To: Department heads｜From: Finance｜Subject: Q3 budget",
+ x:"The finance committee has {1} an additional sum to product development for next quarter. Because {2} on office supplies fell sharply, the funds were available without raising the overall budget. Sales {3} for the coming year remain conservative. {4}",
+ q:[{o:["allocated","allocation","allocating","allocate"],a:0,k:"has ___ 是現在完成式，要用過去分詞。"},
+    {o:["expenditure","expensive","expend","expended"],a:0,k:"Because 後面缺主詞，需要名詞。"},
+    {o:["projections","projecting","projected","project"],a:0,k:"Sales ___ remain，主詞要名詞複數才配 remain。"},
+    {o:["A detailed breakdown is attached for your review.","Please bring a photo ID to the front desk.","The lobby will be closed during the renovation.","A courier will collect the documents at four."],a:0,k:"預算信附上明細供檢視，是最合理的收尾。"}]},
+{t:"Notice · 年度稽核",m:"To: All staff｜From: Controller｜Subject: External audit",
+ x:"An external {1} will take place during the first week of October. Staff should ensure that all {2} balances are recorded accurately before then. The {3} year closes on September 30. {4}",
+ q:[{o:["audit","auditor","audited","auditing"],a:0,k:"An external ___ will take place，需要單數可數名詞指這件事本身；auditor 是人。"},
+    {o:["outstanding","outstandingly","outstand","stood"],a:0,k:"帳務語境的 outstanding balance ＝ 未付餘額。"},
+    {o:["fiscal","fiscally","finance","fiscality"],a:0,k:"固定搭配 fiscal year ＝ 會計年度。"},
+    {o:["Please direct any questions to the controller's office.","Members earn points on every purchase.","The shuttle runs between the hotel and airport.","Boxes must not be left in the corridor."],a:0,k:"通知類公告以「有疑問請洽某單位」結束是慣例。"}]},
+{t:"Press release · 併購案",m:"For immediate release｜Corporate communications",
+ x:"The board today announced a {1} with Halden Industries, expected to close in June. The combined group will operate more than twenty {2} across three continents. Analysts have described the deal as highly {3} for both parties. {4}",
+ q:[{o:["merger","merge","merged","merging"],a:0,k:"announced a ___，冠詞 a 後面要名詞。"},
+    {o:["subsidiaries","subsidies","subsidiary","subsidized"],a:0,k:"twenty 後接複數名詞；subsidy 是補助金，意思不同。"},
+    {o:["lucrative","durable","tentative","courteous"],a:0,k:"形容一筆交易「極為有利可圖」用 lucrative。"},
+    {o:["Shareholders will vote on the proposal next month.","All original receipts must be attached.","The orientation session begins at nine.","Access is restricted to IT staff."],a:0,k:"併購新聞稿的下一步通常是股東投票。"}]}];
+
+PART6[7]=[
+{t:"Email · 行銷活動",m:"To: Marketing team｜From: Director｜Subject: Summer campaign",
+ x:"Our summer advertising {1} launches on June 1. This year we are targeting a younger {2} through social media rather than print. Early data suggest that demand will {3} last year's figures. {4}",
+ q:[{o:["campaign","campaigns","campaigned","campaigning"],a:0,k:"單數動詞 launches 對應單數主詞。"},
+    {o:["demographic","demography","demographically","demographics"],a:0,k:"a younger ___ 指「某一年輕客群」，用單數名詞。"},
+    {o:["exceed","exceeds","exceeded","exceeding"],a:0,k:"will 後面接原形動詞。"},
+    {o:["The full media plan is attached for your comments.","Please retain your receipt for reimbursement.","The elevator passed its annual inspection.","Your order was dispatched this morning."],a:0,k:"對內的行銷信件以附上完整計畫、徵詢意見收尾最自然。"}]},
+{t:"Notice · 會員方案",m:"Customer information｜Rewards program",
+ x:"Members of our {1} program earn points on every purchase. Points may be {2} for gift cards or store credit at any location. Please note that promotional codes issued this spring are {3} only until December 31. {4}",
+ q:[{o:["loyalty","loyal","loyally","loyalist"],a:0,k:"loyalty program 是固定複合名詞。"},
+    {o:["redeemed","redeem","redeeming","redemption"],a:0,k:"may be ___ 是被動語態，要用過去分詞。"},
+    {o:["valid","validate","validity","validly"],a:0,k:"be 動詞後接形容詞 valid（有效的）。"},
+    {o:["Visit our website to check your current balance.","The committee could not convene as planned.","Original specifications are listed in Appendix B.","A shortage of raw materials delayed production."],a:0,k:"會員通知收尾導向查詢點數的管道最合理。"}]},
+{t:"Email · 客訴回覆",m:"To: Ms. Feldman｜From: Customer Care｜Subject: Your recent experience",
+ x:"Thank you for bringing this matter to our attention. We are sorry that your recent {1} was not handled promptly by our store team. The issue has now been {2}, and a full {3} has been credited to your account. {4}",
+ q:[{o:["complaint","complain","complaining","complainant"],a:0,k:"your recent ___ 需要名詞；complain 是動詞。"},
+    {o:["resolved","resolve","resolving","resolution"],a:0,k:"has been ___ 是被動完成式，要用過去分詞。"},
+    {o:["refund","refunded","refunding","refundable"],a:0,k:"a full ___ has been credited，冠詞後要名詞。"},
+    {o:["We hope you will give us another opportunity to serve you.","The merger is expected to close by the end of June.","Vehicles must not obstruct the emergency exit.","All attendees should review the figures beforehand."],a:0,k:"客訴道歉信的標準收尾是希望再有服務機會。"}]}];
+
+PART6[8]=[
+{t:"Notice · 大廳施工",m:"Building management｜Notice to all tenants",
+ x:"Please be advised that {1} work on the main lobby begins Monday. During this period the front entrance will be {2} closed, and visitors should use the east door instead. Work is already {3} on the north wing. {4}",
+ q:[{o:["renovation","renovate","renovated","renovating"],a:0,k:"___ work 是複合名詞，前面要名詞當修飾語。"},
+    {o:["temporarily","temporary","temporariness","temporal"],a:0,k:"修飾形容詞 closed 要用副詞。"},
+    {o:["underway","under","underneath","undergone"],a:0,k:"be 動詞後接 underway 表示「進行中」。"},
+    {o:["We apologize for any inconvenience this may cause.","Points can be redeemed for gift cards.","The quotation is attached for your review.","New hires are evaluated after three months."],a:0,k:"施工公告的固定收尾句，是多益公告題的高頻答案。"}]},
+{t:"Memo · 週六停電",m:"To: All tenants｜From: Building manager｜Subject: Power interruption",
+ x:"The management office has {1} all tenants of a scheduled power interruption this Saturday. Routine {2} of the backup generators will take approximately four hours. A {3} circuit board discovered last month has since been replaced. {4}",
+ q:[{o:["notified","notify","notifying","notification"],a:0,k:"has ___ 是現在完成式，用過去分詞。notify sb of sth 是固定用法。"},
+    {o:["maintenance","maintain","maintained","maintaining"],a:0,k:"Routine ___ of，形容詞後面要名詞。"},
+    {o:["faulty","fault","faultless","faultily"],a:0,k:"修飾名詞 circuit board 要用形容詞；faultless 意思相反。"},
+    {o:["Please save your work before leaving on Friday.","Applicants must submit two professional references.","The layover in Seoul lasts about two hours.","Wholesale prices are offered to registered retailers."],a:0,k:"停電通知最實用的提醒就是事先存檔。"}]},
+{t:"Notice · 門禁調整",m:"Security update｜Effective immediately",
+ x:"Access to the storage area {1} to the loading dock is now {2} to authorized staff only. Vehicles parked overnight must not {3} the emergency exit at any time. {4}",
+ q:[{o:["adjacent","adjacently","adjoin","adjacency"],a:0,k:"the area ___ to the dock，形容詞片語後置修飾名詞；固定搭配 adjacent to。"},
+    {o:["restricted","restricting","restriction","restrict"],a:0,k:"is now ___ to 是被動語態，要用過去分詞。"},
+    {o:["obstruct","obstruction","obstructed","obstructing"],a:0,k:"must not 後面接原形動詞。"},
+    {o:["Contact the janitor if you require access outside business hours.","A free replacement will be sent within five days.","The board holds a quarterly meeting each year.","Our pricing remains highly competitive."],a:0,k:"門禁公告應提供例外情況的聯絡方式。"}]}];
+
+
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const START="2026-08-01", DAY_MS=864e5;
+function dayNumber(){const s=new Date(START+"T00:00:00"),n=new Date();
+  const t=new Date(n.getFullYear(),n.getMonth(),n.getDate());return Math.floor((t-s)/DAY_MS)+1}
+const realDay=dayNumber(), homeDay=Math.min(Math.max(realDay,1),DAYS.length);
+let viewDay=homeDay;
+function chrome(){
+  const day=DAYS[viewDay-1];
+  $("#eyebrow").textContent=`Day ${String(viewDay).padStart(2,"0")}`;
+  $("#theme").textContent=day.theme;
+  $("#story").textContent=day.story;
+  $("#prev").disabled=viewDay<=1; $("#next").disabled=viewDay>=DAYS.length;
+  $("#backToday").style.display=viewDay===homeDay?"none":"inline-block";
+  const d=new Date(); $("#dateLabel").textContent=`今天是 ${d.getMonth()+1}/${d.getDate()}`;
+  $("#jump").value=viewDay;
+}
+function go(n){viewDay=n;load();scrollTo({top:0,behavior:"smooth"})}
+$("#prev").onclick=()=>go(viewDay-1);
+$("#next").onclick=()=>go(viewDay+1);
+$("#backToday").onclick=()=>go(homeDay);
+$("#jump").innerHTML=DAYS.map(d=>`<option value="${d.n}">Day ${String(d.n).padStart(2,"0")} · ${d.theme}</option>`).join("");
+$("#jump").onchange=e=>go(+e.target.value);
+const esc=t=>t.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+
+let mode="p6",P6=[],pi=0,qj=0,p6ans=[],p6done=false,docExp=false;
+function load(){
+  chrome();
+  const set=PART6[viewDay]||[];
+  $("#eyebrow").textContent=`Day ${String(viewDay).padStart(2,"0")} · Part 6 短文填空`;
+  $("#story").textContent="每篇 4 格：3 格字彙文法 + 1 格插入句。插入句題只能靠前後文邏輯判斷，是 Part 6 最關鍵的題型。";
+  $("#plist").innerHTML=set.map((p,i)=>`
+    <article class="pcard" data-i="${i}"><h3>${p.t}</h3><div class="pm">${p.m}</div>
+      <div class="pv">${esc(p.x).replace(/\{[1-4]\}/g,'<span style="color:#3F6B55;font-weight:650">____</span>').slice(0,110)}…</div>
+      <span class="tag">4 格　·　含插入句題</span></article>`).join("");
+  $("#startAll").style.display=set.length?"inline-block":"none";
+  $("#endNotice").innerHTML = set.length?"":`<div class="notice">這一天還沒有 Part 6 短文。</div>`;
+}
+function startP6(from){const set=PART6[viewDay];if(!set||!set.length)return;
+  P6=set;pi=from||0;qj=0;p6ans=P6.map(p=>p.q.map(()=>null));
+  $("#quiz").classList.add("wide");$("#overlay").classList.add("on");drawP6()}
+function p6Passage(){const p=P6[pi];
+  return p.x.replace(/\{([1-4])\}/g,(m,n)=>{const k=+n-1,st=p6ans[pi][k];
+    let cls="bl",label="("+n+")";
+    if(st){cls="bl done"+(st.ok?"":" miss");if(st.txt.length<=16)label=st.txt}
+    else if(k===qj)cls="bl cur";
+    return '<span class="'+cls+'">'+label+'</span>'})}
+function drawP6(){p6done=false;
+  const p=P6[pi],q=p.q[qj],total=P6.reduce((a,b)=>a+b.q.length,0),doneN=p6ans.flat().filter(Boolean).length;
+  const isSent=q.o[0].length>28;
+  $("#quiz").innerHTML=`<div class="qtop"><span>短文 ${pi+1} / ${P6.length}　·　第 ${qj+1} 格</span>
+   <div class="track"><i style="width:${doneN/total*100}%"></i></div><button class="link" id="close">結束</button></div>
+   <div style="display:flex;align-items:center;gap:10px;margin-top:12px">
+     <div style="font-size:15px;font-weight:650">${p.t}</div>
+     <button id="expandDoc" style="margin-left:auto;border:1px solid var(--line);background:var(--card);
+       border-radius:9px;font:inherit;font-size:12.5px;font-weight:550;color:var(--muted);
+       padding:5px 11px;cursor:pointer">${docExp?"⤡ 收合":"⤢ 展開全文"}</button>
+   </div>
+   <div class="passage"><div class="pmeta">${p.m}</div><div class="ptext">${p6Passage()}</div></div>
+   <p class="qhint" style="margin-top:12px">${isSent?"這是插入句題——選出最適合填入 ("+(qj+1)+") 的句子":"選出最適合填入 ("+(qj+1)+") 的答案"}</p>
+   <div class="opts">${q.o.map((o,k)=>`<button class="opt${isSent?" optlong":""}" data-k="${k}"><kbd>${k+1}</kbd>${o}</button>`).join("")}</div>
+   <div class="feedback" id="fb"></div><div class="qfoot" id="foot"></div>`;
+  $("#quiz").classList.toggle("docexp",docExp)}
+function pick6(k){if(p6done)return;p6done=true;
+  const p=P6[pi],q=p.q[qj],ok=k===q.a;p6ans[pi][qj]={ok,txt:q.o[q.a]};
+  $$(".opt").forEach(b=>{b.disabled=true;if(+b.dataset.k===q.a)b.classList.add("right");
+    else if(+b.dataset.k===k)b.classList.add("wrong")});
+  $("#fb").className="feedback on";
+  $("#fb").innerHTML=`<div><b>${ok?"✓ 正確":"✗ 正解："+q.o[q.a]}</b></div><div class="zh">${q.k}</div>`;
+  const last=(pi===P6.length-1&&qj===p.q.length-1);
+  $("#foot").innerHTML=`<button class="primary" id="next2">${last?"看結果":(qj===p.q.length-1?"下一篇 ›":"下一格 ›")}</button><span class="qhint">按 Enter 繼續</span>`;
+  requestAnimationFrame(()=>{const q=$("#quiz");if(q)q.scrollTo({top:q.scrollHeight,behavior:"smooth"})});
+  const pt=document.querySelector(".ptext");if(pt)pt.innerHTML=p6Passage()}
+function nextP6(){const p=P6[pi];
+  if(qj<p.q.length-1){qj++;drawP6()}else if(pi<P6.length-1){pi++;qj=0;drawP6()}else endP6()}
+function endP6(){const flat=p6ans.flat(),right=flat.filter(x=>x&&x.ok).length,total=flat.length,r=right/total;
+  const wrongs=[];P6.forEach((p,a)=>p.q.forEach((q,b)=>{if(p6ans[a][b]&&!p6ans[a][b].ok)wrongs.push({p,q,n:b+1})}));
+  $("#quiz").innerHTML=`<div class="qtop"><span>Day ${viewDay} · Part 6 結果</span><div class="track"><i style="width:100%"></i></div></div>
+   <div class="score">${right}<span style="font-size:22px;color:#A79C90"> / ${total}</span></div>
+   <p class="qhint">${r>=.9?"文脈判斷很穩，這是 Part 6 最難練的一塊。":r>=.7?"字彙沒問題，把錯的插入句題再看一次前後邏輯。":"Part 6 靠的是前後句關係，不是單看空格。把解析逐條讀過再測一次。"}</p>
+   ${wrongs.length?`<div class="wronglist">${wrongs.map(w=>`<div class="wrongitem"><b>${w.p.t}</b>　第 ${w.n} 格<span>正解：${w.q.o[w.q.a]}　·　${w.q.k}</span></div>`).join("")}</div>`:""}
+   <div class="qfoot"><button class="primary" id="again6">再測一次</button><button class="link" id="close">回到列表</button></div>`}
+$("#plist").addEventListener("click",e=>{const c=e.target.closest(".pcard");if(c)startP6(+c.dataset.i)});
+$("#startAll").onclick=()=>startP6(0);
+$("#quiz").addEventListener("click",e=>{
+  if(e.target.closest("#close"))return $("#overlay").classList.remove("on");
+  if(e.target.closest("#again6"))return startP6(0);
+  const ed=e.target.closest("#expandDoc");
+  if(ed){docExp=!docExp;$("#quiz").classList.toggle("docexp",docExp);
+    ed.textContent=docExp?"⤡ 收合":"⤢ 展開全文";return}
+  if(e.target.closest("#next2"))return nextP6();
+  const o=e.target.closest(".opt");if(o)pick6(+o.dataset.k)});
+$("#overlay").addEventListener("click",e=>{if(e.target===$("#overlay"))$("#overlay").classList.remove("on")});
+document.addEventListener("keydown",e=>{
+  if(!$("#overlay").classList.contains("on"))return;
+  if(e.key==="Escape")return $("#overlay").classList.remove("on");
+  if(!p6done&&/^[1-4]$/.test(e.key)){const b=$$(".opt")[+e.key-1];if(b)pick6(+b.dataset.k)}
+  else if(p6done&&(e.key==="Enter"||e.key===" ")){e.preventDefault();const n=$("#next2")||$("#again6");n&&n.click()}});
+load();
+
+</script>
+</body>
+</html>
